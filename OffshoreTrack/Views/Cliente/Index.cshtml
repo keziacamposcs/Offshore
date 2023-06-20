@@ -6,7 +6,7 @@
 <div class="pagetitle">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="display-4">Materiais</h1>
+            <h1 class="display-4">Clientes</h1>
         </div>
         <div class="col-md-6">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -26,10 +26,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Material</th>
-                            <th scope="col">Tipo</th>
-                            <th scope="col">Setor</th>
-                            <th scope="col">Fornecedor</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">CNPJ</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -37,14 +35,11 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.material</td>
-                                <td>@item.tipo</td>
-                                <td>@item.setor</td>
-                                <td>@item.fornecedor</td>
-
+                                <td>@item.cliente</td>
+                                <td>@item.cnpj</td>
                                 <td>
-                                    <a class="btn btn-primary" href="Material/Read/@item.id_material"><i class="bi bi-eye"></i></a>
-                                    <a class="btn btn-success" href="Material/Edit/@item.id_material"><i class="bi bi-pencil"></i></a>
+                                    <a class="btn btn-primary" href="Cliente/Read/@item.id_cliente"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-success" href="Cliente/Edit/@item.id_cliente"><i class="bi bi-pencil"></i></a>
                                 </td>
                             </tr>
                         }

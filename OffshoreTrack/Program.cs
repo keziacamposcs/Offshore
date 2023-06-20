@@ -3,13 +3,12 @@ using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+//Contexto com Banco de Dados do SQLite
+builder.Services.AddDbContext<Contexto>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Fim - Contexto
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//Contexto com Banco de Dados do SQLite
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DbContext>(options => options.UseSqlite(connectionString));
-// Fim - Contexto
 
 var app = builder.Build();
 

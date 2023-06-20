@@ -4,7 +4,7 @@ usingSystem.Data;
 usingSystem.Reflection.Emit;
 usingSystem.Xml.Linq;
 
-@model OffshoreTrack.Models.Manutencao
+@model OffshoreTrack.Models.Cliente
 
 @{
 ViewData["Title"]="Edit";
@@ -13,12 +13,12 @@ ViewData["Title"]="Edit";
 <div class="pagetitle">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="display-4">Editar:Manutenção</h1>
+            <h1 class="display-4">Editar: Cliente</h1>
         </div>
 
         <div class="col-md-6">
             <div class="d-grid gap-2d-md-flex justify-content-md-end">
-                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Manutencao"asp-action="Index">Voltar</a>
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Cliente"asp-action="Index">Voltar</a>
             </div>
         </div>
     </div>
@@ -29,49 +29,21 @@ ViewData["Title"]="Edit";
         <div class="card">
             <div class="card-body">
 
-                <form method="post" action="/Manutencao/Update">
-                    <input type="hidden" asp-for="id_manutencao" />
+                <form method="post" action="/Cliente/Update">
+                    <input type="hidden" asp-for="id_cliente" />
 
-                    <label for="inputText" class="col-smcol-form-label">Manutenção:</label>
-                    <input type="text" class="form-control" id="manutencao" asp-for="manutencao" />
+                    <label for="inputText" class="col-sm col-form-label">Cliente:</label>
+                    <input type="text" class="form-control" id="cliente" asp-for="cliente" />
                     <br/>
 
-                    <label for="inputText" class="col-smcol-form-label">Descrição:</label>
-                    <input type="text" class="form-control" id="descricao" asp-for="descricao" />
+                    <label for="inputText" class="col-sm col-form-label">CNPJ:</label>
+                    <input type="text" class="form-control" id="cnpj" asp-for="cnpj" />
                     <br/>
-
-                    <div class="form-group">
-                        <label asp-for="id_material" class="col-sm col-form-label">Material:</label>
-                        <select asp-for="id_material" class="form-control" asp-items="@ViewBag.material"></select>
-                        <span asp-validation-for="id_material" class="text-danger"></span>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label asp-for="id_setor" class="col-sm col-form-label">Setor:</label>
-                        <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
-                        <span asp-validation-for="id_setor" class="text-danger"></span>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label asp-for="id_fornecedor" class="col-sm col-form-label">Fornecedor:</label>
-                        <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
-                        <span asp-validation-for="id_fornecedor" class="text-danger"></span>
-                    </div>
-                    <br />
-
-                    <div class="form-group">
-                        <label asp-for="id_criticidade" class="col-sm col-form-label">Criticiddade:</label>
-                        <select asp-for="id_criticidade" class="form-control" asp-items="@ViewBag.criticidade"></select>
-                        <span asp-validation-for="id_criticidade" class="text-danger"></span>
-                    </div>
-                    <br />
                     <div class="d-gridgap-2d-md-flexjustify-content-md-end">
-                        <button type="submit" class="btnbtn-primary" name="submit" value="submit">Atualizar</button>
+                        <button type="submit" class="btn btn-primary" name="submit" value="submit">Atualizar</button>
                 </form>
-                <form method="post"action="/Manutencao/Delete">
-                    <input type="hidden"asp-for="id_manutencao"/>
+                <form method="post"action="/Cliente/Delete">
+                    <input type="hidden"asp-for="id_cliente"/>
                     <button type="submit"class="btn btn-danger">Deletar</button>
                 </form>
                     </div>

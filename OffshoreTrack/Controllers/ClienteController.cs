@@ -11,17 +11,17 @@ namespace OffshoreTrack.Controllers
 {
     public class ClienteController : Controller
     {
-        private readonly Contexto contexto;
+        private readonly Contexto _contexto;
 
         public ClienteController(Contexto contexto)
         {
-            this.contexto = contexto;
+            _contexto = contexto ?? throw new ArgumentNullException(nameof(contexto));
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var clientes = await contexto.Cliente.ToListAsync();
+            var clientes = await _contexto.Cliente.ToListAsync();
             return View(clientes);
         }
 
@@ -45,10 +45,10 @@ namespace OffshoreTrack.Controllers
                 cnpj = createRequest.cnpj
             };
 
-            contexto.Cliente.Add(cliente);
+            _contexto.Cliente.Add(cliente);
             try
             {
-                await contexto.SaveChangesAsync();
+                await _contexto.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
-            var cliente = await contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
+            var cliente = await _contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
             return View(cliente);
         }
         // Fim - Read
@@ -73,7 +73,7 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var cliente = await contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
+            var cliente = await _contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Cliente updateRequest)
         {
-            var cliente = await contexto.Cliente.FindAsync(updateRequest.id_cliente);
+            var cliente = await _contexto.Cliente.FindAsync(updateRequest.id_cliente);
             if (cliente == null)
             {
                 return NotFound();
@@ -95,7 +95,7 @@ namespace OffshoreTrack.Controllers
 
             try
             {
-                await contexto.SaveChangesAsync();
+                await _contexto.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
@@ -110,13 +110,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete (Cliente deleteRequest)
         {
-            var cliente = await contexto.Cliente.FindAsync(deleteRequest.id_cliente);
+            var cliente = await _contexto.Cliente.FindAsync(deleteRequest.id_cliente);
             if(cliente == null)
             {
                 return NotFound();
             }
-            contexto.Cliente.Remove(cliente);
-            await contexto.SaveChangesAsync();
+            _contexto.Cliente.Remove(cliente);
+            await _contexto.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         // Fim - Delete
