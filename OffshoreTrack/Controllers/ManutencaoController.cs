@@ -36,13 +36,13 @@ namespace OffshoreTrack.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("manutencao,descricao, tipo, id_material, id_setor, id_fornecedor, id_criticidade")] Manutencao createRequest)
+        public async Task<IActionResult> Create([Bind("manutencao,descricao, id_tipo, id_material, id_setor, id_fornecedor, id_criticidade")] Manutencao createRequest)
         {
             var manutencaos = new Manutencao
             {
                 manutencao = createRequest.manutencao,
                 descricao = createRequest.descricao,
-                tipo = createRequest.tipo,
+                id_tipo = createRequest.id_tipo,
                 id_material = createRequest.id_material,
                 id_setor = createRequest.id_setor,
                 id_fornecedor = createRequest.id_fornecedor,
@@ -96,7 +96,7 @@ namespace OffshoreTrack.Controllers
 
             manutencao.manutencao = updateRequest.manutencao;
             manutencao.descricao = updateRequest.descricao;
-            manutencao.tipo = updateRequest.tipo;
+            manutencao.id_tipo = updateRequest.id_tipo;
             manutencao.id_material = updateRequest.id_material;
             manutencao.id_setor = updateRequest.id_setor;
             manutencao.id_fornecedor = updateRequest.id_fornecedor;

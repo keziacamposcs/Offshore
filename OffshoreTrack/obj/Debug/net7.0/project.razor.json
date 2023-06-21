@@ -18655,13 +18655,33 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/New.cshtml",
-      "TargetPath": "Views\\Material\\New.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Index.cshtml",
+      "TargetPath": "Views\\Criticidade\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutenção/Edit.cshtml",
-      "TargetPath": "Views\\Manutenção\\Edit.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/New.cshtml",
+      "TargetPath": "Views\\Manutencao\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Index.cshtml",
+      "TargetPath": "Views\\Manutencao\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Edit.cshtml",
+      "TargetPath": "Views\\Criticidade\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Edit.cshtml",
+      "TargetPath": "Views\\Manutencao\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/New.cshtml",
+      "TargetPath": "Views\\Material\\New.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18670,8 +18690,13 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutenção/Index.cshtml",
-      "TargetPath": "Views\\Manutenção\\Index.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Edit.cshtml",
+      "TargetPath": "Views\\Local\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/New.cshtml",
+      "TargetPath": "Views\\Material copy\\New.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18680,13 +18705,23 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Cliente/Index.cshtml",
-      "TargetPath": "Views\\Cliente\\Index.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Index.cshtml",
+      "TargetPath": "Views\\Local\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutenção/New.cshtml",
-      "TargetPath": "Views\\Manutenção\\New.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Index.cshtml",
+      "TargetPath": "Views\\Material copy\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/New.cshtml",
+      "TargetPath": "Views\\Criticidade\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Cliente/Index.cshtml",
+      "TargetPath": "Views\\Cliente\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18695,13 +18730,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Read.cshtml",
+      "TargetPath": "Views\\Manutencao\\Read.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Read.cshtml",
       "TargetPath": "Views\\Material\\Read.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutenção/Read.cshtml",
-      "TargetPath": "Views\\Manutenção\\Read.cshtml",
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Read.cshtml",
+      "TargetPath": "Views\\Local\\Read.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Read.cshtml",
+      "TargetPath": "Views\\Material copy\\Read.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -18730,6 +18775,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Read.cshtml",
+      "TargetPath": "Views\\Criticidade\\Read.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
@@ -18737,6 +18787,16 @@
     {
       "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Edit.cshtml",
       "TargetPath": "Views\\Material\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/New.cshtml",
+      "TargetPath": "Views\\Local\\New.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Edit.cshtml",
+      "TargetPath": "Views\\Material copy\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],

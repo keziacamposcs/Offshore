@@ -26,6 +26,11 @@ namespace OffshoreTrack.Models
         public List<Manutencao>? manutencaos { get; set; }
         public List<Material>? materials { get; set; }
 
+        public List<OrdemCompra> OrdensCompra1 { get; set; }
+        public List<OrdemCompra> OrdensCompra2 { get; set; }
+        public List<OrdemCompra> OrdensCompra3 { get; set; }
+
+
     }
 }
 

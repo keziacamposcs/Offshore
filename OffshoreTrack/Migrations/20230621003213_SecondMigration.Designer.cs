@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffshoreTrack.Data;
 
@@ -10,9 +11,11 @@ using OffshoreTrack.Data;
 namespace OffshoreTrack.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230621003213_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -208,46 +211,13 @@ namespace OffshoreTrack.Migrations
                     b.Property<DateOnly?>("data_compra")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("id_fornecedor")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_fornecedor2")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_fornecedor3")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_material")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_parteSolta")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_setor")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("oc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("prioridade")
                         .HasColumnType("TEXT");
 
                     b.Property<double?>("valor")
                         .HasColumnType("REAL");
 
                     b.HasKey("id_oc");
-
-                    b.HasIndex("id_fornecedor");
-
-                    b.HasIndex("id_fornecedor2");
-
-                    b.HasIndex("id_fornecedor3");
-
-                    b.HasIndex("id_material");
-
-                    b.HasIndex("id_parteSolta");
-
-                    b.HasIndex("id_setor");
 
                     b.ToTable("ordemCompra", (string)null);
                 });
@@ -267,9 +237,6 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_oc")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ocid_oc")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("partesolta")
                         .HasColumnType("TEXT");
 
@@ -280,7 +247,7 @@ namespace OffshoreTrack.Migrations
 
                     b.HasIndex("id_material");
 
-                    b.HasIndex("ocid_oc");
+                    b.HasIndex("id_oc");
 
                     b.ToTable("parteSolta", (string)null);
                 });
@@ -453,45 +420,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("usuario");
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>
-                {
-                    b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor")
-                        .WithMany("OrdensCompra1")
-                        .HasForeignKey("id_fornecedor");
-
-                    b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor2")
-                        .WithMany("OrdensCompra2")
-                        .HasForeignKey("id_fornecedor2");
-
-                    b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor3")
-                        .WithMany("OrdensCompra3")
-                        .HasForeignKey("id_fornecedor3");
-
-                    b.HasOne("OffshoreTrack.Models.Material", "material")
-                        .WithMany("ordemCompras")
-                        .HasForeignKey("id_material");
-
-                    b.HasOne("OffshoreTrack.Models.ParteSolta", "parteSolta")
-                        .WithMany("ordemCompras")
-                        .HasForeignKey("id_parteSolta");
-
-                    b.HasOne("OffshoreTrack.Models.Setor", "setor")
-                        .WithMany("ordemCompras")
-                        .HasForeignKey("id_setor");
-
-                    b.Navigation("fornecedor");
-
-                    b.Navigation("fornecedor2");
-
-                    b.Navigation("fornecedor3");
-
-                    b.Navigation("material");
-
-                    b.Navigation("parteSolta");
-
-                    b.Navigation("setor");
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.ParteSolta", b =>
                 {
                     b.HasOne("OffshoreTrack.Models.Material", "material")
@@ -500,7 +428,7 @@ namespace OffshoreTrack.Migrations
 
                     b.HasOne("OffshoreTrack.Models.OrdemCompra", "oc")
                         .WithMany("parteSoltas")
-                        .HasForeignKey("ocid_oc");
+                        .HasForeignKey("id_oc");
 
                     b.Navigation("material");
 
@@ -538,12 +466,6 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Fornecedor", b =>
                 {
-                    b.Navigation("OrdensCompra1");
-
-                    b.Navigation("OrdensCompra2");
-
-                    b.Navigation("OrdensCompra3");
-
                     b.Navigation("manutencaos");
 
                     b.Navigation("materials");
@@ -558,8 +480,6 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Navigation("manutencaos");
 
-                    b.Navigation("ordemCompras");
-
                     b.Navigation("parteSoltas");
                 });
 
@@ -568,18 +488,11 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("parteSoltas");
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.ParteSolta", b =>
-                {
-                    b.Navigation("ordemCompras");
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.Setor", b =>
                 {
                     b.Navigation("manutencaos");
 
                     b.Navigation("materials");
-
-                    b.Navigation("ordemCompras");
 
                     b.Navigation("rateios1");
 

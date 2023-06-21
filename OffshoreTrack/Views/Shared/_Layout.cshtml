@@ -193,12 +193,8 @@
         <div class="container-fluid px-4">
             @RenderBody()
         </div>
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2023 - Offshore Track - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
     </main>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -206,11 +202,8 @@
 
     <script src="~/lib/jquery.mask.js"></script>
     <script src="~/lib/jquery-mask-plugin/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
-    <script>
-    $(document).ready(function(){
-        $('.collapse').collapse()
-    });
-    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

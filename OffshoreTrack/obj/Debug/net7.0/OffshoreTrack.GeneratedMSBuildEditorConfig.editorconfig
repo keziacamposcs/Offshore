@@ -32,12 +32,76 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50ZS9SZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvUmVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9jYWwvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9jYWwvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9jYWwvTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Local/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9jYWwvUmVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9OZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9SZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwgY29weS9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwgY29weS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwgY29weS9OZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material copy/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwgY29weS9SZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Edit.cshtml]

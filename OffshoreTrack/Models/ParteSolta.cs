@@ -23,6 +23,7 @@ namespace OffshoreTrack.Models
         public Material? material { get; set; }
 
         //Relacionamentos
+        public List<OrdemCompra>? ordemCompras { get; set; }
 
     }
 }

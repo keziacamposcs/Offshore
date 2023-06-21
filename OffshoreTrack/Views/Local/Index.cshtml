@@ -1,0 +1,54 @@
+﻿@model List<OffshoreTrack.Models.Local>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Locais</h1>
+        </div>
+        <div class="col-md-6">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" role="button" asp-area="" asp-controller="Local" asp-action="New"> Cadastrar novo </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card">
+            <br />
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Local</th>
+                            <th scope="col">Cliente</th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.local</td>
+                                <td>@item.Cliente</td>
+                                <td>
+                                    <a class="btn btn-primary" href="Local/Read/@item.id_local"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-success" href="Local/Edit/@item.id_local"><i class="bi bi-pencil"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -12,7 +12,8 @@ namespace OffshoreTrack.Models
 
         public string? manutencao { get; set; }
         public string? descricao { get; set; }
-        public string? tipo { get; set; }
+        public int? id_tipo { get; set; }
+        public Tipo? tipo { get; set; }
 
         public int? id_material { get; set; }
         public Material? material { get; set; }

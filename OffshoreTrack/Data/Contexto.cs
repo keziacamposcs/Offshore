@@ -100,6 +100,12 @@ namespace OffshoreTrack.Data
                 .WithMany(c => c.manutencaos)
                 .HasForeignKey(m => m.id_criticidade);
 
+            modelBuilder.Entity<Manutencao>()
+                .HasOne(m => m.tipo)
+                .WithMany(t => t.manutencaos)
+                .HasForeignKey(m => m.id_tipo);
+
+
             //Material
             modelBuilder.Entity<Material>()
                 .HasOne(m => m.tipo)
@@ -138,9 +144,34 @@ namespace OffshoreTrack.Data
 
             // Ordem Compra
             modelBuilder.Entity<OrdemCompra>()
-                .HasMany(oc => oc.parteSoltas)
-                .WithOne(ps => ps.oc)
-                .HasForeignKey(ps => ps.id_oc);
+                .HasOne(oc => oc.fornecedor)
+                .WithMany(f => f.OrdensCompra1)
+                .HasForeignKey(oc => oc.id_fornecedor);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.fornecedor2)
+                .WithMany(f => f.OrdensCompra2)  // Assumindo que Fornecedor tem uma segunda coleção de OrdensCompra
+                .HasForeignKey(oc => oc.id_fornecedor2);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.fornecedor3)
+                .WithMany(f => f.OrdensCompra3)  // Assumindo que Fornecedor tem uma terceira coleção de OrdensCompra
+                .HasForeignKey(oc => oc.id_fornecedor3);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.setor)
+                .WithMany(s => s.ordemCompras)  // Assumindo que Setor tem uma coleção de OrdensCompra
+                .HasForeignKey(oc => oc.id_setor);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.parteSolta)
+                .WithMany(ps => ps.ordemCompras)  // Assumindo que ParteSolta tem uma coleção de OrdensCompra
+                .HasForeignKey(oc => oc.id_parteSolta);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.material)
+                .WithMany(m => m.ordemCompras)  // Assumindo que Material tem uma coleção de OrdensCompra
+                .HasForeignKey(oc => oc.id_material);
 
 
             // Parte Solta
