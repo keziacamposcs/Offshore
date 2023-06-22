@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
@@ -28,12 +29,25 @@ namespace OffshoreTrack.Controllers
         /* CRUD */
 
         // Create
-
         [HttpGet]
-        public IActionResult New()
-        {
-            return View();
-        }
+public IActionResult New()
+{
+    // Tente obter todos os clientes do banco de dados
+    var clientes = contexto.Cliente.ToList();
+
+    // Verifique se você recebeu clientes do banco de dados
+    if (clientes == null || !clientes.Any())
+    {
+        // Se não, imprima uma mensagem de erro ou lance uma exceção
+        Console.WriteLine("Não foi possível obter clientes do banco de dados");
+    }
+
+    ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
+
+    return View();
+}
+
+
 
 
         [HttpPost]

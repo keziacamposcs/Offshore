@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
+using QRCoder;
+using System.Drawing;
 
 namespace OffshoreTrack.Controllers
 {
@@ -38,6 +40,21 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Material createRequest)
         {
+            string qrCodeString = $"{createRequest.material};{createRequest.descricao};{createRequest.tamanho};{createRequest.tipo};{createRequest.criticidade};{createRequest.setor};{createRequest.usuario};{createRequest.fornecedor}";
+
+            // Gera o QRCoder
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrCodeString, QRCodeGenerator.ECCLevel.Q);
+            PngByteQRCode qrCode = new PngByteQRCode(qrCodeData);
+
+            // Obtém os bytes da imagem PNG do QRCode
+            byte[] qrCodeImageBytes = qrCode.GetGraphic(20);
+
+            // Converte a imagem PNG em base64
+            string qrCodeAsBase64 = Convert.ToBase64String(qrCodeImageBytes);
+
+            createRequest.cod_barra = qrCodeAsBase64;
+
             contexto.Material.Add(createRequest);
             try
             {
@@ -49,6 +66,7 @@ namespace OffshoreTrack.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         // Fim - Create
 
 

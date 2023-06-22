@@ -1,11 +1,4 @@
-﻿usingMicrosoft.AspNetCore.Mvc;
-usingSystem;
-usingSystem.Data;
-usingSystem.Reflection.Emit;
-usingSystem.Xml.Linq;
-
-@model OffshoreTrack.Models.Cliente
-
+﻿@model OffshoreTrack.Models.Cliente
 @{
 ViewData["Title"]="Edit";
 }
@@ -39,8 +32,8 @@ ViewData["Title"]="Edit";
                     <label for="inputText" class="col-sm col-form-label">CNPJ:</label>
                     <input type="text" class="form-control" id="cnpj" asp-for="cnpj" />
                     <br/>
-                    <div class="d-gridgap-2d-md-flexjustify-content-md-end">
-                        <button type="submit" class="btn btn-primary" name="submit" value="submit">Atualizar</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
                 </form>
                 <form method="post"action="/Cliente/Delete">
                     <input type="hidden"asp-for="id_cliente"/>

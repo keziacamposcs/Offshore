@@ -1,4 +1,4 @@
-﻿@model OffshoreTrack.Models.Manutencao
+﻿@model OffshoreTrack.Models.Material
 
 @{
     ViewData["Title"] = "Read";
@@ -7,11 +7,11 @@
 <div class="pagetitle">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="display-4">Visualização: Manutenção</h1>
+            <h1 class="display-4">Visualização: Material</h1>
         </div>
         <div class="col-md-6">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn btn-primary" role="button" asp-area="" asp-controller="Manutencao" asp-action="Index">Voltar</a>
+                <a class="btn btn-primary" role="button" asp-area="" asp-controller="Material" asp-action="Index">Voltar</a>
             </div>
         </div>
     </div>
@@ -22,27 +22,45 @@
         <div class="card">
             <div class="card-body">
 
-                <label for="inputText" class="col-sm col-form-label">Manutenção:</label>
-                <input type="text" class="form-control" id="manutencao" name="manutencao" asp-for="manutencao" readonly />
+                <label for="inputText" class="col-sm col-form-label">Material:</label>
+                <input type="text" class="form-control" id="material" name="material" asp-for="material" readonly />
                 <br />
 
                 <label for="inputText" class="col-sm col-form-label">Descrição:</label>
                 <input type="text" class="form-control" id="descricao" name="descricao" asp-for="descricao" readonly />
                 <br />
 
-                <label for="inputText" class="col-sm col-form-label">Material:</label>
-                <p class="form-control" readonly>@Html.DisplayFor(model => model.material.material)</p>
+                <label for="inputText" class="col-sm col-form-label">Tamanho:</label>
+                <input type="text" class="form-control" id="tamanho" name="tamanho" asp-for="tamanho" readonly />
+                <br />
+
+                <label for="inputText" class="col-sm col-form-label">Tipo:</label>
+                <p class="form-control" readonly>@Html.DisplayFor(model => model.tipo.tipo)</p>
+                
+                <label for="inputText" class="col-sm col-form-label">Criticidade:</label>
+                <p class="form-control" readonly>@Html.DisplayFor(model => model.criticidade.criticidade)</p>
 
                 <label for="inputText" class="col-sm col-form-label">Setor:</label>
                 <p class="form-control" readonly>@Html.DisplayFor(model => model.setor.setor)</p>
 
+                <label for="inputText" class="col-sm col-form-label">Cliente:</label>
+                <p class="form-control" readonly>@Html.DisplayFor(model => model.cliente.cliente)</p>
+
+                <label for="inputText" class="col-sm col-form-label">Local:</label>
+                <p class="form-control" readonly>@Html.DisplayFor(model => model.local.local)</p>
+
+                <label for="inputText" class="col-sm col-form-label">Usuário:</label>
+                <p class="form-control" readonly>@Html.DisplayFor(model => model.usuario.usuario)</p>
+
                 <label for="inputText" class="col-sm col-form-label">Fornecedor:</label>
                 <p class="form-control" readonly>@Html.DisplayFor(model => model.fornecedor.fornecedor)</p>
 
-                <label for="inputText" class="col-sm col-form-label">Criticidade:</label>
-                <p class="form-control" readonly>@Html.DisplayFor(model => model.criticidade.criticidade)</p>
 
                 <br />
+
+                <label for="inputText" class="col-sm col-form-label">QR Code:</label>
+                <img src="data:image/png;base64,@Model.cod_barra" alt="QR Code" />
+
             </div>
         </div>
     </div>

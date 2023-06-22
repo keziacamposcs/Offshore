@@ -48,7 +48,7 @@
                     </div>
                     <br />
 
-                    <div class="form-group">
+                   <div class="form-group">
                         <label asp-for="id_cliente" class="col-sm col-form-label">Cliente:</label>
                         <select asp-for="id_cliente" class="form-control" asp-items="@ViewBag.cliente"></select>
                         <span asp-validation-for="id_cliente" class="text-danger"></span>
@@ -82,13 +82,9 @@
                     </div>
                     <br />
 
-                    <div class="form-group">
-                        <label asp-for="cod_barra" class="col-sm col-form-label">Código de barras:</label>
-                        <input type="text" class="form-control" id="cod_barra" asp-for="cod_barra" />
-                        <svg id="barcode"></svg>
-                    </div>
+                    <div id="qrcode"></div>
+
                     <br />
-                    <button onclick="printBarcode()" class="btn btn-primary">Imprimir Código de Barras</button>
 
                     <br />
                     <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
@@ -104,21 +100,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#cod_barra').change(function(){
-                var value = $(this).val();
-                $('#barcodeTarget').html(""); //clear the barcode target
-                JsBarcode("#barcodeTarget", value, {format: "CODE128"}); //generate the barcode
-            });
-        });
-        function printBarcode() {
-            var printWindow = window.open('', '_blank');
-            var barcodeSVG = $('#barcodeTarget').html();
-            printWindow.document.write('<html><head><title>Print Barcode</title></head><body>');
-            printWindow.document.write(barcodeSVG);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        }
+      
     </script>
 }

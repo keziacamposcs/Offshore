@@ -1,11 +1,4 @@
-﻿usingMicrosoft.AspNetCore.Mvc;
-usingSystem;
-usingSystem.Data;
-usingSystem.Reflection.Emit;
-usingSystem.Xml.Linq;
-
-@model OffshoreTrack.Models.Manutencao
-
+﻿@model OffshoreTrack.Models.Manutencao
 @{
 ViewData["Title"]="Edit";
 }
@@ -74,8 +67,9 @@ ViewData["Title"]="Edit";
                         <span asp-validation-for="id_criticidade" class="text-danger"></span>
                     </div>
                     <br />
-                    <div class="d-gridgap-2d-md-flexjustify-content-md-end">
-                        <button type="submit" class="btnbtn-primary" name="submit" value="submit">Atualizar</button>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
                 </form>
                 <form method="post"action="/Manutencao/Delete">
                     <input type="hidden"asp-for="id_manutencao"/>

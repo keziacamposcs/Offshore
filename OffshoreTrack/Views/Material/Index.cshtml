@@ -37,10 +37,10 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.material</td>
-                                <td>@item.tipo</td>
-                                <td>@item.setor</td>
-                                <td>@item.fornecedor</td>
+                                <td>@item?.material</td>
+                                <td>@item?.tipo</td>
+                                <td>@item?.setor</td>
+                                <td>@item?.fornecedor</td>
 
                                 <td>
                                     <a class="btn btn-primary" href="Material/Read/@item.id_material"><i class="bi bi-eye"></i></a>

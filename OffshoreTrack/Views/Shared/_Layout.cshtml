@@ -16,7 +16,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
-                <img src="~/images/offshorelogo.png" width="110px" style="margin-left: 70px;" >
+                <img src="~/images/offshorelogo.png" width="110px" style="margin-left: 70px;">
                 <span class="d-none d-lg-block"></span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn" id="toggle-sidebar-btn"></i>
@@ -62,7 +62,6 @@
                 </ul>
             </li>
             <!-- Fim - Cliente -->
-
             <!-- Criticidade -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#criticidade_nav" data-bs-toggle="collapse" href="#">
@@ -74,7 +73,17 @@
                 </ul>
             </li>
             <!-- Fim - Criticidade -->
-
+            <!-- Fornecedores -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#fornecedor_nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bag"></i><span>Fornecedor</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="fornecedor_nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Fornecedor" asp-action="Index">Lista</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Fornecedor" asp-action="New">Novo</a></li>
+                </ul>
+            </li>
+            <!-- Fim - Fornecedores -->
             <!-- Local -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#local_nav" data-bs-toggle="collapse" href="#">
@@ -86,7 +95,6 @@
                 </ul>
             </li>
             <!-- Fim - Local -->
-
             <!-- Manutenção -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#manutencao_nav" data-bs-toggle="collapse" href="#">
@@ -98,7 +106,6 @@
                 </ul>
             </li>
             <!-- Fim - Manutenção -->
-
             <!-- Material -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#material_nav" data-bs-toggle="collapse" href="#">
@@ -110,7 +117,6 @@
                 </ul>
             </li>
             <!-- Fim - Material -->
-
             <!-- Ordem de Compra -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#oc_nav" data-bs-toggle="collapse" href="#">
@@ -122,7 +128,6 @@
                 </ul>
             </li>
             <!-- Fim - Ordem de Compra -->
-
             <!-- Parte Solta -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#ps_nav" data-bs-toggle="collapse" href="#">
@@ -134,7 +139,6 @@
                 </ul>
             </li>
             <!-- Fim - Parte Solta -->
-
             <!-- Rateio -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#rateio_nav" data-bs-toggle="collapse" href="#">
@@ -146,7 +150,6 @@
                 </ul>
             </li>
             <!-- Fim - Rateio -->
-
             <!-- Setor -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#setor_nav" data-bs-toggle="collapse" href="#">
@@ -158,7 +161,6 @@
                 </ul>
             </li>
             <!-- Fim - Setor -->
-
             <!-- Tipo -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tipo_nav" data-bs-toggle="collapse" href="#">
@@ -170,8 +172,6 @@
                 </ul>
             </li>
             <!-- Fim - Tipo -->
-
-
             <!-- Configurações-->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#config_nav" data-bs-toggle="collapse" href="#">
@@ -202,8 +202,8 @@
 
     <script src="~/lib/jquery.mask.js"></script>
     <script src="~/lib/jquery-mask-plugin/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,11 +1,4 @@
-﻿usingMicrosoft.AspNetCore.Mvc;
-usingSystem;
-usingSystem.Data;
-usingSystem.Reflection.Emit;
-usingSystem.Xml.Linq;
-
-@model OffshoreTrack.Models.Criticidade
-
+﻿@model OffshoreTrack.Models.Criticidade
 @{
 ViewData["Title"]="Edit";
 }
@@ -36,8 +29,8 @@ ViewData["Title"]="Edit";
                     <input type="text" class="form-control" id="criticidade" asp-for="criticidade" />
                     <br/>
 
-                    <div class="d-gridgap-2d-md-flexjustify-content-md-end">
-                        <button type="submit" class="btn btn-primary" name="submit" value="submit">Atualizar</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
                 </form>
                 <form method="post"action="/Criticidade/Delete">
                     <input type="hidden"asp-for="id_criticidade"/>

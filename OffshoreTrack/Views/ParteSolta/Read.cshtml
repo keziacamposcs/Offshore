@@ -1,0 +1,54 @@
+﻿@model OffshoreTrack.Models.ParteSolta
+
+@{
+    ViewData["Title"] = "Read";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Visualização: Partes Soltas</h1>
+        </div>
+        <div class="col-md-6">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" role="button" asp-area="" asp-controller="ParteSolta" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                    <label class="col-sm col-form-label">Parte Solta:</label>
+                    <p class="form-control-static">@Model.partesolta</p>
+                    <br/>
+
+                   <label class="col-sm col-form-label">Quantidade:</label>
+                    <p class="form-control-static">@Model.quantidade</p>
+                    <br/>
+
+                    <label class="col-sm col-form-label">Ordem de Compra:</label>
+                    <p class="form-control-static">@Model.id_oc</p>
+                    <br />
+
+                    <label class="col-sm col-form-label">Material:</label>
+                    <p class="form-control-static">@Model.id_material</p>
+                    <br />
+                    
+                    <label class="col-sm col-form-label">Anexo:</label>
+                    @if (Model.anexo != null)
+                    {
+                        <a href="@Url.Action("Download", "ParteSolta", new { id = Model.id_partesolta })">Baixar anexo existente</a>
+                    }
+                    else
+                    {
+                        <p class="form-control-static">Nenhum anexo.</p>
+                    }
+                    <br>
+            </div>
+        </div>
+    </div>
+</div>
+

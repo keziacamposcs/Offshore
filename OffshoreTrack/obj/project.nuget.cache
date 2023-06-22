@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "I/JHabvMNeA5mhR5voHAvN5pa0qAKRKJRemzuRictRGc9rAh3B9NSWXd+K/appycGxPhupuluvcc6UITqKMDaQ==",
+  "dgSpecHash": "J6hBgv/YiyEVw3Ot8Uv4qyQ0NHj3nAYpIDrodddUnaGlmgPwMu75EtOt+S+wPBNcVRExvWpt2/sRv48pYkQUDA==",
   "success": true,
   "projectFilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/OffshoreTrack.csproj",
   "expectedPackageFiles": [
@@ -47,7 +47,9 @@
     "/Users/keziacampos/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/microsoft.win32.systemevents/7.0.0/microsoft.win32.systemevents.7.0.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/qrcoder/1.4.3/qrcoder.1.4.3.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.4/sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/sqlitepclraw.core/2.1.4/sqlitepclraw.core.2.1.4.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.4/sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",
@@ -56,6 +58,7 @@
     "/Users/keziacampos/.nuget/packages/system.codedom/4.4.0/system.codedom.4.4.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/system.componentmodel.annotations/4.5.0/system.componentmodel.annotations.4.5.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/system.diagnostics.diagnosticsource/4.5.0/system.diagnostics.diagnosticsource.4.5.0.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/system.drawing.common/7.0.0/system.drawing.common.7.0.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",

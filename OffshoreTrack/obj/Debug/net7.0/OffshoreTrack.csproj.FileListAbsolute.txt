@@ -66,3 +66,8 @@
 /Users/keziacampos/GitHub/Offshore/OffshoreTrack/obj/Debug/net7.0/OffshoreTrack.pdb
 /Users/keziacampos/GitHub/Offshore/OffshoreTrack/obj/Debug/net7.0/OffshoreTrack.genruntimeconfig.cache
 /Users/keziacampos/GitHub/Offshore/OffshoreTrack/obj/Debug/net7.0/ref/OffshoreTrack.dll
+/Users/keziacampos/GitHub/Offshore/OffshoreTrack/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/keziacampos/GitHub/Offshore/OffshoreTrack/bin/Debug/net7.0/QRCoder.dll
+/Users/keziacampos/GitHub/Offshore/OffshoreTrack/bin/Debug/net7.0/System.Drawing.Common.dll
+/Users/keziacampos/GitHub/Offshore/OffshoreTrack/bin/Debug/net7.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/keziacampos/GitHub/Offshore/OffshoreTrack/bin/Debug/net7.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll

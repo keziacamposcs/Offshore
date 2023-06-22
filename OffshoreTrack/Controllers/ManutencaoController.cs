@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
@@ -21,9 +22,16 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var manutencaos = await contexto.Manutencao.ToListAsync();
+            var manutencaos = await contexto.Manutencao
+                                            .Include(m => m.material) // inclui os dados de Material
+                                            .Include(m => m.setor)    // inclui os dados de Setor
+                                            .Include(m => m.fornecedor)  // inclui os dados de Fornecedor
+                                            .Include(m => m.criticidade)  // inclui os dados de Criticidade
+                                            .ToListAsync();
             return View(manutencaos);
         }
+
+
         /* CRUD */
 
         // Create
@@ -31,6 +39,16 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var materials = contexto.Material.ToList();
+            var setors = contexto.Setor.ToList();
+            var fornecedors = contexto.Fornecedor.ToList();
+            var criticidades = contexto.Criticidade.ToList();
+
+            ViewBag.material = new SelectList(materials, "id_material", "material");
+            ViewBag.setor = new SelectList(setors, "id_setor", "setor");
+            ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.criticidade = new SelectList(criticidades, "id_criticidade", "criticidade");
+
             return View();
         }
 

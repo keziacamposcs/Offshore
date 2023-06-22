@@ -1,13 +1,6 @@
-﻿usingMicrosoft.AspNetCore.Mvc;
-usingSystem;
-usingSystem.Data;
-usingSystem.Reflection.Emit;
-usingSystem.Xml.Linq;
-
-@model OffshoreTrack.Models.Local
-
+﻿@model OffshoreTrack.Models.Local
 @{
-ViewData["Title"]="Edit";
+    ViewData["Title"]="Edit";
 }
 
 <div class="pagetitle">
@@ -36,10 +29,17 @@ ViewData["Title"]="Edit";
                     <input type="text" class="form-control" id="local" asp-for="local" />
                     <br/>
 
-                    <div class="d-gridgap-2d-md-flexjustify-content-md-end">
-                        <button type="submit" class="btn btn-primary" name="submit" value="submit">Atualizar</button>
+                    <div class="form-group">
+                        <label asp-for="id_cliente" class="col-form-label">Cliente:</label>
+                        <select asp-for="id_cliente" class="form-control" asp-items="@ViewBag.cliente"></select>
+                        <span asp-validation-for="id_cliente" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
                 </form>
-                <form method="post"action="/Criticidade/Delete">
+                <form method="post"action="/Local/Delete">
                     <input type="hidden"asp-for="id_local"/>
                     <button type="submit"class="btn btn-danger">Deletar</button>
                 </form>

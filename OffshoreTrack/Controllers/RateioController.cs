@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OffshoreTrack.Controllers
 {
@@ -32,6 +33,17 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var setores1 = contexto.Setor.ToList();
+            var setores2 = contexto.Setor.ToList();
+
+            if (!setores1.Any())
+            {
+                throw new Exception("Não existem Setores na base de dados!");
+            }
+
+            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
+            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
+
             return View();
         }
 
@@ -65,7 +77,11 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
-            var rateio = await contexto.Rateio.FirstOrDefaultAsync(x => x.id_rateio == id);
+            var rateio = await contexto.Rateio
+                            .Include(r => r.setor1)
+                            .Include(r => r.setor2)
+                            .FirstOrDefaultAsync(x => x.id_rateio == id);
+
             return View(rateio);
         }
         // Fim - Read
@@ -74,7 +90,10 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var rateio = await contexto.Rateio.FirstOrDefaultAsync(x => x.id_rateio == id);
+            var rateio = await contexto.Rateio
+                            .Include(r => r.setor1)
+                            .Include(r => r.setor2)
+                            .FirstOrDefaultAsync(x => x.id_rateio == id);
             if (rateio == null)
             {
                 return NotFound();

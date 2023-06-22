@@ -26,7 +26,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Manutencao</th>
+                            <th scope="col">Manutenção</th>
                             <th scope="col">Material</th>
                             <th scope="col">Setor</th>
                             <th scope="col">Fornecedor</th>
@@ -38,12 +38,10 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.material</td>
-                                <td>@item.material</td>
-                                <td>@item.setor</td>
-                                <td>@item.fornecedor</td>
-                                <td>@item.criticidade</td>
-
+                                <td>@item.material?.material</td>
+                                <td>@item.setor?.setor</td>
+                                <td>@item.fornecedor?.fornecedor</td>
+                                <td>@item.criticidade?.criticidade</td>
                                 <td>
                                     <a class="btn btn-primary" href="Manutencao/Read/@item.id_manutencao"><i class="bi bi-eye"></i></a>
                                     <a class="btn btn-success" href="Manutencao/Edit/@item.id_manutencao"><i class="bi bi-pencil"></i></a>

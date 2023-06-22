@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
@@ -22,18 +23,29 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var locals = await contexto.Local.ToListAsync();
-            return View(locals);
+            var locais = await contexto.Local.Include(l => l.Cliente).ToListAsync();
+            return View(locais);
         }
         /* CRUD */
 
         // Create
 
+
         [HttpGet]
         public IActionResult New()
         {
+            var clientes = contexto.Cliente.ToList();
+
+            if (!clientes.Any())
+            {
+                throw new Exception("Não existem clientes na base de dados!");
+            }
+
+            ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
+
             return View();
         }
+
 
 
         [HttpPost]
@@ -63,7 +75,11 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
-            var local = await contexto.Local.FirstOrDefaultAsync(x => x.id_local == id);
+            var local = await contexto.Local.Include(l => l.Cliente).FirstOrDefaultAsync(x => x.id_local == id);
+            if (local == null)
+            {
+                return NotFound();
+            }
             return View(local);
         }
         // Fim - Read
@@ -73,13 +89,17 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var local = await contexto.Local.FirstOrDefaultAsync(x => x.id_local == id);
+            var local = await contexto.Local.Include(l => l.Cliente).FirstOrDefaultAsync(x => x.id_local == id);
             if (local == null)
             {
                 return NotFound();
             }
+            // Obtenha todos os clientes e crie uma lista de seleção.
+            var clientes = await contexto.Cliente.ToListAsync();
+            ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente", local.id_cliente);
             return View(local);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Update(Local updateRequest)

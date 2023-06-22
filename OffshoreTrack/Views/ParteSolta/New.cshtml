@@ -1,0 +1,57 @@
+﻿@model OffshoreTrack.Models.ParteSolta
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="pagetitle">
+    <h1 class="display-4"> Cadastrar: Partes Soltas</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="Create">
+
+                    <label for="inputText" class="col-sm col-form-label">Parte Solta:</label>
+                    <input type="text" class="form-control" id="partesolta" name="partesolta" asp-for="partesolta" />
+                    <br />
+
+                    <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                    <input type="number" class="form-control" id="quantidade" name="quantidade" asp-for="partesolta" />
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="id_oc" class="col-sm col-form-label">Ordem de Compra:</label>
+                        <select asp-for="id_oc" class="form-control" asp-items="@ViewBag.oc"></select>
+                        <span asp-validation-for="id_oc" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="id_material" class="col-sm col-form-label">Material:</label>
+                        <select asp-for="id_material" class="form-control" asp-items="@ViewBag.material"></select>
+                        <span asp-validation-for="id_material" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="anexo" class="col-sm col-form-label">Anexo:</label>
+                        <input class="form-control" type="file" id="anexo">
+                    </div>
+                    <br />
+
+                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+
+}

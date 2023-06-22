@@ -1,32 +1,35 @@
 ﻿<Properties StartupConfiguration="{DBE46E9A-CC00-411F-A2AC-F5ECFBDA9E2C}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="appsettings.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/Material/New.cshtml">
     <Files>
-      <File FileName="appsettings.json" Line="14" Column="1" />
-      <File FileName="Program.cs" Line="13" Column="1" />
-      <File FileName="Data/Contexto.cs" Line="6" Column="2" />
-      <File FileName="Models/Criticidade.cs" />
-      <File FileName="Data/ContextoFactory.cs" Line="23" Column="1" />
+      <File FileName="Views/Shared/_Layout.cshtml" Line="186" Column="1" />
+      <File FileName="Views/Material/New.cshtml" Line="80" Column="14" />
+      <File FileName="Models/Material.cs" Line="13" Column="32" />
+      <File FileName="Controllers/MaterialController.cs" Line="41" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="OffshoreTrack" expanded="True">
-            <Node name="OffshoreTrack" expanded="True" selected="True">
+            <Node name="OffshoreTrack">
+              <Node name="Controllers" expanded="True">
+                <Node name="MaterialController.cs" selected="True" />
+              </Node>
               <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Shared" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.OffshoreTrack PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
 </Properties>

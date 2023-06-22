@@ -1,0 +1,44 @@
+﻿@model OffshoreTrack.Models.Setor
+@{
+ViewData["Title"]="Edit";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Editar: Setor</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-grid gap-2d-md-flex justify-content-md-end">
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Setor"asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post" action="/Setor/Update">
+                    <input type="hidden" asp-for="id_setor" />
+
+                    <label for="inputText" class="col-sm col-form-label">Setor:</label>
+                    <input type="text" class="form-control" id="setor" asp-for="setor" />
+                    <br/>
+
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
+                </form>
+                <form method="post"action="/Setor/Delete">
+                    <input type="hidden"asp-for="id_setor"/>
+                    <button type="submit"class="btn btn-danger">Deletar</button>
+                </form>
+                    </div>
+        </div>
+    </div>
+</div>
+
