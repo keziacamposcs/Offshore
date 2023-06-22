@@ -35,6 +35,7 @@ namespace OffshoreTrack.Data
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Permissao> Permissao { get; set; }
 
+        public DbSet<Status> Status { get; set; }
 
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -105,6 +106,11 @@ namespace OffshoreTrack.Data
                 .HasOne(m => m.tipo)
                 .WithMany(t => t.manutencaos)
                 .HasForeignKey(m => m.id_tipo);
+
+            modelBuilder.Entity<Manutencao>()
+                .HasOne(m => m.status)
+                .WithMany(t => t.manutencaos)
+                .HasForeignKey(m => m.id_status);
 
 
             //Material

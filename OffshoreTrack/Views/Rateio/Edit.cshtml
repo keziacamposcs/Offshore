@@ -22,9 +22,9 @@ ViewData["Title"]="Edit";
         <div class="card">
             <div class="card-body">
 
-                <form method="post" action="/Rateio/Update">
-                    <label for="inputText" class="col-sm col-form-label">Rateio:</label>
-                    <input type="text" class="form-control" id="rateio" name="rateio" asp-for="rateio" />
+                <form method="post" asp-action="Update">
+                    <label asp-for="rateio" class="col-sm col-form-label">Rateio:</label>
+                    <input type="text" class="form-control" id="rateio" asp-for="rateio" />
                     <br />
                     <div class="row">
                         <div class="col">
@@ -36,8 +36,8 @@ ViewData["Title"]="Edit";
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="inputText" class="col-sm col-form-label">Porcentagem 1:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor1" name="valor1" asp-for="valor1" />
+                                <label asp-for="valor1" class="col-form-label">Porcentagem 1:</label>
+                                <input type="text" min="1" max="100" class="form-control" id="valor1" asp-for="valor1" />
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,8 @@ ViewData["Title"]="Edit";
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label for="inputText" class="col-sm col-form-label">Porcentagem 2:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor2" name="valor2" asp-for="valor2" />
+                                <label asp-for="valor2" class="col-form-label">Porcentagem 2:</label>
+                                <input type="text" min="1" max="100" class="form-control" id="valor2" asp-for="valor2" />
                             </div>
                         </div>
                     </div>
@@ -59,12 +59,13 @@ ViewData["Title"]="Edit";
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
-                </form>
-                <form method="post"action="/Rateio/Delete">
-                    <input type="hidden"asp-for="id_rateio"/>
-                    <button type="submit"class="btn btn-danger">Deletar</button>
-                </form>
                     </div>
+                </form>
+                <form method="post" action="/Rateio/Delete">
+                    <input type="hidden" asp-for="id_rateio" />
+                    <button type="submit" class="btn btn-danger">Deletar</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

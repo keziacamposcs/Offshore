@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffshoreTrack.Data;
 
@@ -10,9 +11,11 @@ using OffshoreTrack.Data;
 namespace OffshoreTrack.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230622150258_eightMigration")]
+    partial class eightMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -102,15 +105,6 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("data")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("data_conclusao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("data_prevista")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("descricao")
                         .HasColumnType("TEXT");
 
@@ -124,9 +118,6 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_setor")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_status")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_tipo")
@@ -145,8 +136,6 @@ namespace OffshoreTrack.Migrations
 
                     b.HasIndex("id_setor");
 
-                    b.HasIndex("id_status");
-
                     b.HasIndex("id_tipo");
 
                     b.ToTable("manutencao", (string)null);
@@ -158,8 +147,11 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("anexo")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("anexo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("cod_barra")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("descricao")
                         .HasColumnType("TEXT");
@@ -176,9 +168,6 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_local")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("id_manutencao")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int?>("id_setor")
                         .HasColumnType("INTEGER");
 
@@ -188,16 +177,7 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_usuario")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("manutencaoid_manutencao")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("material")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("numeroSerie")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("qrcode")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("tamanho")
@@ -218,8 +198,6 @@ namespace OffshoreTrack.Migrations
                     b.HasIndex("id_tipo");
 
                     b.HasIndex("id_usuario");
-
-                    b.HasIndex("manutencaoid_manutencao");
 
                     b.ToTable("material", (string)null);
                 });
@@ -383,20 +361,6 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("setor", (string)null);
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.Status", b =>
-                {
-                    b.Property<int>("id_status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("status")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id_status");
-
-                    b.ToTable("Status");
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.Tipo", b =>
                 {
                     b.Property<int>("id_tipo")
@@ -469,10 +433,6 @@ namespace OffshoreTrack.Migrations
                         .WithMany("manutencaos")
                         .HasForeignKey("id_setor");
 
-                    b.HasOne("OffshoreTrack.Models.Status", "status")
-                        .WithMany("manutencaos")
-                        .HasForeignKey("id_status");
-
                     b.HasOne("OffshoreTrack.Models.Tipo", "tipo")
                         .WithMany("manutencaos")
                         .HasForeignKey("id_tipo");
@@ -484,8 +444,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("material");
 
                     b.Navigation("setor");
-
-                    b.Navigation("status");
 
                     b.Navigation("tipo");
                 });
@@ -520,10 +478,6 @@ namespace OffshoreTrack.Migrations
                         .WithMany("materials")
                         .HasForeignKey("id_usuario");
 
-                    b.HasOne("OffshoreTrack.Models.Manutencao", "manutencao")
-                        .WithMany("materials")
-                        .HasForeignKey("manutencaoid_manutencao");
-
                     b.Navigation("cliente");
 
                     b.Navigation("criticidade");
@@ -531,8 +485,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("fornecedor");
 
                     b.Navigation("local");
-
-                    b.Navigation("manutencao");
 
                     b.Navigation("setor");
 
@@ -651,11 +603,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("materials");
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.Manutencao", b =>
-                {
-                    b.Navigation("materials");
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.Material", b =>
                 {
                     b.Navigation("manutencaos");
@@ -691,11 +638,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("rateios1");
 
                     b.Navigation("rateios2");
-                });
-
-            modelBuilder.Entity("OffshoreTrack.Models.Status", b =>
-                {
-                    b.Navigation("manutencaos");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Tipo", b =>

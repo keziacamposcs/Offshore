@@ -13,8 +13,10 @@ namespace OffshoreTrack.Models
         public string? material { get; set; }
         public string? descricao { get; set; }
         public string? tamanho { get; set; }
-        public string? cod_barra { get; set; }
-        public string? anexo { get; set; }
+        public string? numeroSerie { get; set; }
+
+        public string? qrcode { get; set; }
+        public byte[]? anexo { get; set; }
 
         public int? id_tipo { get; set; }
         public Tipo? tipo { get; set; }
@@ -37,6 +39,9 @@ namespace OffshoreTrack.Models
         public int? id_fornecedor { get; set; }
         public Fornecedor? fornecedor { get; set; }
 
+        public int? id_manutencao { get; set; }
+        public Manutencao? manutencao { get; set; }
+
         //Relacionamentos
         public List<Manutencao>? manutencaos { get; set; }
         public List<ParteSolta>? parteSoltas { get; set; }
@@ -44,4 +49,3 @@ namespace OffshoreTrack.Models
 
     }
 }
-

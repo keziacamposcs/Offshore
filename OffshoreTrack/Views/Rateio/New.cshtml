@@ -12,43 +12,42 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="Create">
+<form method="post" action="Create">
+    <label for="inputText" class="col-sm col-form-label">Rateio:</label>
+    <input type="text" class="form-control" id="rateio" asp-for="rateio" />
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="id_setor1" class="col-form-label">Setor 1:</label>
+                <select class="form-control" asp-for="id_setor1" asp-items="@ViewBag.setores1"></select>
+                <span asp-validation-for="id_setor1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="inputText" class="col-sm col-form-label">Porcentagem 1:</label>
+                <input type="text" min="1" max="100" class="form-control" asp-for="valor1" />
+            </div>
+        </div>
+    </div>
 
-                    <label for="inputText" class="col-sm col-form-label">Rateio:</label>
-                    <input type="text" class="form-control" id="rateio" name="rateio" asp-for="rateio" />
-                    <br />
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label asp-for="id_setor1" class="col-form-label">Setor 1:</label>
-                                <select asp-for="id_setor1" class="form-control" asp-items="@ViewBag.setores1"></select>
-                                <span asp-validation-for="id_setor1" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="inputText" class="col-sm col-form-label">Porcentagem 1:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor1" name="valor1" asp-for="valor1" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label asp-for="id_setor2" class="col-form-label">Setor 2:</label>
-                            <select asp-for="id_setor2" class="form-control" asp-items="@ViewBag.setores2"></select>
-                            <span asp-validation-for="id_setor2" class="text-danger"></span>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="inputText" class="col-sm col-form-label">Porcentagem 2:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor2" name="valor2" asp-for="valor2" />
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
-                </form>
+    <div class="row">
+        <div class="col">
+            <label asp-for="id_setor2" class="col-form-label">Setor 2:</label>
+            <select class="form-control" asp-for="id_setor2" asp-items="@ViewBag.setores2"></select>
+            <span asp-validation-for="id_setor2" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="inputText" class="col-sm col-form-label">Porcentagem 2:</label>
+                <input type="text" min="1" max="100" class="form-control" asp-for="valor2" />
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+</form>
             </div>
         </div>
     </div>

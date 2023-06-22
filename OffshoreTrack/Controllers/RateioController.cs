@@ -47,10 +47,16 @@ namespace OffshoreTrack.Controllers
             return View();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create([Bind("rateio,valor1, valor2, id_setor1, id_setor2")] Rateio createRequest)
         {
+            if (createRequest.valor1 < 0 || createRequest.valor1 > 100 || 
+                createRequest.valor2 < 0 || createRequest.valor2 > 100)
+            {
+                // Retornar um erro caso os valores estejam fora da faixa aceitável
+                return BadRequest("Valores inválidos. Entre 0% e 100%");
+            }
+
             var rateio = new Rateio
             {
                 rateio = createRequest.rateio,
@@ -87,50 +93,66 @@ namespace OffshoreTrack.Controllers
         // Fim - Read
 
         // Update
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var rateio = await contexto.Rateio
-                            .Include(r => r.setor1)
-                            .Include(r => r.setor2)
-                            .FirstOrDefaultAsync(x => x.id_rateio == id);
-            if (rateio == null)
-            {
-                return NotFound();
-            }
-            var setores1 = contexto.Setor.ToList();
-            var setores2 = contexto.Setor.ToList();
-            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
-            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
-            return View(rateio);
-        }
+[HttpGet]
+public async Task<IActionResult> Edit(int id)
+{
+    var rateio = await contexto.Rateio
+                        .Include(r => r.setor1)
+                        .Include(r => r.setor2)
+                        .FirstOrDefaultAsync(x => x.id_rateio == id);
+    if (rateio == null)
+    {
+        return NotFound();
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Update(Rateio updateRequest)
-        {
-            var rateio = await contexto.Rateio.FindAsync(updateRequest.id_rateio);
-            if (rateio == null)
-            {
-                return NotFound();
-            }
+    var setores1 = await contexto.Setor.ToListAsync();
+    var setores2 = await contexto.Setor.ToListAsync();
+    ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor", rateio.id_setor1);
+    ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor", rateio.id_setor2);
+    return View(rateio);
+}
 
-            rateio.rateio = updateRequest.rateio;
+[HttpPost]
+public async Task<IActionResult> Update([Bind("id_rateio, rateio, valor1, valor2, id_setor1, id_setor2")] Rateio updateRequest)
+{
+    if (!ModelState.IsValid)
+    {
+        var setores = contexto.Setor.ToList();
+        ViewBag.setores1 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor1);
+        ViewBag.setores2 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor2);
 
-            rateio.id_setor1 = updateRequest.id_setor1;
-            rateio.valor1 = updateRequest.valor1;
+        return View("Edit", updateRequest);
+    }
 
-            rateio.id_setor2 = updateRequest.id_setor2;
-            rateio.valor2 = updateRequest.valor2;
-            try
-            {
-                await contexto.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+    var rateio = await contexto.Rateio.FindAsync(updateRequest.id_rateio);
+    if (rateio == null)
+    {
+        return NotFound();
+    }
+
+    if (updateRequest.valor1 < 0 || updateRequest.valor1 > 100 || 
+        updateRequest.valor2 < 0 || updateRequest.valor2 > 100)
+    {
+        // Retornar um erro caso os valores estejam fora da faixa aceitável
+        return BadRequest("Valores inválidos. Entre 0% e 100%");
+    }
+
+    rateio.rateio = updateRequest.rateio;
+    rateio.valor1 = updateRequest.valor1;
+    rateio.id_setor1 = updateRequest.id_setor1;
+    rateio.valor2 = updateRequest.valor2;
+    rateio.id_setor2 = updateRequest.id_setor2;
+
+    try
+    {
+        await contexto.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
         // Fim - Update
 
         // Delete

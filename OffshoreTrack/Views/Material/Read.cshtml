@@ -1,0 +1,198 @@
+﻿@model OffshoreTrack.Models.Material
+
+@{
+    ViewData["Title"] = "Read";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Visualização: Material</h1>
+        </div>
+        <div class="col-md-6">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" role="button" asp-area="" asp-controller="Material" asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                <label for="inputText" class="col-sm col-form-label">Material:</label>
+                <input type="text" class="form-control" id="material" name="material" asp-for="material" readonly />
+                <br />
+
+                <label for="inputText" class="col-sm col-form-label">Descrição:</label>
+                <input type="text" class="form-control" id="descricao" name="descricao" asp-for="descricao" readonly />
+                <br />
+
+                <label for="inputText" class="col-sm col-form-label">Número de Série:</label>
+                <input type="text" class="form-control" id="numeroSerie" name="numeroSerie" asp-for="numeroSerie" readonly />
+                <br />
+
+                <label for="inputText" class="col-sm col-form-label">Tamanho:</label>
+                <input type="text" class="form-control" id="tamanho" name="tamanho" asp-for="tamanho" readonly />
+                <br/>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Tipo:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.tipo.tipo)</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Criticidade:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.criticidade.criticidade)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Setor:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.setor.setor)</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Cliente:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.cliente.cliente)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Local:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.local.local)</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputText" class="col-sm col-form-label">Usuário:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.usuario.usuario)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="id_fornecedor" class="col-form-label">Fornecedor:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.fornecedor.fornecedor)</p>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary" id="generateQrCodeButton">Gerar QrCode do Material:</button>
+                        <button type="button" class="btn btn-outline-secondary" id="printQrCodeButton">Imprimir QrCode</button>
+                        <div id="qrcode"></div>
+                        @if (!String.IsNullOrEmpty(Model.qrcode))
+                        {
+                            <img src="data:image/png;base64,@Model.qrcode" alt="QR Code" id="qrCodeImage" style="width: 150px; height: 150px;"/>
+                        }
+                    </div>
+                    <div class="col">
+                        <label asp-for="anexo" class="col-form-label">Anexos:</label>
+                        <a class="btn btn-outline-secondary" role="button" asp-action="DownloadAttachment" asp-route-id="@Model.id_material">
+                            Baixar Anexos
+                        </a>
+                    </div>
+                </div>
+                <!-- Atividades de Manutencao -->
+                <div class="form-group">
+                            <label asp-for="id_manutencao" class="col-form-label">Últimas Manutenções:</label>
+                            <div class="card">
+                                <div class="activity">
+                                    @if (Model.manutencaos != null)
+                                    {
+                                        @foreach (var manutencao in Model.manutencaos.OrderByDescending(m => m.data).Take(5))
+                                        {
+                                            <div class="activity-item d-flex">
+                                                <div class="activite-label">@manutencao.data?.ToString("HH:mm")</div>
+                                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                                <div class="activity-content">
+                                                    @manutencao.manutencao
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <p>Nenhuma manutenção disponível.</p>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                </div>
+                <!-- Fim - Atividades de Manutencao -->
+
+                <br />                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+document.getElementById('generateQrCodeButton').addEventListener('click', function () {
+    var materialId = '@Model.id_material';
+    var qrcodeDiv = document.getElementById('qrcode');
+
+    // Limpar o QR Code existente
+    qrcodeDiv.innerHTML = '';
+
+    // Chame uma ação no controller para gerar o QR Code
+    fetch(`/Material/GenerateQrCode?id=${materialId}`)
+        .then(response => {
+            if(!response.ok) {
+                throw new Error("Erro ao gerar o QR Code");
+            }
+            return response.text();
+        })
+        .then(qrCodeData => {
+            // Defina o conteúdo da div para o QR Code gerado
+            var img = document.createElement('img');
+            img.src = 'data:image/png;base64,' + qrCodeData;
+            img.style.width = '150px';
+            img.style.height = '150px';
+            img.id = 'qrCodeImage';
+            qrcodeDiv.appendChild(img);
+        })
+        .catch(error => {
+            console.log('Erro:', error);
+            qrcodeDiv.innerHTML = 'Erro ao gerar o QR Code';
+        });
+});
+
+//Imprimir QrCode
+document.getElementById('printQrCodeButton').addEventListener('click', function () {
+    var qrCodeImage = document.getElementById('qrCodeImage');
+
+    if (!qrCodeImage) {
+        alert('Por favor, gere o QR Code primeiro.');
+        return;
+    }
+
+    var printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Imprimindo QR Code</title></head><body>');
+    printWindow.document.write('<img src="' + qrCodeImage.src + '" style="width: 100%; height: auto;">');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+});
+// Fim - Imprimir QrCode
+
+    </script>
+}

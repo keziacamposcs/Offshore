@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffshoreTrack.Data;
 
@@ -10,9 +11,11 @@ using OffshoreTrack.Data;
 namespace OffshoreTrack.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230622175101_nineMigration")]
+    partial class nineMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -158,8 +161,8 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<byte[]>("anexo")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("anexo")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("descricao")
                         .HasColumnType("TEXT");
@@ -192,9 +195,6 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("material")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("numeroSerie")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("qrcode")

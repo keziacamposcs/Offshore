@@ -12,6 +12,13 @@ namespace OffshoreTrack.Models
 
         public string? manutencao { get; set; }
         public string? descricao { get; set; }
+        public DateTime? data { get; set; }
+        public DateTime? data_prevista { get; set; }
+        public DateTime? data_conclusao { get; set; }
+
+        public int? id_status { get; set; }
+        public Status? status { get; set; }
+        
         public int? id_tipo { get; set; }
         public Tipo? tipo { get; set; }
 
@@ -28,6 +35,7 @@ namespace OffshoreTrack.Models
         public Criticidade? criticidade { get; set; }
 
         //Relacionamentos
+        public List<Material>? materials { get; set; }
     }
 }
 
