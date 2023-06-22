@@ -15,6 +15,8 @@ namespace OffshoreTrack.Models
         public DateTime? data { get; set; }
         public DateTime? data_prevista { get; set; }
         public DateTime? data_conclusao { get; set; }
+        public byte[]? anexo { get; set; }
+
 
         public int? id_status { get; set; }
         public Status? status { get; set; }

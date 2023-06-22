@@ -1,0 +1,98 @@
+﻿@model OffshoreTrack.Models.Manutencao
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="pagetitle">
+    <h1 class="display-4"> Cadastrar: Manutenção</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="Create">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <label for="inputText" class="col-sm col-form-label">Manutenção:</label>
+                            <input type="text" class="form-control" id="manutencao" name="manutencao" asp-for="manutencao" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label asp-for="id_status" class="col-form-label">Status:</label>
+                            <select asp-for="id_status" class="form-control" asp-items="@ViewBag.status"></select>
+                        </div>
+                    </div>
+                    <label for="inputText" class="col-sm col-form-label">Descrição:</label>
+                    <textarea type="text" rows="3" class="form-control" id="descricao" name="descricao" asp-for="descricao" ></textarea>
+                    <br />
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data:</label>
+                            <input type="date" class="form-control" id="data" name="data" asp-for="data" />
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data Prevista:</label>
+                            <input type="date" class="form-control" id="data_prevista" name="data_prevista" asp-for="data_prevista" />
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data Conclusão:</label>
+                            <input type="date" class="form-control" id="data_conclusao" name="data_conclusao" asp-for="data_conclusao" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="id_material" class="col-form-label">Material:</label>
+                        <select asp-for="id_material" class="form-control" asp-items="@ViewBag.material"></select>
+                        <span asp-validation-for="id_material" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label asp-for="id_tipo" class="col-form-label">Tipo:</label>
+                            <select asp-for="id_tipo" class="form-control" asp-items="@ViewBag.tipo"></select>
+                            <span asp-validation-for="id_tipo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="id_setor" class="col-form-label">Setor:</label>
+                            <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
+                            <span asp-validation-for="id_setor" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label asp-for="id_fornecedor" class="col-form-label">Fornecedor:</label>
+                            <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                            <span asp-validation-for="id_fornecedor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="id_criticidade" class="col-form-label">Criticidade:</label>
+                            <select asp-for="id_criticidade" class="form-control" asp-items="@ViewBag.criticidade"></select>
+                            <span asp-validation-for="id_criticidade" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <label for="anexo" class="form-label">Anexar arquivo:</label>
+                    <input class="form-control" type="file" id="anexo">
+                    <br>
+
+
+
+                    
+                    <br />
+
+                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+
+}

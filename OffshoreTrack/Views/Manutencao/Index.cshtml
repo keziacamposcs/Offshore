@@ -1,0 +1,57 @@
+﻿@model List<OffshoreTrack.Models.Manutencao>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Manutenções</h1>
+        </div>
+        <div class="col-md-6">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" role="button" asp-area="" asp-controller="Manutencao" asp-action="New"> Cadastrar novo </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card">
+            <br />
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Manutenção</th>
+                            <th scope="col">Material</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.manutencao</td>
+                                <td>@item.material?.material</td>
+                                <td>@item.data</td>
+                                <td>@item.status?.status</td>
+                                <td>
+                                    <a class="btn btn-primary" href="Manutencao/Read/@item.id_manutencao"><i class="bi bi-eye"></i></a>
+                                    <a class="btn btn-success" href="Manutencao/Edit/@item.id_manutencao"><i class="bi bi-pencil"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -22,7 +22,6 @@
         <div class="card">
             <div class="card-body">
 
-
                 <label for="inputText" class="col-sm col-form-label">Material:</label>
                 <input type="text" class="form-control" id="material" name="material" asp-for="material" readonly />
                 <br />
@@ -83,6 +82,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -92,6 +92,7 @@
                         <br />
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
                         <button type="button" class="btn btn-secondary" id="generateQrCodeButton">Gerar QrCode do Material:</button>
@@ -109,35 +110,34 @@
                         </a>
                     </div>
                 </div>
+                <hr>
+
                 <!-- Atividades de Manutencao -->
                 <div class="form-group">
-                            <label asp-for="id_manutencao" class="col-form-label">Últimas Manutenções:</label>
-                            <div class="card">
-                                <div class="activity">
-                                    @if (Model.manutencaos != null)
-                                    {
-                                        @foreach (var manutencao in Model.manutencaos.OrderByDescending(m => m.data).Take(5))
-                                        {
-                                            <div class="activity-item d-flex">
-                                                <div class="activite-label">@manutencao.data?.ToString("HH:mm")</div>
-                                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                                <div class="activity-content">
-                                                    @manutencao.manutencao
-                                                </div>
-                                            </div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <p>Nenhuma manutenção disponível.</p>
-                                    }
-                                </div>
-                            </div>
-                            <br />
+                    <label asp-for="id_manutencao" class="col-form-label">Últimas Manutenções:</label>
+                    <div class="card">
+                        <div class="activity">
+                            @if (Model.manutencaos != null)
+                            {
+                                @foreach (var manutencao in Model.manutencaos.OrderByDescending(m => m.data).Take(5))
+                                {
+                                    <div class="d-flex">
+                                        <div class="activite-label">@manutencao.data?.ToString("dd/MM/yyyy")</div>
+                                        <i class='bi bi-circle-fill activity-badge text-secondary align-self-start'></i>
+                                        <div class="activity-content">@manutencao.manutencao</div>
+                                        <p>@(manutencao.status != null ? manutencao.status.status : "Sem status")</p>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>Nenhuma manutenção realizada.</p>
+                            }
                         </div>
+                    </div>
+                    <br />
                 </div>
                 <!-- Fim - Atividades de Manutencao -->
-
                 <br />                
             </div>
         </div>
