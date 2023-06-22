@@ -98,6 +98,10 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
+            var setores1 = contexto.Setor.ToList();
+            var setores2 = contexto.Setor.ToList();
+            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
+            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
             return View(rateio);
         }
 
@@ -111,10 +115,12 @@ namespace OffshoreTrack.Controllers
             }
 
             rateio.rateio = updateRequest.rateio;
-            rateio.valor1 = updateRequest.valor1;
-            rateio.valor2 = updateRequest.valor2;
+
             rateio.id_setor1 = updateRequest.id_setor1;
+            rateio.valor1 = updateRequest.valor1;
+
             rateio.id_setor2 = updateRequest.id_setor2;
+            rateio.valor2 = updateRequest.valor2;
             try
             {
                 await contexto.SaveChangesAsync();

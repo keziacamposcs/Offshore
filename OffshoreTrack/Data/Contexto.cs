@@ -33,6 +33,7 @@ namespace OffshoreTrack.Data
         public DbSet<Tipo> Tipo { get; set; }
 
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Permissao> Permissao { get; set; }
 
 
         //Relacionamentos
@@ -191,6 +192,13 @@ namespace OffshoreTrack.Data
                 .WithMany(s => s.rateios2)
                 .HasForeignKey(r => r.id_setor2);
 
+            //Usuario
+            modelBuilder.Entity<Usuario>()
+                .HasOne(u => u.Permissao)
+                .WithMany(p => p.usuarios)
+                .HasForeignKey(u => u.id_permissao);
+
+
             /* Tabelas */
             modelBuilder.Entity<Cliente>()
             .ToTable("cliente");
@@ -227,6 +235,11 @@ namespace OffshoreTrack.Data
 
             modelBuilder.Entity<Usuario>()
             .ToTable("usuario");
+
+            modelBuilder.Entity<Permissao>()
+            .ToTable("permissao");
+
+
 
             /* Fim - Tabela */
         }

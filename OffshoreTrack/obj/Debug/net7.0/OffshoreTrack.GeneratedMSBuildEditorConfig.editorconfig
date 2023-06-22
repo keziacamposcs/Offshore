@@ -88,38 +88,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9jYWwvUmVhZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9FZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9JbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/New.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9OZXcuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Manutencao/Read.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFudXRlbmNhby9SZWFkLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/New.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvTmV3LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Read.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvUmVhZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/ParteSolta/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFydGVTb2x0YS9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -134,6 +102,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/ParteSolta/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGFydGVTb2x0YS9SZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Permissao/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGVybWlzc2FvL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Permissao/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGVybWlzc2FvL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Permissao/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGVybWlzc2FvL05ldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Permissao/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGVybWlzc2FvL1JlYWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Rateio/Edit.cshtml]
@@ -190,6 +174,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Tipo/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlwby9SZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Usuario/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Usuario/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9OZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Usuario/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpby9SZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/_ViewImports.cshtml]

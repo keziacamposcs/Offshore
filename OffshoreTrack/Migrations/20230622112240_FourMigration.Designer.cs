@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OffshoreTrack.Data;
 
@@ -10,9 +11,11 @@ using OffshoreTrack.Data;
 namespace OffshoreTrack.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230622112240_FourMigration")]
+    partial class FourMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
@@ -285,32 +288,6 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("parteSolta", (string)null);
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.Permissao", b =>
-                {
-                    b.Property<int>("id_permissao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("nome_permissao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("pode_atualizar")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("pode_criar")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("pode_deletar")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("pode_ler")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id_permissao");
-
-                    b.ToTable("permissao", (string)null);
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.Rateio", b =>
                 {
                     b.Property<int>("id_rateio")
@@ -378,12 +355,6 @@ namespace OffshoreTrack.Migrations
                     b.Property<string>("cpf")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("id_permissao")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("nome")
                         .HasColumnType("TEXT");
 
@@ -394,8 +365,6 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("id_usuario");
-
-                    b.HasIndex("id_permissao");
 
                     b.ToTable("usuario", (string)null);
                 });
@@ -556,15 +525,6 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("setor2");
                 });
 
-            modelBuilder.Entity("OffshoreTrack.Models.Usuario", b =>
-                {
-                    b.HasOne("OffshoreTrack.Models.Permissao", "Permissao")
-                        .WithMany("usuarios")
-                        .HasForeignKey("id_permissao");
-
-                    b.Navigation("Permissao");
-                });
-
             modelBuilder.Entity("OffshoreTrack.Models.Cliente", b =>
                 {
                     b.Navigation("locals");
@@ -614,11 +574,6 @@ namespace OffshoreTrack.Migrations
             modelBuilder.Entity("OffshoreTrack.Models.ParteSolta", b =>
                 {
                     b.Navigation("ordemCompras");
-                });
-
-            modelBuilder.Entity("OffshoreTrack.Models.Permissao", b =>
-                {
-                    b.Navigation("usuarios");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Setor", b =>

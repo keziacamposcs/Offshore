@@ -18,6 +18,11 @@ namespace OffshoreTrack.Models
 
         public string? cpf { get; set; }
 
+        public string? email {get; set; }
+
+        public int? id_permissao { get; set; }
+        public Permissao? Permissao { get; set; }
+
         // Relacionamentos
         public List<Material>? materials { get; set; }
     }
