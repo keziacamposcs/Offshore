@@ -20,6 +20,8 @@ namespace OffshoreTrack.Models
 
     public bool pode_deletar { get; set; }
 
+    public bool permissao_admin { get; set; }
+
     // Relacionamentos
     public List<Usuario>? usuarios { get; set; }
 }

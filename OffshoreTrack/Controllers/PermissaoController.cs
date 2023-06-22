@@ -155,6 +155,8 @@ namespace OffshoreTrack.Controllers
                         return permissao.pode_atualizar;
                     case "pode_deletar":
                         return permissao.pode_deletar;
+                    case "permissao_admin":
+                        return permissao.permissao_admin;
                 }
             }
 
