@@ -58,9 +58,9 @@ namespace OffshoreTrack.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("manutencao,id_status, descricao, data, data_prevista,  data_conclusao, anexo, id_tipo, id_material, id_setor, id_fornecedor, id_criticidade")] Manutencao createRequest)
+        public async Task<IActionResult> Create([Bind("manutencao,id_status, descricao, data, data_prevista,  data_conclusao, id_tipo, id_material, id_setor, id_fornecedor, id_criticidade")] Manutencao createRequest, IFormFile anexoFile)
         {
-            var manutencaos = new Manutencao
+            var manutencao = new Manutencao
             {
                 manutencao = createRequest.manutencao,
                 id_status = createRequest.id_status,
@@ -68,7 +68,6 @@ namespace OffshoreTrack.Controllers
                 data = createRequest.data,
                 data_prevista = createRequest.data_prevista,
                 data_conclusao = createRequest.data_conclusao,
-                anexo = createRequest.anexo,
                 id_tipo = createRequest.id_tipo,
                 id_material = createRequest.id_material,
                 id_setor = createRequest.id_setor,
@@ -76,7 +75,16 @@ namespace OffshoreTrack.Controllers
                 id_criticidade = createRequest.id_criticidade
             };
 
-            contexto.Manutencao.Add(manutencaos);
+            if (anexoFile != null && anexoFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexoFile.CopyToAsync(memoryStream);
+                    manutencao.anexo = memoryStream.ToArray(); // Aqui estamos atribuindo o conteúdo do arquivo para o campo anexo.
+                }
+            }
+
+            contexto.Manutencao.Add(manutencao);
             try
             {
                 await contexto.SaveChangesAsync();
@@ -97,7 +105,7 @@ namespace OffshoreTrack.Controllers
             var manutencaos = await contexto.Manutencao
                                             .Include(m => m.material)
                                             .Include(m => m.status)
-                                            .Include(m => m.material) 
+                                            .Include(m => m.tipo)
                                             .Include(m => m.setor)
                                             .Include(m => m.fornecedor)
                                             .Include(m => m.criticidade)
@@ -150,8 +158,8 @@ namespace OffshoreTrack.Controllers
             return View(manutencao);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Update(Manutencao updateRequest)
+       [HttpPost]
+        public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anexo)
         {
             var manutencao = await contexto.Manutencao.FindAsync(updateRequest.id_manutencao);
             if (manutencao == null)
@@ -160,6 +168,9 @@ namespace OffshoreTrack.Controllers
             }
 
             manutencao.manutencao = updateRequest.manutencao;
+            manutencao.data = updateRequest.data;
+            manutencao.data_prevista = updateRequest.data_prevista;
+            manutencao.data_conclusao = updateRequest.data_conclusao;
             manutencao.id_status = updateRequest.id_status;
             manutencao.descricao = updateRequest.descricao;
             manutencao.id_tipo = updateRequest.id_tipo;
@@ -167,6 +178,17 @@ namespace OffshoreTrack.Controllers
             manutencao.id_setor = updateRequest.id_setor;
             manutencao.id_fornecedor = updateRequest.id_fornecedor;
             manutencao.id_criticidade = updateRequest.id_criticidade;
+            
+            // Se um novo arquivo foi enviado no pedido de atualização
+            if (anexo != null && anexo.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexo.CopyToAsync(memoryStream);
+                    manutencao.anexo = memoryStream.ToArray(); // Aqui estamos atribuindo o conteúdo do novo arquivo para o campo anexo.
+                }
+            }
+
             try
             {
                 await contexto.SaveChangesAsync();
@@ -197,5 +219,32 @@ namespace OffshoreTrack.Controllers
         // Fim - Delete
 
         /* Fim - CRUD */
+
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadAnexo(int id)
+        {
+            var manutencao = await contexto.Manutencao.FindAsync(id);
+            if (manutencao == null)
+            {
+                return NotFound();
+            }
+
+            if (manutencao.anexo == null || manutencao.anexo.Length == 0)
+            {
+                return NotFound("O anexo não está disponível.");
+            }
+
+            // Define o tipo MIME do arquivo
+            string contentType = "application/octet-stream";
+
+            // Define o nome do arquivo para download (opcional)
+            string fileName = "anexo.pdf";
+
+            // Retorna o arquivo como um resultado para download
+            return File(manutencao.anexo, contentType, fileName);
+        }
+
+
     }
 }

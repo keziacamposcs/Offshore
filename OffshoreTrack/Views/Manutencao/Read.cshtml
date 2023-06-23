@@ -101,7 +101,7 @@
                 <label for="anexo" class="form-label">Anexo:</label>
                 @if(Model.anexo != null && Model.anexo.Length > 0)
                 {
-                    <a class="btn btn-secondary" href="@Model.anexo" download>Baixar anexo</a>
+                    <a class="btn btn-secondary" href="@Url.Action("DownloadAnexo", "Manutencao", new { id = Model.id_manutencao })">Baixar Anexo</a>
                 }
                 else
                 {

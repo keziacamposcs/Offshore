@@ -12,7 +12,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="Edit">
+                <form method="post" action="Update">
                     <input type="hidden" asp-for="id_manutencao" />
                     <div class="row">
                         <div class="col-sm-9">
@@ -81,6 +81,7 @@
 
                     @if(Model.anexo != null && Model.anexo.Length > 0)
                     {
+                        
                         <a href="@Model.anexo" download>Baixar anexo atual</a>
                     }
                     else
