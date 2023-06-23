@@ -158,47 +158,46 @@ namespace OffshoreTrack.Controllers
             return View(manutencao);
         }
 
-       [HttpPost]
-        public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anexo)
+[HttpPost]
+public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anexoFile)
+{
+    var manutencao = await contexto.Manutencao.FindAsync(updateRequest.id_manutencao);
+    if (manutencao == null)
+    {
+        return NotFound();
+    }
+
+    manutencao.manutencao = updateRequest.manutencao;
+    manutencao.id_status = updateRequest.id_status;
+    manutencao.descricao = updateRequest.descricao;
+    manutencao.id_tipo = updateRequest.id_tipo;
+    manutencao.id_material = updateRequest.id_material;
+    manutencao.id_setor = updateRequest.id_setor;
+    manutencao.id_fornecedor = updateRequest.id_fornecedor;
+    manutencao.id_criticidade = updateRequest.id_criticidade;
+    if (anexoFile != null)
+    {
+        // Limpe o anexo existente
+        manutencao.anexo = null;
+
+        using (var memoryStream = new MemoryStream())
         {
-            var manutencao = await contexto.Manutencao.FindAsync(updateRequest.id_manutencao);
-            if (manutencao == null)
-            {
-                return NotFound();
-            }
-
-            manutencao.manutencao = updateRequest.manutencao;
-            manutencao.data = updateRequest.data;
-            manutencao.data_prevista = updateRequest.data_prevista;
-            manutencao.data_conclusao = updateRequest.data_conclusao;
-            manutencao.id_status = updateRequest.id_status;
-            manutencao.descricao = updateRequest.descricao;
-            manutencao.id_tipo = updateRequest.id_tipo;
-            manutencao.id_material = updateRequest.id_material;
-            manutencao.id_setor = updateRequest.id_setor;
-            manutencao.id_fornecedor = updateRequest.id_fornecedor;
-            manutencao.id_criticidade = updateRequest.id_criticidade;
-            
-            // Se um novo arquivo foi enviado no pedido de atualização
-            if (anexo != null && anexo.Length > 0)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await anexo.CopyToAsync(memoryStream);
-                    manutencao.anexo = memoryStream.ToArray(); // Aqui estamos atribuindo o conteúdo do novo arquivo para o campo anexo.
-                }
-            }
-
-            try
-            {
-                await contexto.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await anexoFile.CopyToAsync(memoryStream);
+            manutencao.anexo = memoryStream.ToArray();
         }
+    }
+    
+    try
+    {
+        await contexto.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+    catch (Exception ex)
+    {
+        return BadRequest(ex.Message);
+    }
+}
+
         // Fim - Update
 
 
