@@ -145,6 +145,14 @@ namespace OffshoreTrack.Controllers
         public async Task<string> GenerateQrCode(int id)
         {
             var material = await contexto.Material.FindAsync(id);
+            var tipos = contexto.Tipo.ToList();
+            var criticidades = contexto.Criticidade.ToList();
+            var setors = contexto.Setor.ToList();
+            var clientes = contexto.Cliente.ToList();
+            var locals = contexto.Local.ToList();
+            var usuarios = contexto.Usuario.ToList();
+            var fornecedors = contexto.Fornecedor.ToList();
+
             if (material == null)
             {
                 return null; // ou lançar uma exceção, dependendo da sua lógica de negócios
@@ -298,6 +306,7 @@ namespace OffshoreTrack.Controllers
         public async Task<IActionResult> DownloadAnexo(int id)
         {
             var materials = await contexto.Material.FindAsync(id);
+            
             if (materials == null)
             {
                 return NotFound();

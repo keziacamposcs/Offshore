@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-body">
 
-                <form method="post" action="/Material/Update">
+                <form method="post" asp-action="Update" enctype="multipart/form-data">
                     <input type="hidden" asp-for="id_material" />
 
                     <label for="inputText" class="col-sm col-form-label">Material:</label>
@@ -113,7 +113,18 @@
                     </div>
 
                     <label for="anexo" class="form-label">Anexos:</label>
-                    <input class="form-control" type="file" id="anexo">
+                    <input type="file" id="anexoFile" name="anexoFile" class="form-control">
+                    <input type="hidden" asp-for="anexo" />
+                    <br>
+                    @if(Model.anexo != null && Model.anexo.Length > 0)
+                    {    
+                        <a class="btn btn-outline-secondary" href="@Url.Action("DownloadAnexo", "Manutencao", new { id = Model.id_manutencao })">Baixar Anexo atual</a>
+                        <br>
+                    }
+                    else
+                    {
+                        <p>Sem Anexo</p>
+                    }
                     <br>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
