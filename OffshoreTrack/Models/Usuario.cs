@@ -25,6 +25,8 @@ namespace OffshoreTrack.Models
 
         // Relacionamentos
         public List<Material>? materials { get; set; }
+        public List<AtividadeLog>? atividadeLogs { get; set; }
+
     }
 }
 

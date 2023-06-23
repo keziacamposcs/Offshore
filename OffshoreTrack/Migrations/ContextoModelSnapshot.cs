@@ -17,6 +17,34 @@ namespace OffshoreTrack.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");
 
+            modelBuilder.Entity("OffshoreTrack.Models.AtividadeLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Acao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("id_material")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_usuario")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("id_material");
+
+                    b.HasIndex("id_usuario");
+
+                    b.ToTable("atividadeLog", (string)null);
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Cliente", b =>
                 {
                     b.Property<int>("id_cliente")
@@ -445,6 +473,21 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("usuario", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.AtividadeLog", b =>
+                {
+                    b.HasOne("OffshoreTrack.Models.Material", "material")
+                        .WithMany("atividadeLogs")
+                        .HasForeignKey("id_material");
+
+                    b.HasOne("OffshoreTrack.Models.Usuario", "usuario")
+                        .WithMany("atividadeLogs")
+                        .HasForeignKey("id_usuario");
+
+                    b.Navigation("material");
+
+                    b.Navigation("usuario");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
                 {
                     b.HasOne("OffshoreTrack.Models.Cliente", "Cliente")
@@ -661,6 +704,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Material", b =>
                 {
+                    b.Navigation("atividadeLogs");
+
                     b.Navigation("manutencaos");
 
                     b.Navigation("ordemCompras");
@@ -710,6 +755,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Usuario", b =>
                 {
+                    b.Navigation("atividadeLogs");
+
                     b.Navigation("materials");
                 });
 #pragma warning restore 612, 618

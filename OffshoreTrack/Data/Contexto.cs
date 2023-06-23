@@ -37,6 +37,9 @@ namespace OffshoreTrack.Data
 
         public DbSet<Status> Status { get; set; }
 
+        public DbSet<AtividadeLog> AtividadeLog { get; set; }
+
+
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -204,6 +207,18 @@ namespace OffshoreTrack.Data
                 .WithMany(p => p.usuarios)
                 .HasForeignKey(u => u.id_permissao);
 
+            // AtividadeLog
+            modelBuilder.Entity<AtividadeLog>()
+                .HasOne(al => al.usuario)
+                .WithMany(u => u.atividadeLogs)
+                .HasForeignKey(al => al.id_usuario);
+
+            modelBuilder.Entity<AtividadeLog>()
+                .HasOne(al => al.material)
+                .WithMany(m => m.atividadeLogs)
+                .HasForeignKey(al => al.id_material);
+
+
 
             /* Tabelas */
             modelBuilder.Entity<Cliente>()
@@ -245,6 +260,8 @@ namespace OffshoreTrack.Data
             modelBuilder.Entity<Permissao>()
             .ToTable("permissao");
 
+            modelBuilder.Entity<AtividadeLog>()
+                .ToTable("atividadeLog");
 
 
             /* Fim - Tabela */

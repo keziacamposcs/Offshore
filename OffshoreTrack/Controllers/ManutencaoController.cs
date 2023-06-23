@@ -80,7 +80,7 @@ namespace OffshoreTrack.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await anexoFile.CopyToAsync(memoryStream);
-                    manutencao.anexo = memoryStream.ToArray(); // Aqui estamos atribuindo o conteúdo do arquivo para o campo anexo.
+                    manutencao.anexo = memoryStream.ToArray();
                 }
             }
 

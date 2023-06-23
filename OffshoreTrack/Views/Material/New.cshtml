@@ -12,7 +12,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" action="Create">
+                <form method="post" action="Create" enctype="multipart/form-data">
 
                     <label for="inputText" class="col-sm col-form-label">Material:</label>
                     <input type="text" class="form-control" id="material" name="material" asp-for="material" />
@@ -102,7 +102,7 @@
                     </div>
 
                     <label for="anexo" class="form-label">Anexar arquivo:</label>
-                    <input class="form-control" type="file" id="anexo">
+                    <input class="form-control" type="file" id="anexoFile" name="anexoFile">
                     <br>
                     
                     <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
@@ -116,14 +116,5 @@
 {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
-    <script>
-        function printQRCode() {
-            var qrCode = document.querySelector('img');  
-            var newWindow = window.open('', '_blank');
-            newWindow.document.write(qrCode.outerHTML);
-            newWindow.document.close();
-            newWindow.print();
-        }
-    </script>
 
 }

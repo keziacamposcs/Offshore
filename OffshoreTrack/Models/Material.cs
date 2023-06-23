@@ -42,10 +42,12 @@ namespace OffshoreTrack.Models
         public int? id_manutencao { get; set; }
         public Manutencao? manutencao { get; set; }
 
+
         //Relacionamentos
         public List<Manutencao>? manutencaos { get; set; }
         public List<ParteSolta>? parteSoltas { get; set; }
         public List<OrdemCompra>? ordemCompras { get; set; }
 
+        public List<AtividadeLog>? atividadeLogs { get; set; }
     }
 }

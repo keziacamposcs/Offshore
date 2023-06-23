@@ -61,8 +61,8 @@ namespace OffshoreTrack.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([Bind("material,descricao, tamanho, anexo, id_tipo, id_criticidade, id_setor, id_cliente, id_local, id_usuario, id_fornecedor")] Material createRequest)
+       [HttpPost]
+        public async Task<IActionResult> Create([Bind("material,descricao,numeroSerie, tamanho, anexo, id_tipo, id_criticidade, id_setor, id_cliente, id_local, id_usuario, id_fornecedor")] Material createRequest,IFormFile anexoFile)
         {
             var materials = new Material
             {
@@ -80,17 +80,39 @@ namespace OffshoreTrack.Controllers
                 id_fornecedor = createRequest.id_fornecedor
             };
 
+            if (anexoFile != null && anexoFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexoFile.CopyToAsync(memoryStream);
+                    materials.anexo = memoryStream.ToArray();
+                }
+            }
+            else
+            {
+                materials.anexo = null; 
+            }
+
             contexto.Material.Add(materials);
-            try
+            await contexto.SaveChangesAsync();
+
+            materials.qrcode = await GenerateQrCode(materials.id_material);
+
+            contexto.Material.Update(materials);
+            await contexto.SaveChangesAsync();
+
+            var atividadeLogCreate = new AtividadeLog
             {
-                await contexto.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return View(createRequest);
-            }
+                id_material = materials.id_material,
+                Timestamp = DateTime.Now,
+                Acao = "Material criado"
+            };
+
+            await LogAtividade(atividadeLogCreate);
+
+            return RedirectToAction("Read", new { id = materials.id_material });
         }
+        // Fim  - Create
 
         // Read
         [HttpGet]
@@ -105,81 +127,51 @@ namespace OffshoreTrack.Controllers
                 .Include(x => x.usuario)
                 .Include(x => x.fornecedor)
                 .Include(x => x.manutencaos)
+                .Include(x => x.atividadeLogs)
                 .FirstOrDefaultAsync(x => x.id_material == id);
 
-            if (material != null)
-            {
-                return View(material);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-        // Gerador de Qrcode
-        public async Task<IActionResult> GenerateQrCode(int id)
-        {
-            var material = await contexto.Material.FindAsync(id);
             if (material == null)
             {
                 return NotFound();
             }
-            // Limpar o QR Code existente
-            material.qrcode = null;
+            else
+            {
+                return View(material);
+            }
+        }
+        // Fim - Read
 
+        // Gerador de Qrcode
+        public async Task<string> GenerateQrCode(int id)
+        {
+            var material = await contexto.Material.FindAsync(id);
+            if (material == null)
+            {
+                return null; // ou lançar uma exceção, dependendo da sua lógica de negócios
+            }
 
-            // Gerar o QRCode para o material
-            string qrCodeContent = $"<html>" +
-                $"<head><title>Material: {material.id_material}</title></head>" +
-                $"<body>" +
-                    $"<h1>Material: {material.material}</h1>" +
-                    $"<p>Descrição: {material.descricao}</p>" +
-                    $"<p>Número de Série: {material.numeroSerie}</p>" +
-                    $"<p>Tamanho: {material.tamanho}</p>" +
-                    $"<p>Tipo: {material.tipo.tipo}</p>" +
-                    $"<p>Criticidade: {material.criticidade.criticidade}</p>" +
-                    $"<p>Setor: {material.setor.setor}</p>" +
-                    $"<p>Cliente: {material.cliente.cliente}</p>" +
-                    $"<p>Local: {material.local.local}</p>" +
-                    $"<p>Usuário: {material.usuario.usuario}</p>" +
-                    $"<p>Fornecedor: {material.fornecedor.fornecedor}</p>" +
-                    (material.manutencaos != null && material.manutencaos.Count > 0
-                        ? $"<h2>Últimas Manutenções:</h2><ul>" +
-                            string.Join("", material.manutencaos.OrderByDescending(m => m.data).Take(5).Select(m => $"<li>{m.data}: {m.manutencao}</li>")) +
-                        "</ul>"
-                        : "") +
-                "</body></html>";
+        string qrCodeContent = $"Material: {material.material}\n" +
+                       $"Descrição: {material.descricao ?? "N/A"}\n" +
+                       $"Número de Série: {material.numeroSerie ?? "N/A"}\n" +
+                       $"Tamanho: {material.tamanho ?? "N/A"}\n" +
+                       $"Tipo: {material?.tipo?.tipo ?? "N/A"}\n" +
+                       $"Criticidade: {material?.criticidade?.criticidade ?? "N/A"}\n" +
+                       $"Setor: {material?.setor?.setor ?? "N/A"}\n" +
+                       $"Cliente: {material?.cliente?.cliente ?? "N/A"}\n" +
+                       $"Local: {material?.local?.local ?? "N/A"}\n" +
+                       $"Fornecedor: {material?.fornecedor?.fornecedor ?? "N/A"}";
+            Console.WriteLine(qrCodeContent);
+
             var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(qrCodeContent, QRCodeGenerator.ECCLevel.Q);
             var qrCode = new PngByteQRCode(qrCodeData);
             var qrCodeAsBytes = qrCode.GetGraphic(20);
             var qrCodeAsBase64 = Convert.ToBase64String(qrCodeAsBytes);
-            material.qrcode = qrCodeAsBase64;
 
-            contexto.Material.Update(material);
-            await contexto.SaveChangesAsync();
-
-            return Content(qrCodeAsBase64);
+            return qrCodeAsBase64;
         }
 
-        // Anexo
-        [HttpGet]
-        public IActionResult DownloadAttachment(int id)
-        {
-            var material = contexto.Material.Find(id);
-            if (material != null)
-            {
-                if (material.anexo != null)
-                {
-                    var contentType = "application/pdf";
-                    return File(material.anexo, contentType, "anexo.pdf");
-                }
-            }
-            return NotFound();
-        }
-
-        // Fim - Anexo
+        // Fim - Gerador de Qrcode
 
         // Update
         [HttpGet]
@@ -211,7 +203,7 @@ namespace OffshoreTrack.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(Material updateRequest, IFormFile newFile)
+        public async Task<IActionResult> Update(Material updateRequest, IFormFile anexoFile)
         {
             var material = await contexto.Material.FindAsync(updateRequest.id_material);
             if (material == null)
@@ -224,14 +216,6 @@ namespace OffshoreTrack.Controllers
             material.numeroSerie = updateRequest.numeroSerie;
             material.tamanho = updateRequest.tamanho;
             material.qrcode = updateRequest.qrcode;
-
-            if (newFile != null && newFile.Length > 0)
-            {
-                using var memoryStream = new MemoryStream();
-                await newFile.CopyToAsync(memoryStream);
-                material.anexo = memoryStream.ToArray();
-            }
-
             material.id_tipo = updateRequest.id_tipo;
             material.id_criticidade = updateRequest.id_criticidade;
             material.id_setor = updateRequest.id_setor;
@@ -239,24 +223,30 @@ namespace OffshoreTrack.Controllers
             material.id_local = updateRequest.id_local;
             material.id_usuario = updateRequest.id_usuario;
             material.id_fornecedor = updateRequest.id_fornecedor;
-            
-            try
+
+            if (anexoFile != null)
             {
-                await contexto.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                material.anexo = null;
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexoFile.CopyToAsync(memoryStream);
+                    material.anexo = memoryStream.ToArray();
+                }
             }
-            catch (Exception ex)
+            contexto.Material.Update(material);
+            await contexto.SaveChangesAsync();
+            material.qrcode = await GenerateQrCode(material.id_material);
+            contexto.Material.Update(material);
+            await contexto.SaveChangesAsync();
+
+            var atividadeLogCreate = new AtividadeLog
             {
-                return BadRequest(ex.Message);
-            }
-        }
-        private async Task<byte[]> ReadFileData(IFormFile file)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                await file.CopyToAsync(memoryStream);
-                return memoryStream.ToArray();
-            }
+                id_material = material.id_material,
+                Timestamp = DateTime.Now,
+                Acao = "Material Atualizado"
+            };
+            await LogAtividade(atividadeLogCreate);
+            return RedirectToAction("Read", new { id = material.id_material });
         }
         // Fim - Update
 
@@ -276,5 +266,59 @@ namespace OffshoreTrack.Controllers
         }
 
         /* Fim - CRUD */
+
+        // Download de Qrcode
+        [HttpGet]
+        public async Task<IActionResult> DownloadQrCode(int id)
+        {
+            var material = await contexto.Material.FindAsync(id);
+            if (material == null || material.qrcode == null)
+            {
+                return NotFound();
+            }
+
+            var qrCodeAsBytes = Convert.FromBase64String(material.qrcode);
+            return File(qrCodeAsBytes, "image/png", $"qrcode_{id}.png");
+        }
+        // Fim - Download de Qrcode
+    
+        // Log de Atividade
+        public async Task LogAtividade(AtividadeLog atividadeLog)
+        {
+            if (atividadeLog != null)
+            {
+                contexto.AtividadeLog.Add(atividadeLog);
+                await contexto.SaveChangesAsync();
+            }
+        }
+        // Fim - Log de Atividade
+
+        // Download de Anexo
+        [HttpGet]
+        public async Task<IActionResult> DownloadAnexo(int id)
+        {
+            var materials = await contexto.Material.FindAsync(id);
+            if (materials == null)
+            {
+                return NotFound();
+            }
+
+            if (materials.anexo == null || materials.anexo.Length == 0)
+            {
+                return NotFound("O anexo não está disponível.");
+            }
+
+            // Define o tipo MIME do arquivo
+            string contentType = "application/octet-stream";
+
+            // Define o nome do arquivo para download (opcional)
+            string fileName = "anexo.pdf";
+
+            // Retorna o arquivo como um resultado para download
+            return File(materials.anexo, contentType, fileName);
+        }
+        // Fim - Download de Anexo
     }
+
+    
 }
