@@ -74,9 +74,15 @@ namespace OffshoreTrack.Controllers
 
         // Read
         [HttpGet]
-        [Authorize(Policy = "PodeLer")]
         public async Task<IActionResult> Read(int id)
-        {
+        {   
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var certificacao = await contexto.Certificacao
             .FirstOrDefaultAsync(x => x.id_certificacao == id);
 

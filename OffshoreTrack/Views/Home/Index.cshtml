@@ -1,6 +1,28 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@if(TempData["Aviso"] != null)
+{
+    ViewBag.Aviso = TempData["Aviso"].ToString();
+}
+
+<!-- Modal de Aviso -->
+<div class="modal fade" id="avisoModal" tabindex="-1" role="dialog" aria-labelledby="avisoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="avisoModalLabel">Aviso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        @ViewBag.Aviso
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fim - Modal de Aviso -->
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -8,4 +30,18 @@
 
 
 </div>
-
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Verifica se há uma mensagem para exibir
+            @if (!String.IsNullOrEmpty(ViewBag.Aviso))
+            {
+                <text>
+                    $('#avisoModal').modal('show');
+                </text>
+            }
+        });
+    </script>
+}
