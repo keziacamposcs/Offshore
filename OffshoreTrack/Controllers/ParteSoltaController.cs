@@ -10,9 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class ParteSoltaController : Controller
     {
         private readonly Contexto contexto;

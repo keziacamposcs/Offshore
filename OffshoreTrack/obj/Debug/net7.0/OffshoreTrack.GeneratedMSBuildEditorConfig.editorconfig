@@ -48,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50ZS9SZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Conta/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGEvTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -230,6 +234,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Mb2dpbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Shared/_ValidationScriptsPartial.cshtml]

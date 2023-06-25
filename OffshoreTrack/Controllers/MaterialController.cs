@@ -11,10 +11,12 @@ using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using QRCoder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class MaterialController : Controller
     {
         private readonly Contexto contexto;

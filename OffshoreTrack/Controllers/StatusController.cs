@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class StatusController : Controller
     {
 

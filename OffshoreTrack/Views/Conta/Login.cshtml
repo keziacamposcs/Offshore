@@ -1,0 +1,22 @@
+@model List<OffshoreTrack.Models.Usuario>
+@{ 
+    Layout = "_LoginLayout";
+    ViewData["Title"]="Login";
+
+}
+
+<h2>Login</h2>
+
+<form method="post">
+    <div>
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" required />
+    </div>
+    <div>
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required />
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+</form>

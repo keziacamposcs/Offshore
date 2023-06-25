@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class FornecedorController : Controller
     {
         private readonly Contexto contexto;

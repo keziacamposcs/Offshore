@@ -7,9 +7,11 @@ using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class OrdemCompraController : Controller
     {
         private readonly Contexto contexto;

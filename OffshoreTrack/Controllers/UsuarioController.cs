@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OffshoreTrack.Data;
 using OffshoreTrack.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly Contexto contexto;

@@ -37,7 +37,9 @@
 
                         <li class="dropdown-item"> <b>Permissão:</b>permisao</li>
                         <li>
-                            <a class="dropdown-item rounded-2"><i class="bi bi-box-arrow-right"></i>Logout</a>
+    <a asp-controller="Conta" asp-action="Logout" class="dropdown-item rounded-2">
+    <i class="bi bi-box-arrow-right"></i>Logout
+    </a>
                         </li>
                     </ul>
 
@@ -186,8 +188,15 @@
                 </ul>
             </li>
             <!-- Fim - Certificacao -->
-            
+
             <!-- Configurações-->
+            @using System.Security.Claims;
+            @{
+                var isAdmin = User.Claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "Admin");
+            }
+
+            @if (isAdmin)
+            {
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#config_nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-gear"></i><span>Configuração</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -200,8 +209,8 @@
 
                 </ul>
             </li>
+            }
             <!-- Fim - Configurações -->
-
 
         </ul>
     </aside>

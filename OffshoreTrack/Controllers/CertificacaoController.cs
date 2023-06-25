@@ -7,9 +7,11 @@ using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class CertificacaoController : Controller
     {
 
@@ -72,6 +74,7 @@ namespace OffshoreTrack.Controllers
 
         // Read
         [HttpGet]
+        [Authorize(Policy = "PodeLer")]
         public async Task<IActionResult> Read(int id)
         {
             var certificacao = await contexto.Certificacao

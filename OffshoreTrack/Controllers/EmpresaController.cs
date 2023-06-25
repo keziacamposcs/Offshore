@@ -3,9 +3,11 @@ using OffshoreTrack.Models;
 using System.Diagnostics;
 using OffshoreTrack.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OffshoreTrack.Controllers
 {
+    [Authorize]
     public class EmpresaController : Controller
     {
         private readonly Contexto contexto;

@@ -236,6 +236,14 @@ namespace OffshoreTrack.Data
                 .WithMany(p => p.usuarios)
                 .HasForeignKey(u => u.id_permissao);
 
+            //Permissao
+            modelBuilder.Entity<Permissao>()
+                .HasMany(p => p.usuarios)
+                .WithOne(u => u.Permissao)
+                .HasForeignKey(u => u.id_permissao);
+
+
+
             // AtividadeLog
             modelBuilder.Entity<AtividadeLog>()
                 .HasOne(al => al.usuario)
