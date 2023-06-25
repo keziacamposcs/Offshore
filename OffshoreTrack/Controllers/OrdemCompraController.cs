@@ -58,7 +58,7 @@ namespace OffshoreTrack.Controllers
         public async Task<IActionResult> Create([Bind("oc, prioridade, observacao, data_oc, data_prevista, item1, quantidade1, valor1, item2, quantidade2, valor2, item3,  item4, quantidade4, valor4, item5, quantidade5, valor5, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
         {
             var ordemCompra = new OrdemCompra
-            {
+            {   id_empresa = 1,
                 oc = createRequest.oc,
                 prioridade = createRequest.prioridade,
                 observacao = createRequest.observacao,
@@ -115,7 +115,8 @@ namespace OffshoreTrack.Controllers
                             .Include(x => x.fornecedor)
                             .Include(x => x.fornecedor2)
                             .Include(x => x.fornecedor3)
-                            .Include(x => x.rateio)                            
+                            .Include(x => x.rateio)
+                            .Include(x => x.empresa)                            
             .FirstOrDefaultAsync(x => x.id_oc == id);
             return View(ordemCompra);
         }

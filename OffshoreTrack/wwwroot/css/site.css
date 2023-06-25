@@ -21,14 +21,19 @@ body {
   margin-bottom: 60px;
 }
 
-/* Estilos para a versão de impressão */
+/* Estilo normal */
+.print-only-oc {
+  display: none;
+}
+
+/* Estilo para a versão de impressão */
 @media print {
   .print-hide {
     display: none !important;
   }
 
   .print-only-oc {
-    display: block;
+    display: block !important;
   }
 
   html {
@@ -39,6 +44,21 @@ body {
     font-size: 10px;
     margin: 0;
     padding: 0;
-
   }
+  .card-body {
+    padding: 0 0px 0px 0px;
+  }
+
+  .card {
+    margin-bottom: 0px;
+    border: none;
+    border-radius: 0px;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+}
+
+
+
 }
