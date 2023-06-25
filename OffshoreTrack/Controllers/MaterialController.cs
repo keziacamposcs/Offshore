@@ -49,6 +49,7 @@ namespace OffshoreTrack.Controllers
             var locals = contexto.Local.ToList();
             var usuarios = contexto.Usuario.ToList();
             var fornecedors = contexto.Fornecedor.ToList();
+            var status = contexto.Status.ToList();
 
             ViewBag.tipo = new SelectList(tipos, "id_tipo", "tipo");
             ViewBag.criticidade = new SelectList(criticidades, "id_criticidade", "criticidade");
@@ -57,19 +58,23 @@ namespace OffshoreTrack.Controllers
             ViewBag.local = new SelectList(locals, "id_local", "local");
             ViewBag.usuario = new SelectList(usuarios, "id_usuario", "usuario");
             ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.status = new SelectList(status, "id_status", "status");
 
             return View();
         }
 
        [HttpPost]
-        public async Task<IActionResult> Create([Bind("material,descricao,numeroSerie, tamanho, anexo, id_tipo, id_criticidade, id_setor, id_cliente, id_local, id_usuario, id_fornecedor")] Material createRequest,IFormFile anexoFile)
+        public async Task<IActionResult> Create([Bind("material,descricao,numeroSerie, dimensoes, peso, dataFabricacao, dataValidade  , anexo, id_tipo, id_criticidade, id_setor, id_cliente, id_local, id_usuario, id_fornecedor, id_status, id_certificacao")] Material createRequest,IFormFile anexoFile)
         {
             var materials = new Material
             {
                 material = createRequest.material,
                 descricao = createRequest.descricao,
                 numeroSerie = createRequest.numeroSerie,
-                tamanho = createRequest.tamanho,
+                dimensoes = createRequest.dimensoes,
+                peso = createRequest.peso,
+                dataFabricacao = createRequest.dataFabricacao,
+                dataValidade = createRequest.dataValidade,
                 anexo = createRequest.anexo,
                 id_tipo = createRequest.id_tipo,
                 id_criticidade = createRequest.id_criticidade,
@@ -77,7 +82,9 @@ namespace OffshoreTrack.Controllers
                 id_cliente = createRequest.id_cliente,
                 id_local = createRequest.id_local,
                 id_usuario = createRequest.id_usuario,
-                id_fornecedor = createRequest.id_fornecedor
+                id_fornecedor = createRequest.id_fornecedor,
+                id_status = createRequest.id_status,
+                id_certificacao = createRequest.id_certificacao
             };
 
             if (anexoFile != null && anexoFile.Length > 0)
@@ -127,6 +134,8 @@ namespace OffshoreTrack.Controllers
                 .Include(x => x.usuario)
                 .Include(x => x.fornecedor)
                 .Include(x => x.manutencaos)
+                .Include(x => x.certificacao)
+                .Include(x => x.status)
                 .Include(x => x.atividadeLogs)
                 .FirstOrDefaultAsync(x => x.id_material == id);
 
@@ -152,6 +161,8 @@ namespace OffshoreTrack.Controllers
             var locals = contexto.Local.ToList();
             var usuarios = contexto.Usuario.ToList();
             var fornecedors = contexto.Fornecedor.ToList();
+            var status = contexto.Status.ToList();
+            var certificacaos = contexto.Certificacao.ToList();
 
             if (material == null)
             {
@@ -161,7 +172,8 @@ namespace OffshoreTrack.Controllers
         string qrCodeContent = $"Material: {material.material}\n" +
                        $"Descrição: {material.descricao ?? "N/A"}\n" +
                        $"Número de Série: {material.numeroSerie ?? "N/A"}\n" +
-                       $"Tamanho: {material.tamanho ?? "N/A"}\n" +
+                       $"Dimensões: {material.dimensoes ?? "N/A"}\n" +
+                       $"Peso: {material.peso ?? "N/A"}\n" +
                        $"Tipo: {material?.tipo?.tipo ?? "N/A"}\n" +
                        $"Criticidade: {material?.criticidade?.criticidade ?? "N/A"}\n" +
                        $"Setor: {material?.setor?.setor ?? "N/A"}\n" +
@@ -193,6 +205,8 @@ namespace OffshoreTrack.Controllers
             var locals = contexto.Local.ToList();
             var usuarios = contexto.Usuario.ToList();
             var fornecedors = contexto.Fornecedor.ToList();
+            var status = contexto.Status.ToList();
+            var certificacaos = contexto.Certificacao.ToList();
 
             ViewBag.tipo = new SelectList(tipos, "id_tipo", "tipo");
             ViewBag.criticidade = new SelectList(criticidades, "id_criticidade", "criticidade");
@@ -201,6 +215,8 @@ namespace OffshoreTrack.Controllers
             ViewBag.local = new SelectList(locals, "id_local", "local");
             ViewBag.usuario = new SelectList(usuarios, "id_usuario", "usuario");
             ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.status = new SelectList(status, "id_status", "status");
+            ViewBag.certificacao = new SelectList(certificacaos, "id_certificacao", "certificacao");
 
          
             if (material == null)
@@ -222,7 +238,8 @@ namespace OffshoreTrack.Controllers
             material.material = updateRequest.material;
             material.descricao = updateRequest.descricao;
             material.numeroSerie = updateRequest.numeroSerie;
-            material.tamanho = updateRequest.tamanho;
+            material.dimensoes = updateRequest.dimensoes;
+            material.peso = updateRequest.peso;
             material.qrcode = updateRequest.qrcode;
             material.id_tipo = updateRequest.id_tipo;
             material.id_criticidade = updateRequest.id_criticidade;
@@ -231,6 +248,8 @@ namespace OffshoreTrack.Controllers
             material.id_local = updateRequest.id_local;
             material.id_usuario = updateRequest.id_usuario;
             material.id_fornecedor = updateRequest.id_fornecedor;
+            material.id_status = updateRequest.id_status;
+            material.id_certificacao = updateRequest.id_certificacao;
 
             if (anexoFile != null)
             {

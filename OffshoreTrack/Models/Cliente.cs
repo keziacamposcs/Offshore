@@ -12,7 +12,14 @@ namespace OffshoreTrack.Models
 
         public string? cliente { get; set; }
 
+        public string? razaoSocial { get; set; }
+
         public string? cnpj { get; set; }
+
+        public string? endereco { get; set; }
+
+        public string? telefone { get; set; }
+
 
         //Relacionamentos
         public List<Material> materials { get; set; } = new List<Material>();

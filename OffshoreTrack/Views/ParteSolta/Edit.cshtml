@@ -6,7 +6,7 @@ ViewData["Title"]="Edit";
 <div class="pagetitle">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="display-4">Editar: ParteSolta</h1>
+            <h1 class="display-4">Editar: Parte Solta</h1>
         </div>
 
         <div class="col-md-6">
@@ -22,40 +22,78 @@ ViewData["Title"]="Edit";
         <div class="card">
             <div class="card-body">
 
-                <form method="post" action="/ParteSolta/Update">
+                <form method="post" asp-action="Update" enctype="multipart/form-data">
                     <input type="hidden" asp-for="id_partesolta" />
 
-                    <label for="inputText" class="col-sm col-form-label">Parte Solta:</label>
-                    <input type="text" class="form-control" id="partesolta" asp-for="partesolta" />
-                    <br/>
-
-                   <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                    <input type="number" class="form-control" id="quantidade" asp-for="quantidade" />
-                    <br/>
-
-                    <div class="form-group">
-                        <label asp-for="id_oc" class="col-sm col-form-label">Ordem de Compra:</label>
-                        <select asp-for="id_oc" class="form-control" asp-items="@ViewBag.oc"></select>
-                        <span asp-validation-for="id_oc" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <label for="inputText" class="col-sm col-form-label">Parte Solta:</label>
+                            <input type="text" class="form-control" id="partesolta" name="partesolta" asp-for="partesolta" />
+                            <br />
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label asp-for="id_status" class="col-sm col-form-label">Status:</label>
+                                <select asp-for="id_status" class="form-control" asp-items="@ViewBag.status"></select>
+                            </div>
+                        </div>
                     </div>
-                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_material" class="col-sm col-form-label">Material:</label>
+                                <select asp-for="id_material" class="form-control" asp-items="@ViewBag.material"></select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_fornecedor" class="col-sm col-form-label">Fornecedor:</label>
+                                <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_local" class="col-sm col-form-label">Local:</label>
+                                <select asp-for="id_local" class="form-control" asp-items="@ViewBag.local"></select>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="id_material" class="col-sm col-form-label">Material:</label>
-                        <select asp-for="id_material" class="form-control" asp-items="@ViewBag.material"></select>
-                        <span asp-validation-for="id_material" class="text-danger"></span>
                     </div>
-                    <br />
-                    
-                    <div class="form-group">
-                        <label asp-for="anexo" class="col-sm col-form-label">Anexo:</label>
-                        <input class="form-control" type="file" id="anexo" name="anexo">
-                        <br />
-                        @if (Model.anexo != null)
-                        {
-                            <a href= "@Url.Action("Download", "ParteSolta", new { id = Model.id_partesolta })" >Baixar anexo existente</a>
-                        }
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade" name="quantidade" asp-for="quantidade" />
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label asp-for="id_oc" class="col-sm col-form-label">Ordem de Compra:</label>
+                                <select asp-for="id_oc" class="form-control" asp-items="@ViewBag.oc"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label asp-for="id_certificacao" class="col-sm col-form-label">Certificado:</label>
+                                <select asp-for="id_certificacao" class="form-control" asp-items="@ViewBag.certificacao"></select>
+                            </div>
+                        </div>
+
                     </div>
+                
+                    <label for="anexo" class="form-label">Anexo:</label>
+                    <input type="file" id="anexoFile" name="anexoFile" class="form-control">
+                    <input type="hidden" asp-for="anexo" />
+                    <br>
+                    @if(Model.anexo != null && Model.anexo.Length > 0)
+                    {    
+                        <a class="btn btn-outline-secondary" href="@Url.Action("DownloadAnexo", "ParteSolta", new { id = Model.id_partesolta })">Baixar Anexo atual</a>
+                        <br>
+                    }
+                    else
+                    {
+                        <p>Sem Anexo</p>
+                    }
                     <br>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>

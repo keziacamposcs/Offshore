@@ -12,6 +12,8 @@ namespace OffshoreTrack.Models
 
         public string? fornecedor { get; set; }
 
+        public string? razaoSocial { get; set; }
+
         public string? cnpj { get; set; }
 
         public string? endereco { get; set; }
@@ -30,6 +32,7 @@ namespace OffshoreTrack.Models
         public List<OrdemCompra>? OrdensCompra2 { get; set; }
         public List<OrdemCompra>? OrdensCompra3 { get; set; }
 
+        public List<ParteSolta>? parteSoltas { get; set; }
 
     }
 }

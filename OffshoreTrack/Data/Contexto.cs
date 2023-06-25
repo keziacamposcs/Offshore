@@ -11,6 +11,7 @@ namespace OffshoreTrack.Data
         }
         
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Certificacao> Certificacao { get; set; }
 
         public DbSet<Criticidade> Criticidade { get; set; }
 
@@ -39,6 +40,9 @@ namespace OffshoreTrack.Data
 
         public DbSet<AtividadeLog> AtividadeLog { get; set; }
 
+        public DbSet<AtividadeLogPS> AtividadeLogPS { get; set; }
+
+        public DbSet<Empresa> Empresa { get; set; }
 
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +59,10 @@ namespace OffshoreTrack.Data
                 .HasMany(c => c.locals)
                 .WithOne(l => l.Cliente)
                 .HasForeignKey(l => l.id_cliente);
+
+            
+            // Certificacao
+
 
             // Criticidade
             modelBuilder.Entity<Criticidade>()
@@ -152,6 +160,12 @@ namespace OffshoreTrack.Data
                 .WithMany(f => f.materials)
                 .HasForeignKey(m => m.id_fornecedor);
 
+            modelBuilder.Entity<Material>()
+                .HasOne(m => m.certificacao)
+                .WithMany(f => f.materials)
+                .HasForeignKey(m => m.id_certificacao);
+
+
             // Ordem Compra
             modelBuilder.Entity<OrdemCompra>()
                 .HasOne(oc => oc.fornecedor)
@@ -160,35 +174,50 @@ namespace OffshoreTrack.Data
 
             modelBuilder.Entity<OrdemCompra>()
                 .HasOne(oc => oc.fornecedor2)
-                .WithMany(f => f.OrdensCompra2)  // Assumindo que Fornecedor tem uma segunda coleção de OrdensCompra
+                .WithMany(f => f.OrdensCompra2) 
                 .HasForeignKey(oc => oc.id_fornecedor2);
 
             modelBuilder.Entity<OrdemCompra>()
                 .HasOne(oc => oc.fornecedor3)
-                .WithMany(f => f.OrdensCompra3)  // Assumindo que Fornecedor tem uma terceira coleção de OrdensCompra
+                .WithMany(f => f.OrdensCompra3)  
                 .HasForeignKey(oc => oc.id_fornecedor3);
 
             modelBuilder.Entity<OrdemCompra>()
                 .HasOne(oc => oc.setor)
-                .WithMany(s => s.ordemCompras)  // Assumindo que Setor tem uma coleção de OrdensCompra
+                .WithMany(s => s.ordemCompras)  
                 .HasForeignKey(oc => oc.id_setor);
 
             modelBuilder.Entity<OrdemCompra>()
-                .HasOne(oc => oc.parteSolta)
-                .WithMany(ps => ps.ordemCompras)  // Assumindo que ParteSolta tem uma coleção de OrdensCompra
-                .HasForeignKey(oc => oc.id_parteSolta);
+                .HasOne(oc => oc.status)
+                .WithMany(s => s.ordemCompras)  
+                .HasForeignKey(oc => oc.id_status);
 
             modelBuilder.Entity<OrdemCompra>()
-                .HasOne(oc => oc.material)
-                .WithMany(m => m.ordemCompras)  // Assumindo que Material tem uma coleção de OrdensCompra
-                .HasForeignKey(oc => oc.id_material);
+                .HasOne(oc => oc.rateio)
+                .WithMany(s => s.ordemCompras)  
+                .HasForeignKey(oc => oc.id_rateio);
 
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(oc => oc.usuario)
+                .WithMany(s => s.ordemCompras)  
+                .HasForeignKey(oc => oc.id_usuario);
+
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(o => o.empresa)
+                .WithMany(e => e.ordemCompras)
+                .HasForeignKey(o => o.id_empresa);
 
             // Parte Solta
             modelBuilder.Entity<ParteSolta>()
                 .HasOne(ps => ps.material)
                 .WithMany(m => m.parteSoltas)
                 .HasForeignKey(ps => ps.id_material);
+
+            modelBuilder.Entity<ParteSolta>()
+                .HasOne(ps => ps.certificacao)
+                .WithMany(m => m.parteSoltas)
+                .HasForeignKey(ps => ps.id_certificacao);
+
 
             // Rateio
             modelBuilder.Entity<Rateio>()
@@ -218,6 +247,11 @@ namespace OffshoreTrack.Data
                 .WithMany(m => m.atividadeLogs)
                 .HasForeignKey(al => al.id_material);
 
+            // AtividadeLogPS
+            modelBuilder.Entity<AtividadeLogPS>()
+                .HasOne(al => al.parteSolta)
+                .WithMany(m => m.atividadeLogsPS)
+                .HasForeignKey(al => al.id_parteSolta);
 
 
             /* Tabelas */
@@ -263,6 +297,8 @@ namespace OffshoreTrack.Data
             modelBuilder.Entity<AtividadeLog>()
                 .ToTable("atividadeLog");
 
+            modelBuilder.Entity<AtividadeLogPS>()
+                .ToTable("atividadeLogPS");
 
             /* Fim - Tabela */
         }

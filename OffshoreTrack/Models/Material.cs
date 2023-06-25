@@ -12,7 +12,15 @@ namespace OffshoreTrack.Models
 
         public string? material { get; set; }
         public string? descricao { get; set; }
-        public string? tamanho { get; set; }
+
+        public string? dimensoes { get; set; } 
+
+        public string? peso { get; set; }
+
+        public DateTime? dataFabricacao { get; set; }
+
+        public DateTime? dataValidade { get; set; }
+
         public string? numeroSerie { get; set; }
 
         public string? qrcode { get; set; }
@@ -42,12 +50,24 @@ namespace OffshoreTrack.Models
         public int? id_manutencao { get; set; }
         public Manutencao? manutencao { get; set; }
 
+        public int? id_partesolta { get; set; }
+        public ParteSolta? parteSolta { get; set; }
+
+        public int? id_ordemcompra { get; set; }
+        public OrdemCompra? ordemCompra { get; set; }
+
+        public int? id_status { get; set; }
+        public Status? status { get; set; }
+
+        public int? id_certificacao { get; set; }
+        public Certificacao? certificacao { get; set; }
+
 
         //Relacionamentos
         public List<Manutencao>? manutencaos { get; set; }
         public List<ParteSolta>? parteSoltas { get; set; }
-        public List<OrdemCompra>? ordemCompras { get; set; }
-
         public List<AtividadeLog>? atividadeLogs { get; set; }
+
+        public List<Certificacao>? certificacaos { get; set; }
     }
 }

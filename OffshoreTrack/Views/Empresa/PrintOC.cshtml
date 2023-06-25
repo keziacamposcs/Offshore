@@ -1,0 +1,56 @@
+﻿@model OffshoreTrack.Models.Empresa
+@{
+    ViewData["Title"] = "PrintOC";
+}
+
+<!-- Cabeçalho para imprimir o OC -->
+<div class="print-only-oc">
+    <h4>Ordem de compra</h4>
+    <table>
+        <tr>
+            <td colspan="2">
+                <img src="@Model.logoEmpresa" alt="Logo da Empresa" />
+            </td>
+            <td colspan="2">
+                <strong>@Model.empresa</strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <strong>Razão Social:</strong> @Model.razaoSocialEmpresa
+            </td>
+            <td colspan="2">
+                <strong>CNPJ:</strong> @Model.cnpjEmpresa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <strong>Inscrição Estadual:</strong> @Model.inscricaoEstadualEmpresa
+            </td>
+            <td colspan="2">
+                <strong>Inscrição Municipal:</strong> @Model.inscricaoMunicipalEmpresa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <strong>Endereço:</strong> @Model.enderecoEmpresa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <strong>Telefone:</strong> @Model.telefoneEmpresa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <strong>E-mail:</strong> @Model.emailEmpresa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <strong>Responsável:</strong> @Model.responsavelEmpresa
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- Fim - Cabeçalho para imprimir o OC -->

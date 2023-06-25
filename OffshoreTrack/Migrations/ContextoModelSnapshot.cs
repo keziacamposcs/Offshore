@@ -45,6 +45,68 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("atividadeLog", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.AtividadeLogPS", b =>
+                {
+                    b.Property<int>("id_atividadeLogPs")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("acao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("id_parteSolta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_usuario")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("usuarioid_usuario")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id_atividadeLogPs");
+
+                    b.HasIndex("id_parteSolta");
+
+                    b.HasIndex("usuarioid_usuario");
+
+                    b.ToTable("atividadeLogPS", (string)null);
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.Certificacao", b =>
+                {
+                    b.Property<int>("id_certificacao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Materialid_material")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<byte[]>("anexo")
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("certificacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("dataEmissao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("dataValidade")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("orgaoEmissor")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id_certificacao");
+
+                    b.HasIndex("Materialid_material");
+
+                    b.ToTable("Certificacao");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Cliente", b =>
                 {
                     b.Property<int>("id_cliente")
@@ -55,6 +117,15 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("cnpj")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("endereco")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("razaoSocial")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("telefone")
                         .HasColumnType("TEXT");
 
                     b.HasKey("id_cliente");
@@ -76,6 +147,47 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("criticidade", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Empresa", b =>
+                {
+                    b.Property<int>("id_empresa")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("cnpjEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("emailEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("empresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("enderecoEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("inscricaoEstadualEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("inscricaoMunicipalEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("logoEmpresa")
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("razaoSocialEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("responsavelEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("telefoneEmpresa")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id_empresa");
+
+                    b.ToTable("Empresa");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Fornecedor", b =>
                 {
                     b.Property<int>("id_fornecedor")
@@ -92,6 +204,9 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("fornecedor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("razaoSocial")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("telefone")
@@ -192,8 +307,20 @@ namespace OffshoreTrack.Migrations
                     b.Property<byte[]>("anexo")
                         .HasColumnType("BLOB");
 
+                    b.Property<DateTime?>("dataFabricacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("dataValidade")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("descricao")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("dimensoes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("id_certificacao")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_cliente")
                         .HasColumnType("INTEGER");
@@ -210,7 +337,16 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_manutencao")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("id_ordemcompra")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_partesolta")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("id_setor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_status")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_tipo")
@@ -228,13 +364,24 @@ namespace OffshoreTrack.Migrations
                     b.Property<string>("numeroSerie")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ordemCompraid_oc")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("parteSoltaid_partesolta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("peso")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("qrcode")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("tamanho")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("statusid_status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("id_material");
+
+                    b.HasIndex("id_certificacao");
 
                     b.HasIndex("id_cliente");
 
@@ -252,6 +399,12 @@ namespace OffshoreTrack.Migrations
 
                     b.HasIndex("manutencaoid_manutencao");
 
+                    b.HasIndex("ordemCompraid_oc");
+
+                    b.HasIndex("parteSoltaid_partesolta");
+
+                    b.HasIndex("statusid_status");
+
                     b.ToTable("material", (string)null);
                 });
 
@@ -261,8 +414,20 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly?>("data_compra")
+                    b.Property<byte[]>("anexo")
+                        .HasColumnType("BLOB");
+
+                    b.Property<DateTime?>("data_conclusao")
                         .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("data_oc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("data_prevista")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("id_empresa")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_fornecedor")
                         .HasColumnType("INTEGER");
@@ -273,14 +438,35 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_fornecedor3")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("id_material")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("id_parteSolta")
+                    b.Property<int?>("id_rateio")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_setor")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_usuario")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("item1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("item2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("item3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("item4")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("item5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("observacao")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("oc")
                         .HasColumnType("TEXT");
@@ -288,10 +474,39 @@ namespace OffshoreTrack.Migrations
                     b.Property<string>("prioridade")
                         .HasColumnType("TEXT");
 
-                    b.Property<double?>("valor")
+                    b.Property<int?>("quantidade1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("quantidade2")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("quantidade3")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("quantidade4")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("quantidade5")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("valor1")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("valor2")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("valor3")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("valor4")
+                        .HasColumnType("REAL");
+
+                    b.Property<double?>("valor5")
                         .HasColumnType("REAL");
 
                     b.HasKey("id_oc");
+
+                    b.HasIndex("id_empresa");
 
                     b.HasIndex("id_fornecedor");
 
@@ -299,11 +514,13 @@ namespace OffshoreTrack.Migrations
 
                     b.HasIndex("id_fornecedor3");
 
-                    b.HasIndex("id_material");
-
-                    b.HasIndex("id_parteSolta");
+                    b.HasIndex("id_rateio");
 
                     b.HasIndex("id_setor");
+
+                    b.HasIndex("id_status");
+
+                    b.HasIndex("id_usuario");
 
                     b.ToTable("ordemCompra", (string)null);
                 });
@@ -314,13 +531,37 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("anexo")
+                    b.Property<byte[]>("anexo")
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("descricao")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("dimensoes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("fornecedorid_fornecedor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_certificacao")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_fornecedor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_local")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_material")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_oc")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("localid_local")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("ocid_oc")
@@ -329,14 +570,28 @@ namespace OffshoreTrack.Migrations
                     b.Property<string>("partesolta")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("peso")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("quantidade")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("statusid_status")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id_partesolta");
 
+                    b.HasIndex("fornecedorid_fornecedor");
+
+                    b.HasIndex("id_certificacao");
+
                     b.HasIndex("id_material");
 
+                    b.HasIndex("localid_local");
+
                     b.HasIndex("ocid_oc");
+
+                    b.HasIndex("statusid_status");
 
                     b.ToTable("parteSolta", (string)null);
                 });
@@ -382,13 +637,13 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_setor2")
                         .HasColumnType("INTEGER");
 
+                    b.Property<decimal?>("porcentagem1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("porcentagem2")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("rateio")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("valor1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal?>("valor2")
                         .HasColumnType("TEXT");
 
                     b.HasKey("id_rateio");
@@ -488,6 +743,28 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("usuario");
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.AtividadeLogPS", b =>
+                {
+                    b.HasOne("OffshoreTrack.Models.ParteSolta", "parteSolta")
+                        .WithMany("atividadeLogsPS")
+                        .HasForeignKey("id_parteSolta");
+
+                    b.HasOne("OffshoreTrack.Models.Usuario", "usuario")
+                        .WithMany()
+                        .HasForeignKey("usuarioid_usuario");
+
+                    b.Navigation("parteSolta");
+
+                    b.Navigation("usuario");
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.Certificacao", b =>
+                {
+                    b.HasOne("OffshoreTrack.Models.Material", null)
+                        .WithMany("certificacaos")
+                        .HasForeignKey("Materialid_material");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
                 {
                     b.HasOne("OffshoreTrack.Models.Cliente", "Cliente")
@@ -538,6 +815,10 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Material", b =>
                 {
+                    b.HasOne("OffshoreTrack.Models.Certificacao", "certificacao")
+                        .WithMany("materials")
+                        .HasForeignKey("id_certificacao");
+
                     b.HasOne("OffshoreTrack.Models.Cliente", "cliente")
                         .WithMany("materials")
                         .HasForeignKey("id_cliente");
@@ -570,6 +851,20 @@ namespace OffshoreTrack.Migrations
                         .WithMany("materials")
                         .HasForeignKey("manutencaoid_manutencao");
 
+                    b.HasOne("OffshoreTrack.Models.OrdemCompra", "ordemCompra")
+                        .WithMany("materials")
+                        .HasForeignKey("ordemCompraid_oc");
+
+                    b.HasOne("OffshoreTrack.Models.ParteSolta", "parteSolta")
+                        .WithMany("materials")
+                        .HasForeignKey("parteSoltaid_partesolta");
+
+                    b.HasOne("OffshoreTrack.Models.Status", "status")
+                        .WithMany("materials")
+                        .HasForeignKey("statusid_status");
+
+                    b.Navigation("certificacao");
+
                     b.Navigation("cliente");
 
                     b.Navigation("criticidade");
@@ -580,7 +875,13 @@ namespace OffshoreTrack.Migrations
 
                     b.Navigation("manutencao");
 
+                    b.Navigation("ordemCompra");
+
+                    b.Navigation("parteSolta");
+
                     b.Navigation("setor");
+
+                    b.Navigation("status");
 
                     b.Navigation("tipo");
 
@@ -589,6 +890,10 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>
                 {
+                    b.HasOne("OffshoreTrack.Models.Empresa", "empresa")
+                        .WithMany("ordemCompras")
+                        .HasForeignKey("id_empresa");
+
                     b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor")
                         .WithMany("OrdensCompra1")
                         .HasForeignKey("id_fornecedor");
@@ -601,17 +906,23 @@ namespace OffshoreTrack.Migrations
                         .WithMany("OrdensCompra3")
                         .HasForeignKey("id_fornecedor3");
 
-                    b.HasOne("OffshoreTrack.Models.Material", "material")
+                    b.HasOne("OffshoreTrack.Models.Rateio", "rateio")
                         .WithMany("ordemCompras")
-                        .HasForeignKey("id_material");
-
-                    b.HasOne("OffshoreTrack.Models.ParteSolta", "parteSolta")
-                        .WithMany("ordemCompras")
-                        .HasForeignKey("id_parteSolta");
+                        .HasForeignKey("id_rateio");
 
                     b.HasOne("OffshoreTrack.Models.Setor", "setor")
                         .WithMany("ordemCompras")
                         .HasForeignKey("id_setor");
+
+                    b.HasOne("OffshoreTrack.Models.Status", "status")
+                        .WithMany("ordemCompras")
+                        .HasForeignKey("id_status");
+
+                    b.HasOne("OffshoreTrack.Models.Usuario", "usuario")
+                        .WithMany("ordemCompras")
+                        .HasForeignKey("id_usuario");
+
+                    b.Navigation("empresa");
 
                     b.Navigation("fornecedor");
 
@@ -619,26 +930,52 @@ namespace OffshoreTrack.Migrations
 
                     b.Navigation("fornecedor3");
 
-                    b.Navigation("material");
-
-                    b.Navigation("parteSolta");
+                    b.Navigation("rateio");
 
                     b.Navigation("setor");
+
+                    b.Navigation("status");
+
+                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.ParteSolta", b =>
                 {
+                    b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor")
+                        .WithMany("parteSoltas")
+                        .HasForeignKey("fornecedorid_fornecedor");
+
+                    b.HasOne("OffshoreTrack.Models.Certificacao", "certificacao")
+                        .WithMany("parteSoltas")
+                        .HasForeignKey("id_certificacao");
+
                     b.HasOne("OffshoreTrack.Models.Material", "material")
                         .WithMany("parteSoltas")
                         .HasForeignKey("id_material");
+
+                    b.HasOne("OffshoreTrack.Models.Local", "local")
+                        .WithMany("parteSoltas")
+                        .HasForeignKey("localid_local");
 
                     b.HasOne("OffshoreTrack.Models.OrdemCompra", "oc")
                         .WithMany("parteSoltas")
                         .HasForeignKey("ocid_oc");
 
+                    b.HasOne("OffshoreTrack.Models.Status", "status")
+                        .WithMany("parteSoltas")
+                        .HasForeignKey("statusid_status");
+
+                    b.Navigation("certificacao");
+
+                    b.Navigation("fornecedor");
+
+                    b.Navigation("local");
+
                     b.Navigation("material");
 
                     b.Navigation("oc");
+
+                    b.Navigation("status");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Rateio", b =>
@@ -665,6 +1002,13 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("Permissao");
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Certificacao", b =>
+                {
+                    b.Navigation("materials");
+
+                    b.Navigation("parteSoltas");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Cliente", b =>
                 {
                     b.Navigation("locals");
@@ -679,6 +1023,11 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("materials");
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Empresa", b =>
+                {
+                    b.Navigation("ordemCompras");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Fornecedor", b =>
                 {
                     b.Navigation("OrdensCompra1");
@@ -690,11 +1039,15 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("manutencaos");
 
                     b.Navigation("materials");
+
+                    b.Navigation("parteSoltas");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
                 {
                     b.Navigation("materials");
+
+                    b.Navigation("parteSoltas");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Manutencao", b =>
@@ -706,26 +1059,35 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Navigation("atividadeLogs");
 
-                    b.Navigation("manutencaos");
+                    b.Navigation("certificacaos");
 
-                    b.Navigation("ordemCompras");
+                    b.Navigation("manutencaos");
 
                     b.Navigation("parteSoltas");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>
                 {
+                    b.Navigation("materials");
+
                     b.Navigation("parteSoltas");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.ParteSolta", b =>
                 {
-                    b.Navigation("ordemCompras");
+                    b.Navigation("atividadeLogsPS");
+
+                    b.Navigation("materials");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Permissao", b =>
                 {
                     b.Navigation("usuarios");
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.Rateio", b =>
+                {
+                    b.Navigation("ordemCompras");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Setor", b =>
@@ -744,6 +1106,12 @@ namespace OffshoreTrack.Migrations
             modelBuilder.Entity("OffshoreTrack.Models.Status", b =>
                 {
                     b.Navigation("manutencaos");
+
+                    b.Navigation("materials");
+
+                    b.Navigation("ordemCompras");
+
+                    b.Navigation("parteSoltas");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Tipo", b =>
@@ -758,6 +1126,8 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("atividadeLogs");
 
                     b.Navigation("materials");
+
+                    b.Navigation("ordemCompras");
                 });
 #pragma warning restore 612, 618
         }

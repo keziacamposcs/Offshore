@@ -36,8 +36,8 @@ ViewData["Title"]="Edit";
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label asp-for="valor1" class="col-form-label">Porcentagem 1:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor1" asp-for="valor1" />
+                                <label asp-for="porcentagem1" class="col-form-label">Porcentagem 1:</label>
+                                <input type="text" min="1" max="100" class="form-control" id="porcentagem1" asp-for="porcentagem1" />
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,8 @@ ViewData["Title"]="Edit";
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label asp-for="valor2" class="col-form-label">Porcentagem 2:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="valor2" asp-for="valor2" />
+                                <label asp-for="porcentagem2" class="col-form-label">Porcentagem 2:</label>
+                                <input type="text" min="1" max="100" class="form-control" id="porcentagem2" asp-for="porcentagem2" />
                             </div>
                         </div>
                     </div>
@@ -75,13 +75,13 @@ ViewData["Title"]="Edit";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script>
         $(document).ready(function(){
-        $("input[name='valor1']").on('input', function() {
+        $("input[name='porcentagem1']").on('input', function() {
             $(this).val(function(i, v) {
             return v.replace('%','') + '%';  });
             });
         });
         $(document).ready(function(){
-        $("input[name='valor2']").on('input', function() {
+        $("input[name='porcentagem2']").on('input', function() {
             $(this).val(function(i, v) {
             return v.replace('%','') + '%';  });
             });

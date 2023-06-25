@@ -48,10 +48,10 @@ namespace OffshoreTrack.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("rateio,valor1, valor2, id_setor1, id_setor2")] Rateio createRequest)
+        public async Task<IActionResult> Create([Bind("rateio,porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio createRequest)
         {
-            if (createRequest.valor1 < 0 || createRequest.valor1 > 100 || 
-                createRequest.valor2 < 0 || createRequest.valor2 > 100)
+            if (createRequest.porcentagem1 < 0 || createRequest.porcentagem1 > 100 || 
+                createRequest.porcentagem2 < 0 || createRequest.porcentagem2 > 100)
             {
                 // Retornar um erro caso os valores estejam fora da faixa aceitável
                 return BadRequest("Valores inválidos. Entre 0% e 100%");
@@ -60,8 +60,8 @@ namespace OffshoreTrack.Controllers
             var rateio = new Rateio
             {
                 rateio = createRequest.rateio,
-                valor1 = createRequest.valor1,
-                valor2 = createRequest.valor2,
+                porcentagem1 = createRequest.porcentagem1,
+                porcentagem2 = createRequest.porcentagem2,
                 id_setor1 = createRequest.id_setor1,
                 id_setor2 = createRequest.id_setor2
             };
@@ -113,7 +113,7 @@ public async Task<IActionResult> Edit(int id)
 }
 
 [HttpPost]
-public async Task<IActionResult> Update([Bind("id_rateio, rateio, valor1, valor2, id_setor1, id_setor2")] Rateio updateRequest)
+public async Task<IActionResult> Update([Bind("id_rateio, rateio, porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio updateRequest)
 {
     if (!ModelState.IsValid)
     {
@@ -130,17 +130,17 @@ public async Task<IActionResult> Update([Bind("id_rateio, rateio, valor1, valor2
         return NotFound();
     }
 
-    if (updateRequest.valor1 < 0 || updateRequest.valor1 > 100 || 
-        updateRequest.valor2 < 0 || updateRequest.valor2 > 100)
+    if (updateRequest.porcentagem1 < 0 || updateRequest.porcentagem1 > 100 || 
+        updateRequest.porcentagem2 < 0 || updateRequest.porcentagem2 > 100)
     {
         // Retornar um erro caso os valores estejam fora da faixa aceitável
         return BadRequest("Valores inválidos. Entre 0% e 100%");
     }
 
     rateio.rateio = updateRequest.rateio;
-    rateio.valor1 = updateRequest.valor1;
+    rateio.porcentagem1 = updateRequest.porcentagem1;
     rateio.id_setor1 = updateRequest.id_setor1;
-    rateio.valor2 = updateRequest.valor2;
+    rateio.porcentagem2 = updateRequest.porcentagem2;
     rateio.id_setor2 = updateRequest.id_setor2;
 
     try

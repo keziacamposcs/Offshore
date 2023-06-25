@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OffshoreTrack.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/OffshoreTrack.styles.css" asp-append-version="true" media="print"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
@@ -19,32 +19,35 @@
                 <img src="~/images/offshorelogo.png" width="110px" style="margin-left: 70px;">
                 <span class="d-none d-lg-block"></span>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn" id="toggle-sidebar-btn"></i>
-
         </div>
 
-        <nav class="header-nav ms-auto">
+        <nav class="header-nav ms-auto print-hide">
             <ul class="d-flex align-items-center">
-
+                <a class="btn btn-outline-light" role="button" asp-area="" asp-controller="Empresa" asp-action="Read">Dados da Empresa</a>&nbsp;&nbsp;&nbsp;
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <p class="" style="margin: 1px;">Usuário:</p>
                         <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                     </a>
+
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6></h6>
                         </li>
+
                         <li class="dropdown-item"> <b>Permissão:</b>permisao</li>
                         <li>
                             <a class="dropdown-item rounded-2"><i class="bi bi-box-arrow-right"></i>Logout</a>
                         </li>
                     </ul>
+
                 </li>
             </ul>
         </nav>
+
     </header>
 
-    <aside id="sidebar" class="sidebar">
+    <aside id="sidebar" class="sidebar print-hide">
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
@@ -172,6 +175,17 @@
                 </ul>
             </li>
             <!-- Fim - Tipo -->
+            <!-- Certificacao -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#certificacao_nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-patch-check"></i><span>Certificação</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="certificacao_nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Certificacao" asp-action="Index">Lista</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Certificacao" asp-action="New">Novo</a></li>
+                </ul>
+            </li>
+            <!-- Fim - Certificacao -->
             
             <!-- Configurações-->
             <li class="nav-item">
@@ -182,6 +196,8 @@
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Usuario" asp-action="Index">Configuração de Usuários</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Permissao" asp-action="Index">Configuração de Permisão</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Status" asp-action="Index">Configuração de Status</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Empresa" asp-action="Edit">Atualização dos dados da Empresa</a></li>
+
                 </ul>
             </li>
             <!-- Fim - Configurações -->

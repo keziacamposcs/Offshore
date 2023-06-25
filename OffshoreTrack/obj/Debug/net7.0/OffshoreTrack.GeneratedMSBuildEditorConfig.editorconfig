@@ -16,6 +16,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/keziacampos/GitHub/Offshore/OffshoreTrack
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Certificacao/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2VydGlmaWNhY2FvL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Certificacao/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2VydGlmaWNhY2FvL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Certificacao/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2VydGlmaWNhY2FvL05ldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Certificacao/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2VydGlmaWNhY2FvL1JlYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Cliente/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2xpZW50ZS9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,6 +62,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvUmVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Empresa/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wcmVzYS9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Empresa/PrintOC.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wcmVzYS9QcmludE9DLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Empresa/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wcmVzYS9SZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Fornecedor/Edit.cshtml]
@@ -118,6 +146,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Material/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvUmVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvUmVhZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/ParteSolta/Edit.cshtml]

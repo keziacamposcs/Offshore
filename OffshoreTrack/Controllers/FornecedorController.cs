@@ -37,11 +37,12 @@ namespace OffshoreTrack.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("fornecedor,cnpj, endereco, telefone, email, vendedor")] Fornecedor createRequest)
+        public async Task<IActionResult> Create([Bind("fornecedor,razaoSocial, cnpj, endereco, telefone, email, vendedor")] Fornecedor createRequest)
         {
             var fornecedor = new Fornecedor
             {
                 fornecedor = createRequest.fornecedor,
+                razaoSocial = createRequest.razaoSocial,
                 cnpj = createRequest.cnpj,
                 endereco = createRequest.endereco,
                 telefone = createRequest.telefone,
@@ -95,6 +96,7 @@ namespace OffshoreTrack.Controllers
             }
 
             fornecedor.fornecedor = updateRequest.fornecedor;
+            fornecedor.razaoSocial = updateRequest.razaoSocial;
             fornecedor.cnpj = updateRequest.cnpj;
             fornecedor.endereco = updateRequest.endereco;
             fornecedor.telefone = updateRequest.telefone;

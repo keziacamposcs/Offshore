@@ -1,0 +1,75 @@
+﻿@model OffshoreTrack.Models.Certificacao
+@{
+    ViewData["Title"]="Edit";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Editar: Certificação</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-grid gap-2d-md-flex justify-content-md-end">
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Certificacao"asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post" asp-action="Update" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="id_certificacao" />
+
+                    <label for="inputText" class="col-sm col-form-label">Certificação:</label>
+                    <input type="text" class="form-control" id="certificacao" asp-for="certificacao" />
+                    <br/>
+
+                    <label for="inputText" class="col-sm col-form-label">Orgão Emissor:</label>
+                    <input type="text" class="form-control" id="orgaoEmissor" name="orgaoEmissor" asp-for="orgaoEmissor" />
+                    <br />
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data de Emissão:</label>
+                            <input type="date" class="form-control" id="dataEmissao" name="dataEmissao" asp-for="dataEmissao" />
+                            <br />
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data de Validade:</label>
+                            <input type="date" class="form-control" id="dataValidade" name="dataValidade" asp-for="dataValidade" />
+                            <br />
+                        </div>
+                    </div>
+
+                    <label for="anexo" class="form-label">Anexar arquivo:</label>
+                    <input type="file" id="anexoFile" name="anexoFile" class="form-control">
+                    
+                    <input type="hidden" asp-for="anexo" />
+                    <br>
+                    @if(Model.anexo != null && Model.anexo.Length > 0)
+                    {    
+                        <a class="btn btn-outline-secondary" href="@Url.Action("DownloadAnexo", "Certificacao", new { id = Model.id_certificacao })">Baixar Anexo atual</a>
+                        <br>
+                    }
+                    else
+                    {
+                        <p>Sem Anexo</p>
+                    }
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
+                </form>
+                <form method="post"action="/Certificacao/Delete">
+                    <input type="hidden"asp-for="id_certificacao"/>
+                    <button type="submit"class="btn btn-danger">Deletar</button>
+                </form>
+                    </div>
+        </div>
+    </div>
+</div>
+

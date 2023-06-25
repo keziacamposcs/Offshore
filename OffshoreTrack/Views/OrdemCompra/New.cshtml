@@ -1,0 +1,199 @@
+﻿@model OffshoreTrack.Models.OrdemCompra
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="pagetitle">
+    <h1 class="display-4"> Cadastrar: Ordem de Compra</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="Create" enctype="multipart/form-data">
+
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <label for="inputText" class="col-sm col-form-label">Ordem de Compra:</label>
+                            <input type="text" class="form-control" id="oc" name="oc" asp-for="oc" />
+                            <br />
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label asp-for="prioridade" class="col-sm col-form-label">Prioridade:</label>
+                                <select class="form-select" asp-for="prioridade">
+                                    <option value="Baixa">Baixa</option>
+                                    <option value="Média">Média</option>
+                                    <option value="Alta">Alta</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Observação:</label>
+                            <textarea type="text" rows="3" class="form-control" id="observacao" name="observacao" asp-for="observacao" ></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data:</label>
+                            <input type="date" class="form-control" id="data_oc" name="data_oc" asp-for="data_oc" value="@(Model.data_oc?.ToString("yyyy-MM-dd"))" readonly/>
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data prevista:</label>
+                            <input type="date" class="form-control" id="data_prevista" name="data_prevista" asp-for="data_prevista" />
+                        </div>
+                    </div>
+                    <hr>
+                    <h5>Itens</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Item 1:</label>
+                            <input type="text" class="form-control" id="item1" name="item1" asp-for="item1" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade1" name="quantidade1" asp-for="quantidade1" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Valor:</label>
+                            <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Item 2:</label>
+                            <input type="text" class="form-control" id="item2" name="item2" asp-for="item2" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade2" name="quantidade2" asp-for="quantidade2" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Valor:</label>
+                            <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Item 3:</label>
+                            <input type="text" class="form-control" id="item3" name="item3" asp-for="item3" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade3" name="quantidade3" asp-for="quantidade3" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Valor:</label>
+                            <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Item 4:</label>
+                            <input type="text" class="form-control" id="item4" name="item4" asp-for="item4" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade4" name="quantidade4" asp-for="quantidade4" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Valor:</label>
+                            <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Item 5:</label>
+                            <input type="text" class="form-control" id="item5" name="item5" asp-for="item5" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade5" name="quantidade5" asp-for="quantidade5" />
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="inputText" class="col-sm col-form-label">Valor:</label>
+                            <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" />
+                        </div>
+                    </div>
+                    <br><hr>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
+                            <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
+                        </div>
+                    </div>
+
+                    <h5>Fornecedor</h5>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_fornecedor" class="col-sm col-form-label">Fornecedor Principal:</label>
+                                <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_fornecedor2" class="col-sm col-form-label">Fornecedor 2:</label>
+                                <select asp-for="id_fornecedor2" class="form-control" asp-items="@ViewBag.fornecedor2"></select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label asp-for="id_fornecedor3" class="col-sm col-form-label">Fornecedor 3:</label>
+                                <select asp-for="id_fornecedor3" class="form-control" asp-items="@ViewBag.fornecedor3"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="id_setor" class="col-sm col-form-label">Setor Solicitante:</label>
+                            <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="anexo" class="form-label">Anexar arquivo:</label>
+                        <input class="form-control" type="file" id="anexoFile" name="anexoFile">
+                    </div>
+                    <br />
+
+                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".valor").on('input', function() {
+        var value = $(this).val();
+        value = value.replace(/^R\$ /, '');
+        $(this).val('R$ ' + value);
+    });
+
+    $('form').on('submit', function(e) {
+        $(".valor").each(function() {
+            var value = $(this).val();
+            value = value.replace(/^R\$ /, '');
+            $(this).val(value);
+        });
+    });
+});
+</script>
+
+}

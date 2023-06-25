@@ -27,6 +27,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Cliente</th>
+                            <th scope="col">Razão Social</th>
                             <th scope="col">CNPJ</th>
                             <th></th>
                         </tr>
@@ -36,6 +37,7 @@
                         {
                             <tr>
                                 <td>@item.cliente</td>
+                                <td>@item.razaoSocial</td>
                                 <td>@item.cnpj</td>
                                 <td>
                                     <a class="btn btn-primary" href="Cliente/Read/@item.id_cliente"><i class="bi bi-eye"></i></a>

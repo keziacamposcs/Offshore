@@ -18,6 +18,8 @@ namespace OffshoreTrack.Models
         //Relacionamentos
         public List<Material>? materials { get; set; }
 
+        public List<ParteSolta>? parteSoltas { get; set; }
+
     }
 }
 

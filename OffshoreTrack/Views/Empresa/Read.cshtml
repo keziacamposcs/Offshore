@@ -1,0 +1,134 @@
+﻿@model OffshoreTrack.Models.Empresa
+@{
+ViewData["Title"]="Read";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Dados da Empresa</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-grid gap-2d-md-flex justify-content-md-end">
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Home"asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                    <div class="col-sm-12">
+                        <label for="inputText" class="col-sm col-form-label">Nome da Empresa:</label>
+                        <input type="text" class="form-control" id="empresa" name="empresa" value="@Model.empresa" readonly>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="inputText" class="col-sm col-form-label">Razão Social:</label>
+                        <input type="text" class="form-control" id="razaoSocialEmpresa" name="razaoSocialEmpresa" value="@Model.razaoSocialEmpresa" readonly>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="inputText" class="col-sm col-form-label">CNPJ:</label>
+                            <input type="text" class="form-control" id="cnpjEmpresa" name="cnpjEmpresa" value="@Model.cnpjEmpresa" readonly>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="inputText" class="col-sm col-form-label">Inscrição Estadual:</label>
+                            <input type="text" class="form-control" id="inscricaoEstadualEmpresa" name="inscricaoEstadualEmpresa" value="@Model.inscricaoEstadualEmpresa" readonly>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="inputText" class="col-sm col-form-label">Inscrição Municipal:</label>
+                            <input type="text" class="form-control" id="inscricaoMunicipalEmpresa" name="inscricaoMunicipalEmpresa" value="@Model.inscricaoMunicipalEmpresa"readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="inputText" class="col-sm col-form-label">Endereço:</label>
+                        <input type="text" class="form-control" id="enderecoEmpresa" name="enderecoEmpresa" value="@Model.enderecoEmpresa" readonly>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <label for="inputText" class="col-sm col-form-label">Telefone:</label>
+                            </div>
+                            <input type="text" class="form-control" id="telefoneEmpresa" name="telefoneEmpresa" value="@Model.telefoneEmpresa" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">E-mail:</label>
+                            <input type="email" class="form-control" id="emailEmpresa" name="emailEmpresa" value="@Model.emailEmpresa" readonly>
+                        </div>
+                     </div>
+                     <br>
+
+                    <div class="col-sm-12">
+                        <label for="responsavelEmpresa">Responsável pelas Informações:</label>
+                        <input type="text" class="form-control" id="responsavelEmpresa" name="responsavelEmpresa" value="@Model.responsavelEmpresa" readonly>
+                    </div>
+                    <br>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Logo da Empresa:</label>
+                        <br>
+                        <img id="logoPreview" src="@ViewBag.LogoEmpresa" alt="Logo da Empresa" style="max-width: 100%; max-height: 150px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+
+        //Mascaras
+        $(document).ready(function(){
+            $('#cnpjEmpresa').mask('00.000.000/0000-00');
+            $('#cepEmpresa').mask('00000-000');
+            $('#telefoneEmpresa').mask('(00) 00000-0000');
+        });
+       
+        //Concatenando Endereço
+        $(document).ready(function() {
+        // Manipular os campos do endereço em tempo real
+        $('#ruaEmpresa, #bairroEmpresa, #numeroEmpresa, #cepEmpresa, #cidadeEmpresa, #estadoEmpresa').on('input', function() {
+            var rua = $('#ruaEmpresa').val();
+            var bairro = $('#bairroEmpresa').val();
+            var numero = $('#numeroEmpresa').val();
+            var cep = $('#cepEmpresa').val();
+            var cidade = $('#cidadeEmpresa').val();
+            var estado = $('#estadoEmpresa').val();
+
+            var endereco = rua + ', ' + numero + ', ' + bairro + ', ' + cep + ', ' + cidade + ', ' + estado;
+
+            $('#enderecoEmpresa').val(endereco);
+        });
+    });
+
+    //Preview da Logo
+    document.getElementById("logoEmpresa").addEventListener("change", function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("logoPreview").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    </script>
+    
+}

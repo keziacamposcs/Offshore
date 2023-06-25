@@ -29,6 +29,10 @@ ViewData["Title"]="Edit";
                     <input type="text" class="form-control" id="fornecedor" asp-for="fornecedor" />
                     <br/>
 
+                    <label for="inputText" class="col-sm col-form-label">Razão Social:</label>
+                    <input type="text" class="form-control" id="razaoSocial" asp-for="razaoSocial" />
+                    <br/>
+
                     <label for="inputText" class="col-sm col-form-label">CNPJ:</label>
                     <input type="text" class="form-control" id="cnpj" asp-for="cnpj" />
                     <br/>
@@ -61,3 +65,14 @@ ViewData["Title"]="Edit";
     </div>
 </div>
 
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#cnpj').mask('00.000.000/0000-00');
+        });
+    </script>
+}

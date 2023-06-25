@@ -21,10 +21,17 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-
-                <label for="inputText" class="col-sm col-form-label">Material:</label>
-                <input type="text" class="form-control" id="material" name="material" asp-for="material" readonly />
-                <br />
+                <div class="row">
+                    <div class="col-sm-10">
+                        <label for="inputText" class="col-sm col-form-label">Material:</label>
+                        <input type="text" class="form-control" id="material" name="material" asp-for="material" readonly />
+                        <br />
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="inputText" class="col-sm col-form-label">Status:</label>
+                        <p class="form-control" readonly>@Html.DisplayFor(model => model.status.status)</p>
+                    </div>
+                </div>
 
                 <label for="inputText" class="col-sm col-form-label">Descrição:</label>
                 <input type="text" class="form-control" id="descricao" name="descricao" asp-for="descricao" readonly />
@@ -34,9 +41,31 @@
                 <input type="text" class="form-control" id="numeroSerie" name="numeroSerie" asp-for="numeroSerie" readonly />
                 <br />
 
-                <label for="inputText" class="col-sm col-form-label">Tamanho:</label>
-                <input type="text" class="form-control" id="tamanho" name="tamanho" asp-for="tamanho" readonly />
-                <br/>
+                <div class="row">
+                    <div class="col">
+                        <label for="inputText" class="col-sm col-form-label">Dimensões:</label>
+                        <input type="text" class="form-control" id="dimensoes" name="dimensoes" asp-for="dimensoes" readonly/>
+                        <br />
+                    </div>
+                    <div class="col">
+                        <label for="inputText" class="col-sm col-form-label">Peso:</label>
+                        <input type="text" class="form-control" id="peso" name="peso" asp-for="peso" readonly/>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="inputText" class="col-sm col-form-label">Data de Fabricação:</label>
+                        <input type="date" class="form-control" id="dataFabricacao" name="dataFabricacao" asp-for="dataFabricacao" readonly/>
+                        <br />
+                    </div>
+                    <div class="col">
+                        <label for="inputText" class="col-sm col-form-label">Data de Validade:</label>
+                        <input type="date" class="form-control" id="dataValidade" name="dataValidade" asp-for="dataValidade" readonly/>
+                        <br />
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col">
@@ -92,6 +121,17 @@
                         <br />
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="id_certificacao" class="col-form-label">Certificação:</label>
+                            <p class="form-control" readonly>@Html.DisplayFor(model => model.certificacao.certificacao)</p>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col">
                             <button type="button" class="btn btn-outline-secondary" id="printQrCodeButton" onclick="printQrCode()">Imprimir QrCode</button>

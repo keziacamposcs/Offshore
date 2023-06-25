@@ -177,7 +177,6 @@ public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anex
     manutencao.id_criticidade = updateRequest.id_criticidade;
     if (anexoFile != null)
     {
-        // Limpe o anexo existente
         manutencao.anexo = null;
 
         using (var memoryStream = new MemoryStream())

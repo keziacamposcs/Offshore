@@ -30,33 +30,30 @@ namespace OffshoreTrack.Controllers
 
         // Create
         [HttpGet]
-public IActionResult New()
-{
-    // Tente obter todos os clientes do banco de dados
-    var clientes = contexto.Cliente.ToList();
+        public IActionResult New()
+        {
+            var clientes = contexto.Cliente.ToList();
 
-    // Verifique se você recebeu clientes do banco de dados
-    if (clientes == null || !clientes.Any())
-    {
-        // Se não, imprima uma mensagem de erro ou lance uma exceção
-        Console.WriteLine("Não foi possível obter clientes do banco de dados");
-    }
+            if (clientes == null || !clientes.Any())
+            {
+                Console.WriteLine("Não foi possível obter clientes do banco de dados");
+            }
 
-    ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
+            ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
 
-    return View();
-}
-
-
-
+            return View();
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("cliente,cnpj")] Cliente createRequest)
+        public async Task<IActionResult> Create([Bind("cliente, razaoSocial, cnpj, endereco, telefone")] Cliente createRequest)
         {
             var cliente = new Cliente
             {
                 cliente = createRequest.cliente,
-                cnpj = createRequest.cnpj
+                razaoSocial = createRequest.razaoSocial,
+                cnpj = createRequest.cnpj,
+                endereco = createRequest.endereco,
+                telefone = createRequest.telefone
             };
 
             contexto.Cliente.Add(cliente);
@@ -105,7 +102,10 @@ public IActionResult New()
             }
 
             cliente.cliente = updateRequest.cliente;
+            cliente.razaoSocial = updateRequest.razaoSocial;
             cliente.cnpj = updateRequest.cnpj;
+            cliente.endereco = updateRequest.endereco;
+            cliente.telefone = updateRequest.telefone;
 
             try
             {

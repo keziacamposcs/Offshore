@@ -14,6 +14,9 @@ namespace OffshoreTrack.Models
 
         //Relacionamentos
         public List<Manutencao>? manutencaos { get; set; }
+        public List<ParteSolta>? parteSoltas { get; set; }
+        public List<Material>? materials { get; set; }
+        public List<OrdemCompra>? ordemCompras { get; set; }
 
     }
 }
