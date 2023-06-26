@@ -35,6 +35,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -64,6 +71,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var tipo = await contexto.Tipo.FirstOrDefaultAsync(x => x.id_tipo == id);
             return View(tipo);
         }
@@ -73,6 +87,14 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
+
             var tipo = await contexto.Tipo.FirstOrDefaultAsync(x => x.id_tipo == id);
             if (tipo == null)
             {
@@ -107,6 +129,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Tipo deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var tipo = await contexto.Tipo.FindAsync(deleteRequest.id_tipo);
 
             if (tipo == null)

@@ -4,19 +4,22 @@
     ViewData["Title"]="Login";
 
 }
-
-<h2>Login</h2>
-
-<form method="post">
-    <div>
-        <label for="usuario">Usuário</label>
-        <input type="text" id="usuario" name="usuario" required />
+<form method="post">  
+    <div class="col-12">
+        <label class="form-label">Usuário</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="usuario" name="usuario" required>
+        </div>
+        <br>
     </div>
-    <div>
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required />
+    <div class="col-12">
+        <label class="form-label">Senha</label>
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" id="senha" name="senha" required>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="Login" />
-    </div>
+    <br>
+        <input class="btn btn-primary w-100 py-2" type="submit" value="Login" />
+    <br>
 </form>
+<br>

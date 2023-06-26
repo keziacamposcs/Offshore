@@ -35,6 +35,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -63,6 +70,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var criticidade = await contexto.Criticidade.FirstOrDefaultAsync(x => x.id_criticidade == id);
             return View(criticidade);
         }
@@ -73,6 +87,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var criticidade = await contexto.Criticidade.FirstOrDefaultAsync(x => x.id_criticidade == id);
             if (criticidade == null)
             {
@@ -106,6 +126,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Criticidade deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var criticidade = await contexto.Criticidade.FindAsync(deleteRequest.id_criticidade);
             if (criticidade == null)
             {

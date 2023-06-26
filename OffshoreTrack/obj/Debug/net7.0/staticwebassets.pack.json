@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets/images/offshorelogo.png"
     },
     {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/images/offshorelogo_white.png",
+      "PackagePath": "staticwebassets/images/offshorelogo_white.png"
+    },
+    {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

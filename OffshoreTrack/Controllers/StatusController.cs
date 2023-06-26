@@ -35,6 +35,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -64,6 +71,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var status = await contexto.Status.FirstOrDefaultAsync(x => x.id_status == id);
             return View(status);
         }
@@ -73,6 +87,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var status = await contexto.Status.FirstOrDefaultAsync(x => x.id_status == id);
             if (status == null)
             {
@@ -108,6 +129,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Status deleteRequest)
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var status = await contexto.Status.FindAsync(deleteRequest.id_status);
 
             if (status == null)

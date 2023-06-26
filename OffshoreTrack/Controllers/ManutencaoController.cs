@@ -40,6 +40,14 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
+
             var materials = contexto.Material.ToList();
             var status = contexto.Status.ToList();
             var tipos = contexto.Tipo.ToList();
@@ -104,6 +112,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var manutencaos = await contexto.Manutencao
                                             .Include(m => m.material)
                                             .Include(m => m.status)
@@ -126,6 +141,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var manutencao = await contexto.Manutencao
                 .Include(x => x.status)
                 .Include(x => x.tipo)
@@ -160,44 +182,44 @@ namespace OffshoreTrack.Controllers
             return View(manutencao);
         }
 
-[HttpPost]
-public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anexoFile)
-{
-    var manutencao = await contexto.Manutencao.FindAsync(updateRequest.id_manutencao);
-    if (manutencao == null)
-    {
-        return NotFound();
-    }
-
-    manutencao.manutencao = updateRequest.manutencao;
-    manutencao.id_status = updateRequest.id_status;
-    manutencao.descricao = updateRequest.descricao;
-    manutencao.id_tipo = updateRequest.id_tipo;
-    manutencao.id_material = updateRequest.id_material;
-    manutencao.id_setor = updateRequest.id_setor;
-    manutencao.id_fornecedor = updateRequest.id_fornecedor;
-    manutencao.id_criticidade = updateRequest.id_criticidade;
-    if (anexoFile != null)
-    {
-        manutencao.anexo = null;
-
-        using (var memoryStream = new MemoryStream())
+        [HttpPost]
+        public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anexoFile)
         {
-            await anexoFile.CopyToAsync(memoryStream);
-            manutencao.anexo = memoryStream.ToArray();
+            var manutencao = await contexto.Manutencao.FindAsync(updateRequest.id_manutencao);
+            if (manutencao == null)
+            {
+                return NotFound();
+            }
+
+            manutencao.manutencao = updateRequest.manutencao;
+            manutencao.id_status = updateRequest.id_status;
+            manutencao.descricao = updateRequest.descricao;
+            manutencao.id_tipo = updateRequest.id_tipo;
+            manutencao.id_material = updateRequest.id_material;
+            manutencao.id_setor = updateRequest.id_setor;
+            manutencao.id_fornecedor = updateRequest.id_fornecedor;
+            manutencao.id_criticidade = updateRequest.id_criticidade;
+            if (anexoFile != null)
+            {
+                manutencao.anexo = null;
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexoFile.CopyToAsync(memoryStream);
+                    manutencao.anexo = memoryStream.ToArray();
+                }
+            }
+            
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-    }
-    
-    try
-    {
-        await contexto.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
-    catch (Exception ex)
-    {
-        return BadRequest(ex.Message);
-    }
-}
 
         // Fim - Update
 
@@ -206,6 +228,13 @@ public async Task<IActionResult> Update(Manutencao updateRequest, IFormFile anex
         [HttpPost]
         public async Task<IActionResult> Delete(Manutencao deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var manutencao = await contexto.Manutencao.FindAsync(deleteRequest.id_manutencao);
 
             if (manutencao == null)

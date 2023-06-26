@@ -37,7 +37,7 @@ public class ContaController : Controller
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usuario.usuario),
-                    new Claim(ClaimTypes.Role, usuario.Permissao.permissao_admin ? "Admin" : "User"),
+                    new Claim(ClaimTypes.Role, usuario.Permissao.permissao_admin ? "Admin" : "Usuário"),
                     new Claim("PodeCriar", usuario.Permissao.pode_criar.ToString()),
                     new Claim("PodeLer", usuario.Permissao.pode_ler.ToString()),
                     new Claim("PodeAtualizar", usuario.Permissao.pode_atualizar.ToString()),

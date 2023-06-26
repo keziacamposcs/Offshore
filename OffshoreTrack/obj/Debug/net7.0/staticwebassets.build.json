@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "B0GbEK8AfcBkXuRPPzjSGbpnPy8VQTfvTSd4S9dbyBU=",
+  "Hash": "fqFPjctC56L11JNTxUMGiSv9tw/a0EdR8hAx1rbw0fk=",
   "Source": "OffshoreTrack",
   "BasePath": "_content/OffshoreTrack",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/.DS_Store"
+    },
+    {
+      "Identity": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/images/offshorelogo_white.png",
+      "SourceId": "OffshoreTrack",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/",
+      "BasePath": "_content/OffshoreTrack",
+      "RelativePath": "images/offshorelogo_white.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/offshorelogo_white.png"
     },
     {
       "Identity": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/images/offshorelogo.png",

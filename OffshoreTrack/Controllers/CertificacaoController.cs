@@ -36,6 +36,13 @@ namespace OffshoreTrack.Controllers
          [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -94,6 +101,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var certificacao = await contexto.Certificacao.FirstOrDefaultAsync(x => x.id_certificacao == id);
             if (certificacao == null)
             {
@@ -142,6 +156,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Certificacao deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var certificacao = await contexto.Certificacao.FindAsync(deleteRequest.id_certificacao);
 
             if (certificacao == null)

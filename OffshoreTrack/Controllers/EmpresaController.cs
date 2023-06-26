@@ -22,6 +22,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult Read()
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var empresa = contexto.Empresa.FirstOrDefault();
 
             if (empresa.logoEmpresa != null)
@@ -47,53 +54,53 @@ namespace OffshoreTrack.Controllers
             return View(empresa);
         }
 
-[HttpPost]
-public async Task<IActionResult> Update(Empresa editRequest, IFormFile logoEmpresa)
-{
-    Empresa empresa;
-
-    if (editRequest.id_empresa != 0)
+    [HttpPost]
+    public async Task<IActionResult> Update(Empresa editRequest, IFormFile logoEmpresa)
     {
-        // Entidade existente
-        empresa = await contexto.Empresa.FindAsync(editRequest.id_empresa);
-        if (empresa == null)
+        Empresa empresa;
+
+        if (editRequest.id_empresa != 0)
         {
-            return NotFound();
+            // Entidade existente
+            empresa = await contexto.Empresa.FindAsync(editRequest.id_empresa);
+            if (empresa == null)
+            {
+                return NotFound();
+            }
+        }
+        else
+        {
+            // Nova entidade
+            empresa = new Empresa();
+            contexto.Empresa.Add(empresa);
+        }
+
+        // Atualiza a entidade
+        empresa.empresa = editRequest.empresa;
+        empresa.razaoSocialEmpresa = editRequest.razaoSocialEmpresa;
+        empresa.cnpjEmpresa = editRequest.cnpjEmpresa;
+        empresa.inscricaoEstadualEmpresa = editRequest.inscricaoEstadualEmpresa;
+        empresa.inscricaoMunicipalEmpresa = editRequest.inscricaoMunicipalEmpresa;
+        empresa.enderecoEmpresa = editRequest.enderecoEmpresa;
+        empresa.telefoneEmpresa = editRequest.telefoneEmpresa;
+        empresa.emailEmpresa = editRequest.emailEmpresa;
+        empresa.responsavelEmpresa = editRequest.responsavelEmpresa;
+
+        // Atualizar a imagem da empresa, se uma nova imagem foi enviada
+        if (logoEmpresa != null && logoEmpresa.Length > 0)
+        {
+            empresa.logoEmpresa = null;
+            using (var memoryStream = new MemoryStream())
+            {
+                await logoEmpresa.CopyToAsync(memoryStream);
+                empresa.logoEmpresa = memoryStream.ToArray();
+            }
+        }
+
+        await contexto.SaveChangesAsync();
+        return RedirectToAction("Index", "Home");
+    }
+
+            // Fim - Update
         }
     }
-    else
-    {
-        // Nova entidade
-        empresa = new Empresa();
-        contexto.Empresa.Add(empresa);
-    }
-
-    // Atualiza a entidade
-    empresa.empresa = editRequest.empresa;
-    empresa.razaoSocialEmpresa = editRequest.razaoSocialEmpresa;
-    empresa.cnpjEmpresa = editRequest.cnpjEmpresa;
-    empresa.inscricaoEstadualEmpresa = editRequest.inscricaoEstadualEmpresa;
-    empresa.inscricaoMunicipalEmpresa = editRequest.inscricaoMunicipalEmpresa;
-    empresa.enderecoEmpresa = editRequest.enderecoEmpresa;
-    empresa.telefoneEmpresa = editRequest.telefoneEmpresa;
-    empresa.emailEmpresa = editRequest.emailEmpresa;
-    empresa.responsavelEmpresa = editRequest.responsavelEmpresa;
-
-    // Atualizar a imagem da empresa, se uma nova imagem foi enviada
-    if (logoEmpresa != null && logoEmpresa.Length > 0)
-    {
-        empresa.logoEmpresa = null;
-        using (var memoryStream = new MemoryStream())
-        {
-            await logoEmpresa.CopyToAsync(memoryStream);
-            empresa.logoEmpresa = memoryStream.ToArray();
-        }
-    }
-
-    await contexto.SaveChangesAsync();
-    return RedirectToAction("Index", "Home");
-}
-
-        // Fim - Update
-    }
-}

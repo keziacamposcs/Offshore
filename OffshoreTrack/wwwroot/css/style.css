@@ -358,13 +358,13 @@ h6 {
 
         .nav-tabs-bordered .nav-link:hover,
         .nav-tabs-bordered .nav-link:focus {
-            color: #003554;
+            color: #fff;
         }
 
         .nav-tabs-bordered .nav-link.active {
             background-color: #fff;
             color: #003554;
-            border-bottom: 2px solid #003554;
+            border-bottom: 2px solid #fff;
         }
 
 /*--------------------------------------------------------------

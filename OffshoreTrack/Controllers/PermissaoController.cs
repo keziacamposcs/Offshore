@@ -23,6 +23,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var permissao = await contexto.Permissao.ToListAsync();
             return View(permissao);
         }
@@ -33,6 +40,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -53,6 +67,14 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int? id)
         {
+
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -73,6 +95,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -118,7 +147,14 @@ namespace OffshoreTrack.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id) // Alterado de DeleteConfirmed para Delete
-        {
+        {    
+            var isAdmin = User.IsInRole("Admin");
+            if (!isAdmin)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var permissao = await contexto.Permissao.FindAsync(id);
             contexto.Permissao.Remove(permissao);
             await contexto.SaveChangesAsync();

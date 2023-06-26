@@ -35,6 +35,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var setores1 = contexto.Setor.ToList();
             var setores2 = contexto.Setor.ToList();
 
@@ -85,6 +92,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var rateio = await contexto.Rateio
                             .Include(r => r.setor1)
                             .Include(r => r.setor2)
@@ -95,72 +109,88 @@ namespace OffshoreTrack.Controllers
         // Fim - Read
 
         // Update
-[HttpGet]
-public async Task<IActionResult> Edit(int id)
-{
-    var rateio = await contexto.Rateio
-                        .Include(r => r.setor1)
-                        .Include(r => r.setor2)
-                        .FirstOrDefaultAsync(x => x.id_rateio == id);
-    if (rateio == null)
-    {
-        return NotFound();
-    }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
 
-    var setores1 = await contexto.Setor.ToListAsync();
-    var setores2 = await contexto.Setor.ToListAsync();
-    ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor", rateio.id_setor1);
-    ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor", rateio.id_setor2);
-    return View(rateio);
-}
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
 
-[HttpPost]
-public async Task<IActionResult> Update([Bind("id_rateio, rateio, porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio updateRequest)
-{
-    if (!ModelState.IsValid)
-    {
-        var setores = contexto.Setor.ToList();
-        ViewBag.setores1 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor1);
-        ViewBag.setores2 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor2);
+            var rateio = await contexto.Rateio
+                                .Include(r => r.setor1)
+                                .Include(r => r.setor2)
+                                .FirstOrDefaultAsync(x => x.id_rateio == id);
+            if (rateio == null)
+            {
+                return NotFound();
+            }
 
-        return View("Edit", updateRequest);
-    }
+            var setores1 = await contexto.Setor.ToListAsync();
+            var setores2 = await contexto.Setor.ToListAsync();
+            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor", rateio.id_setor1);
+            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor", rateio.id_setor2);
+            return View(rateio);
+        }
 
-    var rateio = await contexto.Rateio.FindAsync(updateRequest.id_rateio);
-    if (rateio == null)
-    {
-        return NotFound();
-    }
+        [HttpPost]
+        public async Task<IActionResult> Update([Bind("id_rateio, rateio, porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio updateRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                var setores = contexto.Setor.ToList();
+                ViewBag.setores1 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor1);
+                ViewBag.setores2 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor2);
 
-    if (updateRequest.porcentagem1 < 0 || updateRequest.porcentagem1 > 100 || 
-        updateRequest.porcentagem2 < 0 || updateRequest.porcentagem2 > 100)
-    {
-        // Retornar um erro caso os valores estejam fora da faixa aceitável
-        return BadRequest("Valores inválidos. Entre 0% e 100%");
-    }
+                return View("Edit", updateRequest);
+            }
 
-    rateio.rateio = updateRequest.rateio;
-    rateio.porcentagem1 = updateRequest.porcentagem1;
-    rateio.id_setor1 = updateRequest.id_setor1;
-    rateio.porcentagem2 = updateRequest.porcentagem2;
-    rateio.id_setor2 = updateRequest.id_setor2;
+            var rateio = await contexto.Rateio.FindAsync(updateRequest.id_rateio);
+            if (rateio == null)
+            {
+                return NotFound();
+            }
 
-    try
-    {
-        await contexto.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
-    catch (Exception ex)
-    {
-        return BadRequest(ex.Message);
-    }
-}
+            if (updateRequest.porcentagem1 < 0 || updateRequest.porcentagem1 > 100 || 
+                updateRequest.porcentagem2 < 0 || updateRequest.porcentagem2 > 100)
+            {
+                // Retornar um erro caso os valores estejam fora da faixa aceitável
+                return BadRequest("Valores inválidos. Entre 0% e 100%");
+            }
+
+            rateio.rateio = updateRequest.rateio;
+            rateio.porcentagem1 = updateRequest.porcentagem1;
+            rateio.id_setor1 = updateRequest.id_setor1;
+            rateio.porcentagem2 = updateRequest.porcentagem2;
+            rateio.id_setor2 = updateRequest.id_setor2;
+
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         // Fim - Update
 
         // Delete
         [HttpPost]
         public async Task<IActionResult> Delete(Rateio deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
+
             var rateio = await contexto.Rateio.FindAsync(deleteRequest.id_rateio);
 
             if (rateio == null)

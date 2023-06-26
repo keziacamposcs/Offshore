@@ -33,7 +33,15 @@ namespace OffshoreTrack.Controllers
         // Create
         [HttpGet]
         public IActionResult New()
-        {
+        {   
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
+
             var clientes = contexto.Cliente.ToList();
 
             if (clientes == null || !clientes.Any())
@@ -75,7 +83,14 @@ namespace OffshoreTrack.Controllers
         // Read
         [HttpGet]
         public async Task<IActionResult> Read(int id)
-        {
+        {   
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var cliente = await contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
             return View(cliente);
         }
@@ -86,6 +101,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var cliente = await contexto.Cliente.FirstOrDefaultAsync(x => x.id_cliente == id);
             if (cliente == null)
             {
@@ -126,6 +148,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete (Cliente deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var cliente = await contexto.Cliente.FindAsync(deleteRequest.id_cliente);
             if(cliente == null)
             {

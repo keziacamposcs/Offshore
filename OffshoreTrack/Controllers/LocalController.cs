@@ -36,6 +36,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var podeCriar = User.HasClaim("PodeCriar", "True");
+            if(!podeCriar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var clientes = contexto.Cliente.ToList();
 
             if (!clientes.Any())
@@ -53,6 +60,7 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("local,id_cliente")] Local createRequest)
         {
+            
             var locais = new Local
             {
                 local = createRequest.local,
@@ -77,6 +85,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var local = await contexto.Local.Include(l => l.Cliente).FirstOrDefaultAsync(x => x.id_local == id);
             if (local == null)
             {
@@ -91,6 +106,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if(!podeAtualizar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var local = await contexto.Local.Include(l => l.Cliente).FirstOrDefaultAsync(x => x.id_local == id);
             if (local == null)
             {
@@ -131,6 +153,13 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(Local deleteRequest)
         {
+            var podeDeletar = User.HasClaim("PodeDeletar", "True");
+            if(!podeDeletar)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var local = await contexto.Local.FindAsync(deleteRequest.id_local);
 
             if (local == null)
