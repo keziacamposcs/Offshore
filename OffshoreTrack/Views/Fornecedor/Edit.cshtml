@@ -37,6 +37,18 @@ ViewData["Title"]="Edit";
                     <input type="text" class="form-control" id="cnpj" asp-for="cnpj" />
                     <br/>
 
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Inscrição Estadual:</label>
+                            <input type="text" class="form-control"  asp-for="inscricaoEstadual" />
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Inscrição Municipal:</label>
+                            <input type="text" class="form-control" asp-for="inscricaoMunicipal" />
+                        </div>
+                    </div>
+                    <br>
+
                     <label for="inputText" class="col-sm col-form-label">Endereço:</label>
                     <input type="text" class="form-control" id="endereco" asp-for="endereco" />
                     <br/>

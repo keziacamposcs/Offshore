@@ -12,8 +12,8 @@ namespace OffshoreTrack.Models
 
         public string? rateio { get; set; }
 
-        public decimal? porcentagem1 { get; set; }
-        public decimal? porcentagem2 { get; set; }
+        public double? porcentagem1 { get; set; }
+        public double? porcentagem2 { get; set; }
 
         public int? id_setor1 { get; set; }
         public Setor? setor1 { get; set; }

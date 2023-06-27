@@ -5,7 +5,17 @@
 }
 
 <div class="pagetitle">
-    <h1 class="display-4"> Cadastrar: Ordem de Compra</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Editar: Ordem de Compra</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-grid gap-2d-md-flex justify-content-md-end">
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="OrdemCompra"asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -13,15 +23,10 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" asp-action="Update" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="id_oc"/>
 
                     <div class="row">
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <label asp-for="id_oc" class="col-sm col-form-label">ID:</label>
-                                <input type="text" class="form-control" id="id_oc" name="id_oc" asp-for="id_oc" value="id_oc"readonly/>
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
+                        <div class="col-sm-9">
                             <label for="inputText" class="col-sm col-form-label">Ordem de Compra:</label>
                             <input type="text" class="form-control" id="oc" name="oc" asp-for="oc" />
                             <br />
@@ -46,95 +51,150 @@
                     <div class="row">
                         <div class="col">
                             <label for="inputText" class="col-sm col-form-label">Data:</label>
-                            <input type="date" class="form-control" id="data_oc" name="data_oc" asp-for="data_oc" value="@DateTime.Now" readonly/>
+                            <input type="date" class="form-control" id="data_oc" name="data_oc" asp-for="data_oc" value="@(Model.data_oc?.ToString("yyyy-MM-dd"))" readonly/>
                         </div>
                         <div class="col">
                             <label for="inputText" class="col-sm col-form-label">Data prevista:</label>
                             <input type="date" class="form-control" id="data_prevista" name="data_prevista" asp-for="data_prevista" />
                         </div>
                         <div class="col">
-                            <label for="inputText" class="col-sm col-form-label">Data de Conclusão:</label>
+                            <label for="inputText" class="col-sm col-form-label">Data de Conclusão da OC:</label>
                             <input type="date" class="form-control" id="data_conclusao" name="data_conclusao" asp-for="data_conclusao" />
                         </div>
 
                     </div>
                     <hr>
                     <h5>Itens</h5>
-                    <br>
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <label for="inputText" class="col-sm col-form-label">Item 1:</label>
                             <input type="text" class="form-control" id="item1" name="item1" asp-for="item1" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                            <input type="text" class="form-control" id="quantidade1" name="quantidade1" asp-for="quantidade1" />
+                            <input type="number" class="form-control" id="quantidade1" name="quantidade1" asp-for="quantidade1" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda1" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <label for="inputText" class="col-sm col-form-label">Item 2:</label>
                             <input type="text" class="form-control" id="item2" name="item2" asp-for="item2" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                            <input type="text" class="form-control" id="quantidade2" name="quantidade2" asp-for="quantidade2" />
+                            <input type="number" class="form-control" id="quantidade2" name="quantidade2" asp-for="quantidade2" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda2" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <label for="inputText" class="col-sm col-form-label">Item 3:</label>
                             <input type="text" class="form-control" id="item3" name="item3" asp-for="item3" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                            <input type="text" class="form-control" id="quantidade3" name="quantidade3" asp-for="quantidade3" />
+                            <input type="number" class="form-control" id="quantidade3" name="quantidade3" asp-for="quantidade3" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda3" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <label for="inputText" class="col-sm col-form-label">Item 4:</label>
                             <input type="text" class="form-control" id="item4" name="item4" asp-for="item4" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                            <input type="text" class="form-control" id="quantidade4" name="quantidade4" asp-for="quantidade4" />
+                            <input type="number" class="form-control" id="quantidade4" name="quantidade4" asp-for="quantidade4" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda4" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-sm-7">
+                        <div class="col-sm-6">
                             <label for="inputText" class="col-sm col-form-label">Item 5:</label>
                             <input type="text" class="form-control" id="item5" name="item5" asp-for="item5" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                            <input type="text" class="form-control" id="quantidade5" name="quantidade5" asp-for="quantidade5" />
+                            <input type="number" class="form-control" id="quantidade5" name="quantidade5" asp-for="quantidade5" />
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda5" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br><hr>
+                    <div class="col">
+                        <div class="form-group">
+                            <div class="row">
+                                <h5>Rateio</h5>
+                                <div class="col-sm-3">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="sem_rateio">
+                                    <label class="form-check-label">
+                                        Sem Rateio
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
+                                    <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
+                                    <input type="hidden" asp-for="id_rateio" id="hiddenRateio" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
 
                     <h5>Fornecedor</h5>
                     <div class="row">
@@ -142,18 +202,21 @@
                             <div class="form-group">
                                 <label asp-for="id_fornecedor" class="col-sm col-form-label">Fornecedor Principal:</label>
                                 <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                                <div class="form-text"></div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label asp-for="id_fornecedor2" class="col-sm col-form-label">Fornecedor 2:</label>
+                                <label asp-for="id_fornecedor2" class="col-sm col-form-label">Fornecedor 2: </label>
                                 <select asp-for="id_fornecedor2" class="form-control" asp-items="@ViewBag.fornecedor2"></select>
+                                <div class="form-text">O fornecedor escolhido será a 2º opção.</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label asp-for="id_fornecedor3" class="col-sm col-form-label">Fornecedor 3:</label>
                                 <select asp-for="id_fornecedor3" class="form-control" asp-items="@ViewBag.fornecedor3"></select>
+                                <div class="form-text">O fornecedor escolhido será a 3º opção.</div>
                             </div>
                         </div>
                     </div>
@@ -165,23 +228,37 @@
                             <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
                         </div>
                     </div>
+                    <br>
 
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
-                            <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
+                            <label asp-for="id_formaPagamento" class="col-sm col-form-label">Forma de Pagamento:</label>
+                            <select asp-for="id_formaPagamento" class="form-control" asp-items="@ViewBag.formaPagamento"></select>
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        <label for="anexo" class="form-label">Anexar arquivo:</label>
-                        <input class="form-control" type="file" id="anexoFile" name="anexoFile">
-                    </div>
-                    <br />
-
-                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                    <br>
+                    <label for="anexo" class="form-label">Anexo:</label>
+                    <input type="file" id="anexoFile" name="anexoFile" class="form-control">
+                    <input type="hidden" asp-for="anexo" />
+                    <br>
+                    @if(Model.anexo != null && Model.anexo.Length > 0)
+                    {    
+                        <a class="btn btn-outline-secondary" href="@Url.Action("DownloadAnexo", "OrdemCompra", new { id = Model.id_oc })">Baixar Anexo atual</a>
+                        <br>
+                    }
+                    else
+                    {
+                        <p>Sem Anexo</p>
+                    }
+                    <br>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
                 </form>
+                <form method="post"action="/Material/Delete">
+                    <input type="hidden"asp-for="id_oc"/>
+                    <button type="submit"class="btn btn-danger">Deletar</button>
+                </form>
+                    </div>
             </div>
         </div>
     </div>

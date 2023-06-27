@@ -44,6 +44,10 @@ namespace OffshoreTrack.Data
 
         public DbSet<Empresa> Empresa { get; set; }
 
+        public DbSet<FormaPagamento> FormaPagamento { get; set; }
+
+        public DbSet<Contrato> Contrato { get; set; }
+
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -207,6 +211,12 @@ namespace OffshoreTrack.Data
                 .WithMany(e => e.ordemCompras)
                 .HasForeignKey(o => o.id_empresa);
 
+            modelBuilder.Entity<OrdemCompra>()
+                .HasOne(o => o.formaPagamento)
+                .WithMany(e => e.ordemCompras)
+                .HasForeignKey(o => o.id_formaPagamento);
+
+
             // Parte Solta
             modelBuilder.Entity<ParteSolta>()
                 .HasOne(ps => ps.material)
@@ -242,6 +252,26 @@ namespace OffshoreTrack.Data
                 .WithOne(u => u.Permissao)
                 .HasForeignKey(u => u.id_permissao);
 
+            //Contrato 
+            modelBuilder.Entity<Contrato>()
+                .HasOne(c => c.cliente)
+                .WithMany(c => c.contratos)
+                .HasForeignKey(c => c.id_cliente);
+
+            modelBuilder.Entity<Contrato>()
+                .HasOne(c => c.fornecedor)
+                .WithMany(s => s.contratos)
+                .HasForeignKey(c => c.id_fornecedor);
+            
+            modelBuilder.Entity<Contrato>()
+                .HasOne(c => c.status)
+                .WithMany(s => s.contratos)
+                .HasForeignKey(c => c.id_status);
+
+            modelBuilder.Entity<Contrato>()
+                .HasOne(c => c.setor)
+                .WithMany(s => s.contratos)
+                .HasForeignKey(c => c.id_setor);
 
 
             // AtividadeLog

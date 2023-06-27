@@ -26,8 +26,9 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <label for="inputText" class="col-sm col-form-label">Porcentagem 1:</label>
+                <label for="inputText" class="col-sm col-form-label">Porcentagem 1 (%):</label>
                 <input type="text" min="1" max="100" class="form-control" asp-for="porcentagem1" />
+                <span asp-validation-for="porcentagem1" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -40,8 +41,9 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <label for="inputText" class="col-sm col-form-label">Porcentagem 2:</label>
+                <label for="inputText" class="col-sm col-form-label">Porcentagem 2 (%):</label>
                 <input type="text" min="1" max="100" class="form-control" asp-for="porcentagem2" />
+                <span asp-validation-for="porcentagem2" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -55,30 +57,17 @@
 
 @section Scripts
 {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('form').on('submit', function() {
-                $("input[name='porcentagem1']").val(function(i, v) {
-                    return v.replace('%','');
-                });
-                $("input[name='porcentagem2']").val(function(i, v) {
-                    return v.replace('%','');
-                });
-            });
+    $(document).ready(function() {
+        $('form').submit(function(e) {
+            var porcentagem1 = parseFloat($('#porcentagem1').val().replace(',', '.'));
+            var porcentagem2 = parseFloat($('#porcentagem2').val().replace(',', '.'));
 
-            $("input[name='porcentagem1']").on('input', function() {
-                $(this).val(function(i, v) {
-                    return v.replace('%','') + '%';
-                });
-            });
-            
-            $("input[name='porcentagem2']").on('input', function() {
-                $(this).val(function(i, v) {
-                    return v.replace('%','') + '%';
-                });
-            });
+            if (isNaN(porcentagem1) || isNaN(porcentagem2) || porcentagem1 + porcentagem2 != 100) {
+                alert('A soma das porcentagens deve ser 100%');
+                e.preventDefault(); // impede a submissão do formulário
+            }
         });
+    });
     </script>
 }

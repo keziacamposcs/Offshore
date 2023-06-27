@@ -1,0 +1,38 @@
+﻿@model OffshoreTrack.Models.FormaPagamento
+
+@{
+    ViewData["Title"] = "New";
+}
+
+<div class="pagetitle">
+    <h1 class="display-4"> Cadastrar: Forma de Pagamento</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="Create">
+
+                    <label for="inputText" class="col-sm col-form-label">Forma de pagamento:</label>
+                    <input type="text" class="form-control" id="formaPagamento" name="formaPagamento" asp-for="formaPagamento" />
+                    <br />
+
+                    <label for="inputText" class="col-sm col-form-label">Descrição:</label>
+                    <input type="text" class="form-control" id="descricao" name="descricao" asp-for="formaPagamento" />
+                    <br />
+
+
+                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+
+}

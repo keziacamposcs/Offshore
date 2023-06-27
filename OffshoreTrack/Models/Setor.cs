@@ -19,6 +19,7 @@ namespace OffshoreTrack.Models
         public List<Rateio>? rateios2 { get; set; }
 
         public List<OrdemCompra>? ordemCompras { get; set; }
+        public List<Contrato>? contratos { get; set; }
 
     }
 }

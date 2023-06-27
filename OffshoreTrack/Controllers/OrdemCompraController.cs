@@ -52,19 +52,21 @@ namespace OffshoreTrack.Controllers
             var fornecedors1 = contexto.Fornecedor.ToList();
             var fornecedors2 = contexto.Fornecedor.ToList();
             var fornecedors3 = contexto.Fornecedor.ToList();
-
             var rateios = contexto.Rateio.ToList();
+            var formaPagamentos = contexto.FormaPagamento.ToList();
+
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
             ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
             ViewBag.fornecedor2 = new SelectList(fornecedors2, "id_fornecedor", "fornecedor");
             ViewBag.fornecedor3 = new SelectList(fornecedors3, "id_fornecedor", "fornecedor");
             ViewBag.rateio = new SelectList(rateios, "id_rateio", "rateio");
+            ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
             return View(model); 
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, item1, quantidade1, valor1, item2, quantidade2, valor2, item3,  item4, quantidade4, valor4, item5, quantidade5, valor5, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
+        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, item1, quantidade1, valor1, item2, quantidade2, valor2, item3,  item4, quantidade4, valor4, item5, quantidade5, valor5, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
         {
             var ordemCompra = new OrdemCompra
             {   id_empresa = 1,
@@ -94,6 +96,7 @@ namespace OffshoreTrack.Controllers
                 id_fornecedor3 = createRequest.id_fornecedor3,
                 id_setor = createRequest.id_setor,
                 id_rateio = createRequest.id_rateio,
+                id_formaPagamento = createRequest.id_formaPagamento,
                 anexo = createRequest.anexo
             };
             if (anexoFile != null && anexoFile.Length > 0)
@@ -133,7 +136,8 @@ namespace OffshoreTrack.Controllers
                             .Include(x => x.fornecedor2)
                             .Include(x => x.fornecedor3)
                             .Include(x => x.rateio)
-                            .Include(x => x.empresa)                            
+                            .Include(x => x.empresa)  
+                            .Include(x => x.formaPagamento)                          
             .FirstOrDefaultAsync(x => x.id_oc == id);
             return View(ordemCompra);
         }
@@ -156,12 +160,14 @@ namespace OffshoreTrack.Controllers
             var fornecedors2 = contexto.Fornecedor.ToList();
             var fornecedors3 = contexto.Fornecedor.ToList();
             var rateios = contexto.Rateio.ToList();
+            var formaPagamentos = contexto.FormaPagamento.ToList();
             
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
             ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
             ViewBag.fornecedor2 = new SelectList(fornecedors2, "id_fornecedor", "fornecedor");
             ViewBag.fornecedor3 = new SelectList(fornecedors3, "id_fornecedor", "fornecedor");
             ViewBag.rateio = new SelectList(rateios, "id_rateio", "rateio");
+            ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
             
             if (ordemCompra == null)
             {
@@ -204,8 +210,8 @@ namespace OffshoreTrack.Controllers
             ordemCompra.id_fornecedor3 = updateRequest.id_fornecedor3;
             ordemCompra.id_setor = updateRequest.id_setor;
             ordemCompra.id_rateio = updateRequest.id_rateio;
+            ordemCompra.id_formaPagamento = updateRequest.id_formaPagamento;
 
-            
             if (anexoFile != null && anexoFile.Length > 0)
             {
                 ordemCompra.anexo = null;

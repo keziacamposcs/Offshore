@@ -11,6 +11,7 @@ using OffshoreTrack.Data;
 using OffshoreTrack.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace OffshoreTrack.Controllers
 {
@@ -213,7 +214,7 @@ namespace OffshoreTrack.Controllers
             {
                 id_parteSolta = parteSolta.id_partesolta,
                 Timestamp = DateTime.Now,
-                acao = "Material Atualizado"
+                acao = "Material Atualizado",
             };
             await LogAtividadePS(atividadeLogPSCreate);
             return RedirectToAction("Read", new { id = parteSolta.id_partesolta });

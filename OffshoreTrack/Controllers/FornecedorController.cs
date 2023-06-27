@@ -46,7 +46,7 @@ namespace OffshoreTrack.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("fornecedor,razaoSocial, cnpj, endereco, telefone, email, vendedor")] Fornecedor createRequest)
+        public async Task<IActionResult> Create([Bind("fornecedor,razaoSocial, cnpj, endereco, telefone, email, vendedor, inscricaoEstadual, inscricaoMunicipal")] Fornecedor createRequest)
         {
             var fornecedor = new Fornecedor
             {
@@ -56,7 +56,10 @@ namespace OffshoreTrack.Controllers
                 endereco = createRequest.endereco,
                 telefone = createRequest.telefone,
                 email = createRequest.email,
-                vendedor = createRequest.vendedor
+                vendedor = createRequest.vendedor,
+                inscricaoEstadual = createRequest.inscricaoEstadual,
+                inscricaoMunicipal = createRequest.inscricaoMunicipal
+
             };
 
             contexto.Fornecedor.Add(fornecedor);
@@ -125,6 +128,8 @@ namespace OffshoreTrack.Controllers
             fornecedor.telefone = updateRequest.telefone;
             fornecedor.email = updateRequest.email;
             fornecedor.vendedor = updateRequest.vendedor;
+            fornecedor.inscricaoEstadual = updateRequest.inscricaoEstadual;
+            fornecedor.inscricaoMunicipal = updateRequest.inscricaoMunicipal;
 
             try
             {

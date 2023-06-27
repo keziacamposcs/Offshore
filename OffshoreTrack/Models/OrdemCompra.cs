@@ -30,7 +30,6 @@ namespace OffshoreTrack.Models
         public int? quantidade4 { get; set; }
         public int? quantidade5 { get; set; }
 
-
         public string? prioridade { get; set; }
         public byte[]? anexo { get; set; }
 
@@ -62,6 +61,9 @@ namespace OffshoreTrack.Models
         public Usuario? usuario { get; set; }
         public int? id_empresa { get; set; }
         public Empresa? empresa { get; set; }
+
+        public int? id_formaPagamento { get; set; }
+        public FormaPagamento? formaPagamento { get; set; }
 
         //Relacionamentos
         public List<ParteSolta>? parteSoltas { get; set; }

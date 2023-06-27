@@ -31,13 +31,12 @@ namespace OffshoreTrack.Controllers
         /* CRUD */
 
         // Create
-
         [HttpGet]
         public IActionResult New()
         {
             var podeCriar = User.HasClaim("PodeCriar", "True");
-            if(!podeCriar)
-            {    
+            if (!podeCriar)
+            {
                 TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
@@ -56,36 +55,52 @@ namespace OffshoreTrack.Controllers
             return View();
         }
 
-        [HttpPost]
+       [HttpPost]
         public async Task<IActionResult> Create([Bind("rateio,porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio createRequest)
         {
-            if (createRequest.porcentagem1 < 0 || createRequest.porcentagem1 > 100 || 
-                createRequest.porcentagem2 < 0 || createRequest.porcentagem2 > 100)
+            if (createRequest.porcentagem1.HasValue && createRequest.porcentagem2.HasValue && 
+                createRequest.porcentagem1 + createRequest.porcentagem2 != 100)
             {
-                // Retornar um erro caso os valores estejam fora da faixa aceitável
-                return BadRequest("Valores inválidos. Entre 0% e 100%");
+                // Add model error
+                ModelState.AddModelError("porcentagem1", "A soma das porcentagens deve ser 100%");
+                ModelState.AddModelError("porcentagem2", "A soma das porcentagens deve ser 100%");
             }
 
-            var rateio = new Rateio
+            if (ModelState.IsValid)
             {
-                rateio = createRequest.rateio,
-                porcentagem1 = createRequest.porcentagem1,
-                porcentagem2 = createRequest.porcentagem2,
-                id_setor1 = createRequest.id_setor1,
-                id_setor2 = createRequest.id_setor2
-            };
+                var rateio = new Rateio
+                {
+                    rateio = createRequest.rateio,
+                    porcentagem1 = createRequest.porcentagem1,
+                    porcentagem2 = createRequest.porcentagem2,
+                    id_setor1 = createRequest.id_setor1,
+                    id_setor2 = createRequest.id_setor2
+                };
 
-            contexto.Rateio.Add(rateio);
-            try
-            {
-                await contexto.SaveChangesAsync();
-                return RedirectToAction("Index");
+                contexto.Rateio.Add(rateio);
+                try
+                {
+                    await contexto.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            // If we got this far, something failed, redisplay form
+            var setores1 = await contexto.Setor.ToListAsync();
+            var setores2 = await contexto.Setor.ToListAsync();
+            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
+            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
+
+            return View(createRequest);
         }
+
+        // Fim - Create
+
+
         // Fim - Create
 
         // Read
@@ -112,7 +127,6 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-
             var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
             if(!podeAtualizar)
             {    
@@ -120,64 +134,47 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var rateio = await contexto.Rateio
-                                .Include(r => r.setor1)
-                                .Include(r => r.setor2)
-                                .FirstOrDefaultAsync(x => x.id_rateio == id);
+            var rateio = await contexto.Rateio.Include(r => r.setor1)
+                                            .Include(r => r.setor2)
+                                            .FirstOrDefaultAsync(x => x.id_rateio == id);
+
             if (rateio == null)
             {
                 return NotFound();
             }
-
             var setores1 = await contexto.Setor.ToListAsync();
             var setores2 = await contexto.Setor.ToListAsync();
-            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor", rateio.id_setor1);
-            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor", rateio.id_setor2);
+            ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
+            ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
+
             return View(rateio);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([Bind("id_rateio, rateio, porcentagem1, porcentagem2, id_setor1, id_setor2")] Rateio updateRequest)
+        public async Task<IActionResult>Update(Rateio updateRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                var setores = contexto.Setor.ToList();
-                ViewBag.setores1 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor1);
-                ViewBag.setores2 = new SelectList(setores, "id_setor", "setor", updateRequest.id_setor2);
-
-                return View("Edit", updateRequest);
-            }
-
             var rateio = await contexto.Rateio.FindAsync(updateRequest.id_rateio);
             if (rateio == null)
             {
                 return NotFound();
             }
-
-            if (updateRequest.porcentagem1 < 0 || updateRequest.porcentagem1 > 100 || 
-                updateRequest.porcentagem2 < 0 || updateRequest.porcentagem2 > 100)
-            {
-                // Retornar um erro caso os valores estejam fora da faixa aceitável
-                return BadRequest("Valores inválidos. Entre 0% e 100%");
-            }
-
             rateio.rateio = updateRequest.rateio;
             rateio.porcentagem1 = updateRequest.porcentagem1;
-            rateio.id_setor1 = updateRequest.id_setor1;
             rateio.porcentagem2 = updateRequest.porcentagem2;
+            rateio.id_setor1 = updateRequest.id_setor1;
             rateio.id_setor2 = updateRequest.id_setor2;
-
             try
             {
                 await contexto.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
         // Fim - Update
+
 
         // Delete
         [HttpPost]

@@ -38,6 +38,8 @@ namespace OffshoreTrack.Models
 
         public List<ParteSolta>? parteSoltas { get; set; }
 
+        public List<Contrato>? contratos { get; set; }
+
     }
 }
 

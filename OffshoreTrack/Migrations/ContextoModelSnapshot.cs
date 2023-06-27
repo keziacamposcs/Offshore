@@ -133,6 +133,49 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("cliente", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Contrato", b =>
+                {
+                    b.Property<int>("id_contrato")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("anexo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("contrato")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("dataFim")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("dataInicio")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("id_cliente")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_fornecedor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_setor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("id_contrato");
+
+                    b.HasIndex("id_cliente");
+
+                    b.HasIndex("id_fornecedor");
+
+                    b.HasIndex("id_setor");
+
+                    b.HasIndex("id_status");
+
+                    b.ToTable("Contrato");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Criticidade", b =>
                 {
                     b.Property<int>("id_criticidade")
@@ -186,6 +229,23 @@ namespace OffshoreTrack.Migrations
                     b.HasKey("id_empresa");
 
                     b.ToTable("Empresa");
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.FormaPagamento", b =>
+                {
+                    b.Property<int>("id_formaPagamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("descricao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("formaPagamento")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id_formaPagamento");
+
+                    b.ToTable("FormaPagamento");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Fornecedor", b =>
@@ -435,6 +495,9 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_empresa")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("id_formaPagamento")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("id_fornecedor")
                         .HasColumnType("INTEGER");
 
@@ -516,6 +579,8 @@ namespace OffshoreTrack.Migrations
                     b.HasKey("id_oc");
 
                     b.HasIndex("id_empresa");
+
+                    b.HasIndex("id_formaPagamento");
 
                     b.HasIndex("id_fornecedor");
 
@@ -646,11 +711,11 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_setor2")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal?>("porcentagem1")
-                        .HasColumnType("TEXT");
+                    b.Property<double?>("porcentagem1")
+                        .HasColumnType("REAL");
 
-                    b.Property<decimal?>("porcentagem2")
-                        .HasColumnType("TEXT");
+                    b.Property<double?>("porcentagem2")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("rateio")
                         .HasColumnType("TEXT");
@@ -772,6 +837,33 @@ namespace OffshoreTrack.Migrations
                     b.HasOne("OffshoreTrack.Models.Material", null)
                         .WithMany("certificacaos")
                         .HasForeignKey("Materialid_material");
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.Contrato", b =>
+                {
+                    b.HasOne("OffshoreTrack.Models.Cliente", "cliente")
+                        .WithMany("contratos")
+                        .HasForeignKey("id_cliente");
+
+                    b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor")
+                        .WithMany("contratos")
+                        .HasForeignKey("id_fornecedor");
+
+                    b.HasOne("OffshoreTrack.Models.Setor", "setor")
+                        .WithMany("contratos")
+                        .HasForeignKey("id_setor");
+
+                    b.HasOne("OffshoreTrack.Models.Status", "status")
+                        .WithMany("contratos")
+                        .HasForeignKey("id_status");
+
+                    b.Navigation("cliente");
+
+                    b.Navigation("fornecedor");
+
+                    b.Navigation("setor");
+
+                    b.Navigation("status");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
@@ -903,6 +995,10 @@ namespace OffshoreTrack.Migrations
                         .WithMany("ordemCompras")
                         .HasForeignKey("id_empresa");
 
+                    b.HasOne("OffshoreTrack.Models.FormaPagamento", "formaPagamento")
+                        .WithMany("ordemCompras")
+                        .HasForeignKey("id_formaPagamento");
+
                     b.HasOne("OffshoreTrack.Models.Fornecedor", "fornecedor")
                         .WithMany("OrdensCompra1")
                         .HasForeignKey("id_fornecedor");
@@ -932,6 +1028,8 @@ namespace OffshoreTrack.Migrations
                         .HasForeignKey("id_usuario");
 
                     b.Navigation("empresa");
+
+                    b.Navigation("formaPagamento");
 
                     b.Navigation("fornecedor");
 
@@ -1020,6 +1118,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Cliente", b =>
                 {
+                    b.Navigation("contratos");
+
                     b.Navigation("locals");
 
                     b.Navigation("materials");
@@ -1037,6 +1137,11 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("ordemCompras");
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.FormaPagamento", b =>
+                {
+                    b.Navigation("ordemCompras");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Fornecedor", b =>
                 {
                     b.Navigation("OrdensCompra1");
@@ -1044,6 +1149,8 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("OrdensCompra2");
 
                     b.Navigation("OrdensCompra3");
+
+                    b.Navigation("contratos");
 
                     b.Navigation("manutencaos");
 
@@ -1101,6 +1208,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Setor", b =>
                 {
+                    b.Navigation("contratos");
+
                     b.Navigation("manutencaos");
 
                     b.Navigation("materials");
@@ -1114,6 +1223,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Status", b =>
                 {
+                    b.Navigation("contratos");
+
                     b.Navigation("manutencaos");
 
                     b.Navigation("materials");

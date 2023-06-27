@@ -52,6 +52,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udGEvTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Contrato/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udHJhdG8vRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Contrato/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udHJhdG8vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Contrato/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udHJhdG8vTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Contrato/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29udHJhdG8vUmVhZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Criticidade/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3JpdGljaWRhZGUvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,6 +94,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Empresa/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wcmVzYS9SZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/FormaPagamento/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRm9ybWFQYWdhbWVudG8vRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/FormaPagamento/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRm9ybWFQYWdhbWVudG8vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/FormaPagamento/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRm9ybWFQYWdhbWVudG8vTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/FormaPagamento/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRm9ybWFQYWdhbWVudG8vUmVhZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Fornecedor/Edit.cshtml]

@@ -1,0 +1,166 @@
+﻿@model OffshoreTrack.Models.Contrato
+@{
+    ViewData["Title"]="Edit";
+}
+
+<div class="pagetitle">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">Editar: Contrato</h1>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-grid gap-2d-md-flex justify-content-md-end">
+                <a class="btn btn-primary"role="button"asp-area=""asp-controller="Contrato"asp-action="Index">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+
+                <form method="post" asp-action="Update" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="id_contrato" />
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                        <label for="inputText" class="col-sm col-form-label">Contrato:</label>
+                        <input type="text" class="form-control" id="contrato" name="contrato" asp-for="contrato"/>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="col-form-label">Status:</label>
+                            <select asp-for="id_status" class="form-control" asp-items="@ViewBag.status"></select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data de Início:</label>
+                            <input type="date" class="form-control" id="dataInicio" name="dataInicio" asp-for="dataInicio" />
+                        </div>
+                        <div class="col">
+                            <label for="inputText" class="col-sm col-form-label">Data de Validade:</label>
+                            <input type="date" class="form-control" id="dataFim" name="dataFim" asp-for="dataFim" />
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="id_setor" class="col-form-label">Contrato voltado para o Setor:</label>
+                                <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
+                                <span asp-validation-for="id_setor" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="ehFornecedor" @(Model.id_fornecedor != null ? "checked" : "") >
+                                <label class="form-check-label" for="ehFornecedor">
+                                    É Fornecedor?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label asp-for="id_fornecedor" class="col-form-label">Fornecedor:</label>
+                                <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                                <span asp-validation-for="id_fornecedor" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="ehCliente" @(Model.id_cliente != null ? "checked" : "")>
+                                <input class="form-check-input" type="checkbox" value="" id="ehCliente" readonly>
+                                <label class="form-check-label" for="ehCliente">
+                                    É Cliente?
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label asp-for="id_cliente" class="col-form-label">Cliente:</label>
+                                <select asp-for="id_cliente" class="form-control" asp-items="@ViewBag.cliente"></select>
+                                <span asp-validation-for="id_cliente" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                
+
+                    <label for="anexo" class="form-label">Anexar arquivo:</label>
+                    <input type="file" id="anexoFile" name="anexoFile" class="form-control">
+                    
+                    <input type="hidden" asp-for="anexo" />
+                    <br>
+                    @if(Model.anexo != null && Model.anexo.Length > 0)
+                    {    
+                        <a class="btn btn-outline-secondary" href="@Url.Action("DownloadAnexo", "Contrato", new { id = Model.id_contrato })">Baixar Anexo atual</a>
+                        <br>
+                    }
+                    else
+                    {
+                        <p>Sem Anexo</p>
+                    }
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
+                </form>
+                <form method="post"action="/Contrato/Delete">
+                    <input type="hidden"asp-for="id_contrato"/>
+                    <button type="submit"class="btn btn-danger">Deletar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.onload = function() {
+            document.getElementById('id_fornecedor').disabled = !(document.getElementById('ehFornecedor').checked);
+            document.getElementById('id_cliente').disabled = !(document.getElementById('ehCliente').checked);
+        }
+
+        document.getElementById('ehFornecedor').addEventListener('change', function() {
+            var select = document.getElementById('id_fornecedor');
+
+            if (this.checked) {
+                select.disabled = false;
+                if(document.getElementById('ehCliente').checked) {
+                    document.getElementById('ehCliente').checked = false;
+                    document.getElementById('id_cliente').value = '';
+                    document.getElementById('id_cliente').disabled = true;
+                }
+            } else {
+                select.value = '';
+                select.disabled = true;
+            }
+        });
+
+        document.getElementById('ehCliente').addEventListener('change', function() {
+            var select = document.getElementById('id_cliente');
+
+            if (this.checked) {
+                select.disabled = false;
+                if(document.getElementById('ehFornecedor').checked) {
+                    document.getElementById('ehFornecedor').checked = false;
+                    document.getElementById('id_fornecedor').value = '';
+                    document.getElementById('id_fornecedor').disabled = true;
+                }
+            } else {
+                select.value = '';
+                select.disabled = true;
+            }
+        });
+    </script>
+}

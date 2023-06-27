@@ -131,14 +131,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row col-sm-12">
                         <div class="col print_oc print_rel">
                             <label for="inputText" class="col-sm col-form-label">Observação:</label>
                             <textarea type="text" rows="3" class="form-control" id="observacao" name="observacao" asp-for="observacao" readonly></textarea>
                         </div>
                     </div>
-
                     <div class="row print_rel">
+                        <br>
                         <div class="col print_oc">
                             <label for="inputText" class="col-sm col-form-label">Data:</label>
                             <input type="date" class="form-control" id="data_oc" name="data_oc" asp-for="data_oc" readonly/>
@@ -162,95 +162,75 @@
 
                     <hr>
 
-                    <h5 class="print_oc print_rel">Itens</h5>
+                    <h5 class="print_oc print_rel col-sm-12">Itens</h5>
+                        <table class="table table-bordered border-dark print_oc print_rel">
 
                         @if (!string.IsNullOrEmpty(Model.item1)){
-                        <div class="row print_oc print_rel" >
-                            <div class="col-sm-6">
-                                <label for="inputText" class="col-sm col-form-label">Item 1:</label>
-                                <input type="text" class="form-control" id="item1" name="item1" asp-for="item1" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade1" name="quantidade1" asp-for="quantidade1" readonly/>
-                            </div>
-                            <div class="col-sm-4">
-                                <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <input id="moeda" class="form-control" name="moeda" asp-for="moeda"readonly/>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" readonly/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Item 1:</strong> @Model.item1
+                                </td>
+                                <td colspan="1">
+                                    <strong>Quant.:</strong> @Model.quantidade1
+                                </td>
+                                <td colspan="1">
+                                    <strong>Valor:</strong> @Model.moeda @Model.valor1
+                                </td>
+                            </tr>
                         }
                         @if (!string.IsNullOrEmpty(Model.item2)){
-                        <div class="row print_oc print_rel">
-                            <div class="col-sm-6">
-                                <label for="inputText" class="col-sm col-form-label">Item 2:</label>
-                                <input type="text" class="form-control" id="item2" name="item2" asp-for="item2" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade2" name="quantidade2" asp-for="quantidade2" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                                <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" readonly/>
-                            </div>
-                        </div>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Item 2:</strong> @Model.item2
+                                </td>
+                                <td colspan="1">
+                                    <strong>Quant.:</strong> @Model.quantidade2
+                                </td>
+                                <td colspan="1">
+                                    <strong>Valor:</strong> @Model.moeda @Model.valor2
+                                </td>
+                            </tr>
                         }
                         @if (!string.IsNullOrEmpty(Model.item3)){
-                        <div class="row print_oc print_rel">
-                            <div class="col-sm-6">
-                                <label for="inputText" class="col-sm col-form-label">Item 3:</label>
-                                <input type="text" class="form-control" id="item3" name="item3" asp-for="item3" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade3" name="quantidade3" asp-for="quantidade3" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                                <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" readonly/>
-                            </div>
-                        </div>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Item 3:</strong> @Model.item3
+                                </td>
+                                <td colspan="1">
+                                    <strong>Quant.:</strong> @Model.quantidade3
+                                </td>
+                                <td colspan="1">
+                                    <strong>Valor:</strong> @Model.moeda @Model.valor3
+                                </td>
+                            </tr>
                         }
                         @if (!string.IsNullOrEmpty(Model.item4)){
-                        <div class="row print_oc print_rel">
-                            <div class="col-sm-6">
-                                <label for="inputText" class="col-sm col-form-label">Item 4:</label>
-                                <input type="text" class="form-control" id="item4" name="item4" asp-for="item4" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade4" name="quantidade4" asp-for="quantidade4" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                                <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" readonly/>
-                            </div>
-                        </div>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Item 4:</strong> @Model.item4
+                                </td>
+                                <td colspan="1">
+                                    <strong>Quant.:</strong> @Model.quantidade4
+                                </td>
+                                <td colspan="1">
+                                    <strong>Valor:</strong> @Model.moeda @Model.valor4
+                                </td>
+                            </tr>
                         }
                         @if (!string.IsNullOrEmpty(Model.item5)){
-                        <div class="row print_oc print_rel" >
-                            <div class="col-sm-6">
-                                <label for="inputText" class="col-sm col-form-label">Item 5:</label>
-                                <input type="text" class="form-control" id="item5" name="item5" asp-for="item5" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade5" name="quantidade5" asp-for="quantidade5" readonly/>
-                            </div>
-                            <div class="col-sm-2">
-                                <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                                <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" readonly/>
-                            </div>
-                        </div>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Item 5:</strong> @Model.item5
+                                </td>
+                                <td colspan="1">
+                                    <strong>Quant.:</strong> @Model.quantidade5
+                                </td>
+                                <td colspan="1">
+                                    <strong>Valor:</strong> @Model.moeda @Model.valor5
+                                </td>
+                            </tr>
                         }
+                        </table>
                     <br class="">
 
                     <div class="row print_oc print_rel">
@@ -259,40 +239,28 @@
                     <hr>
                     @if (Model.rateio != null)
                     {
-                        <div class="print_rel">
-                            <h5 class="">Rateio</h5>
-                            <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
-                            <p class="form-control" readonly>@Html.DisplayFor(model => model.rateio.rateio)</p>
-
+                        <div class="print_rel col-sm-12">
                             <div class="row">
-                                <div class="col-sm-2">Rateio 1:</div>
-                                <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <strong>Porcentagem do Rateio 1:</strong><p>@Model.rateio.porcentagem1</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <p class="form-control rateio1">@Model.moeda @Model.TotalComRateio1</p>
-                                </div>
+                                <p><strong>Rateio: </strong>@Model.rateio.rateio</p>
                             </div>
-
-                            <div class="row ">   
-                                <div class="col-sm-2">Rateio 2:</div>
-
-                                <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <strong>Porcentagem do Rateio 2:</strong><p>@Model.rateio.porcentagem2</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5">
-                                    <p class="form-control rateio1">@Model.moeda @Model.TotalComRateio2</p>
-                                </div>
+                            <div class="col-sm-12">
+                                <table class="table table-bordered border-dark">
+                                    <tr>
+                                        <td>Rateio 1</td>
+                                        <td colspan="1"><strong>Porcentagem (%):</strong> @Model.rateio.porcentagem1</td>
+                                        <td colspan="1"><strong>Valor:</strong> @Model.moeda @Model.TotalComRateio1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rateio 2</td>
+                                        <td colspan="1"><strong>Porcentagem (%):</strong> @Model.rateio.porcentagem2</td>
+                                        <td colspan="1"><strong>Valor:</strong> @Model.moeda @Model.TotalComRateio2</td>
+                                    </tr>
+                                </table>
                             </div>
-                        <hr>
-                        </div>    
+                        </div>
                     }
                     <div class="print_rel">
-                    <h5>Fornecedores</h5>
+                    <h5 class="col-sm-12">Fornecedores</h5>
                     <div class="row ">
                         <div class="col">
                             <div class="form-group">
@@ -311,6 +279,14 @@
                                 <label asp-for="id_fornecedor3" class="col-sm col-form-label">Fornecedor 3:</label>
                                 <p class="form-control" readonly>@Html.DisplayFor(model => model.fornecedor3.fornecedor)</p>
                             </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="col print_oc">
+                        <div class="form-group">
+                            <label asp-for="id_formaPagamento" class="col-sm col-form-label">Forma de Pagamento:</label>
+                            <p class="form-control" readonly>@Model.formaPagamento?.formaPagamento</p>
                         </div>
                     </div>
                     <br>
@@ -364,7 +340,7 @@ function printOC() {
     }
     
     // Adiciona estilos CSS para a nova janela
-    printWindow.document.write('<style>body { font-size: 16px; color: #ffafcc; }</style>');
+    printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:0;padding:0;width:100%;}.col{flex-basis:0;flex-grow:1;max-width:100%;}.col-sm{flex:0 0 auto;width:auto;}.col-sm-2{flex:0 0 16.666667%;max-width:16.666667%;}.col-sm-3{flex:0 0 25%;max-width:25%;}.col-sm-5{flex:0 0 41.666667%;max-width:41.666667%;}.col-sm-6{flex:0 0 50%;max-width:50%;}.table{width:100%;margin-bottom:1rem;color:#212529;border-collapse:collapse;}.table-bordered{border:1px solid #dee2e6;}.table-bordered td,.table-bordered th{border:1px solid #dee2e6;}strong{font-weight:bold;}.text-end{text-align:end;}.form-control{display:block;width:100%;padding:0;font-size:1rem;line-height:1.5;color:#000;background-color:#fff;background-clip:padding-box;border:1px solid #000;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;}h4,h5{font-size: 15px; margin-top:0.5em;margin-bottom:0.5em;}.bg-danger{background-color:#dc3545!important;}.col, .col-sm, .col-sm-2, .col-sm-3, .col-sm-5, .col-sm-6, .col-sm-12 {position: relative;width: 100%;padding-right: 15px;padding-left: 15px;}.row {display: flex;flex-wrap: wrap;margin-right: 0;margin-left: 0;} .col.print_oc, .col {margin: 0;}.col.print_oc .form-control, .col .form-control {padding: 0;}</style>');
 
     // Imprime a nova janela
     printWindow.document.close();
@@ -384,7 +360,7 @@ function printRel() {
     }
     
     // Adiciona estilos CSS para a nova janela
-    printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:0;padding:0;width:100%;}.col{flex-basis:0;flex-grow:1;max-width:100%;}.col-sm{flex:0 0 auto;width:auto;}.col-sm-2{flex:0 0 16.666667%;max-width:16.666667%;}.col-sm-3{flex:0 0 25%;max-width:25%;}.col-sm-5{flex:0 0 41.666667%;max-width:41.666667%;}.col-sm-6{flex:0 0 50%;max-width:50%;}.table{width:100%;margin-bottom:1rem;color:#212529;border-collapse:collapse;}.table-bordered{border:1px solid #dee2e6;}.table-bordered td,.table-bordered th{border:1px solid #dee2e6;}strong{font-weight:bold;}.text-end{text-align:end;}.form-control{display:block;width:100%;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#000;background-color:#fff;background-clip:padding-box;border:1px solid #000;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;}h4,h5{font-size: 15px; margin-top:0.5em;margin-bottom:0.5em;}.bg-danger{background-color:#dc3545!important;}.col, .col-sm, .col-sm-2, .col-sm-3, .col-sm-5, .col-sm-6, .col-sm-12 {position: relative;width: 100%;padding-right: 15px;padding-left: 15px;}.row {display: flex;flex-wrap: wrap;margin-right: 0;margin-left: 0;}</style>');
+    printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:0;padding:0;width:100%;}.col{flex-basis:0;flex-grow:1;max-width:100%;}.col-sm{flex:0 0 auto;width:auto;}.col-sm-2{flex:0 0 16.666667%;max-width:16.666667%;}.col-sm-3{flex:0 0 25%;max-width:25%;}.col-sm-5{flex:0 0 41.666667%;max-width:41.666667%;}.col-sm-6{flex:0 0 50%;max-width:50%;}.table{width:100%;margin-bottom:1rem;color:#212529;border-collapse:collapse;}.table-bordered{border:1px solid #dee2e6;}.table-bordered td,.table-bordered th{border:1px solid #dee2e6;}strong{font-weight:bold;}.text-end{text-align:end;}.form-control{display:block;width:100%;padding:0;font-size:1rem;line-height:1.5;color:#000;background-color:#fff;background-clip:padding-box;border:1px solid #000;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;}h4,h5{font-size: 15px; margin-top:0.5em;margin-bottom:0.5em;}.bg-danger{background-color:#dc3545!important;}.col, .col-sm, .col-sm-2, .col-sm-3, .col-sm-5, .col-sm-6, .col-sm-12 {position: relative;width: 100%;padding-right: 15px;padding-left: 15px;}.row {display: flex;flex-wrap: wrap;margin-right: 0;margin-left: 0;} .col.print_oc, .col {margin: 0;}.col.print_oc .form-control, .col .form-control {padding: 0;}</style>');
 
     // Imprime a nova janela
     printWindow.document.close();

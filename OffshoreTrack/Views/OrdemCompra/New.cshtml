@@ -226,6 +226,16 @@
                         </div>
                     </div>
                     <br>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="id_formaPagamento" class="col-sm col-form-label">Forma de Pagamento:</label>
+                            <select asp-for="id_formaPagamento" class="form-control" asp-items="@ViewBag.formaPagamento"></select>
+                        </div>
+                    </div>
+                    <br>
+
+
                     <div class="form-group">
                         <label for="anexo" class="form-label">Anexar arquivo:</label>
                         <input class="form-control" type="file" id="anexoFile" name="anexoFile">
