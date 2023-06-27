@@ -47,7 +47,7 @@ namespace OffshoreTrack.Data
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
 
         public DbSet<Contrato> Contrato { get; set; }
-
+ 
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

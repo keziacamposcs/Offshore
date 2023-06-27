@@ -139,8 +139,8 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("anexo")
-                        .HasColumnType("TEXT");
+                    b.Property<byte[]>("anexo")
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("contrato")
                         .HasColumnType("TEXT");
