@@ -1,10 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "J6hBgv/YiyEVw3Ot8Uv4qyQ0NHj3nAYpIDrodddUnaGlmgPwMu75EtOt+S+wPBNcVRExvWpt2/sRv48pYkQUDA==",
+  "dgSpecHash": "GvjDW7I/OkJGBXSkCElp4NoiopJQSub+64nznshXrzXoHSKnuWvWuijVGihRN7j3FHKnxlKriVOo01mDllr5Tg==",
   "success": true,
   "projectFilePath": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/OffshoreTrack.csproj",
   "expectedPackageFiles": [
+    "/Users/keziacampos/.nuget/packages/bootstrap/5.0.0/bootstrap.5.0.0.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/datatables.net/1.12.1/datatables.net.1.12.1.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/datatables.net-bs5/1.13.4/datatables.net-bs5.1.13.4.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/keziacampos/.nuget/packages/jquery/1.7.0/jquery.1.7.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "/Users/keziacampos/.nuget/packages/microsoft.aspnetcore.authorization/2.2.0/microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",

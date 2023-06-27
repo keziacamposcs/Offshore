@@ -1,12 +1,68 @@
 {
   "Files": [
     {
+      "Id": "/Users/keziacampos/.nuget/packages/datatables.net-bs5/1.13.4/contentFiles/any/any/wwwroot/css/dataTables.bootstrap5.css",
+      "PackagePath": "staticwebassets/css/dataTables.bootstrap5.css"
+    },
+    {
+      "Id": "/Users/keziacampos/.nuget/packages/datatables.net-bs5/1.13.4/contentFiles/any/any/wwwroot/css/dataTables.bootstrap5.min.css",
+      "PackagePath": "staticwebassets/css/dataTables.bootstrap5.min.css"
+    },
+    {
+      "Id": "/Users/keziacampos/.nuget/packages/datatables.net-bs5/1.13.4/contentFiles/any/any/wwwroot/js/dataTables.bootstrap5.js",
+      "PackagePath": "staticwebassets/js/dataTables.bootstrap5.js"
+    },
+    {
+      "Id": "/Users/keziacampos/.nuget/packages/datatables.net-bs5/1.13.4/contentFiles/any/any/wwwroot/js/dataTables.bootstrap5.min.js",
+      "PackagePath": "staticwebassets/js/dataTables.bootstrap5.min.js"
+    },
+    {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/obj/Debug/net7.0/scopedcss/projectbundle/OffshoreTrack.bundle.scp.css",
       "PackagePath": "staticwebassets/OffshoreTrack.bundle.scp.css"
     },
     {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/.DS_Store",
       "PackagePath": "staticwebassets/.DS_Store"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/dataTables.dateTime.css",
+      "PackagePath": "staticwebassets/css/dataTables.dateTime.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/dataTables.dateTime.min.css",
+      "PackagePath": "staticwebassets/css/dataTables.dateTime.min.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/datatables.css",
+      "PackagePath": "staticwebassets/css/datatables.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/datatables.min.css",
+      "PackagePath": "staticwebassets/css/datatables.min.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/responsive.bootstrap5.css",
+      "PackagePath": "staticwebassets/css/responsive.bootstrap5.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/responsive.bootstrap5.min.css",
+      "PackagePath": "staticwebassets/css/responsive.bootstrap5.min.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/searchPanes.bootstrap.css",
+      "PackagePath": "staticwebassets/css/searchPanes.bootstrap.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/searchPanes.bootstrap.min.css",
+      "PackagePath": "staticwebassets/css/searchPanes.bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/searchPanes.bootstrap5.css",
+      "PackagePath": "staticwebassets/css/searchPanes.bootstrap5.css"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/searchPanes.bootstrap5.min.css",
+      "PackagePath": "staticwebassets/css/searchPanes.bootstrap5.min.css"
     },
     {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/css/site.css",
@@ -31,6 +87,38 @@
     {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/images/offshorelogo_white.png",
       "PackagePath": "staticwebassets/images/offshorelogo_white.png"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/dataTables.dateTime.js",
+      "PackagePath": "staticwebassets/js/dataTables.dateTime.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/dataTables.dateTime.min.js",
+      "PackagePath": "staticwebassets/js/dataTables.dateTime.min.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/datatables.js",
+      "PackagePath": "staticwebassets/js/datatables.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/datatables.min.js",
+      "PackagePath": "staticwebassets/js/datatables.min.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/responsive.bootstrap5.js",
+      "PackagePath": "staticwebassets/js/responsive.bootstrap5.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/responsive.bootstrap5.min.js",
+      "PackagePath": "staticwebassets/js/responsive.bootstrap5.min.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/searchPanes.bootstrap5.js",
+      "PackagePath": "staticwebassets/js/searchPanes.bootstrap5.js"
+    },
+    {
+      "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/searchPanes.bootstrap5.min.js",
+      "PackagePath": "staticwebassets/js/searchPanes.bootstrap5.min.js"
     },
     {
       "Id": "/Users/keziacampos/GitHub/Offshore/OffshoreTrack/wwwroot/js/site.js",

@@ -23,7 +23,7 @@
         <div class="card">
             <br />
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tableLocal">
                     <thead>
                         <tr>
                             <th scope="col">Local</th>
@@ -52,3 +52,10 @@
     </div>
 </div>
 
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#tableLocal').DataTable();
+        });
+    </script>
+    }
