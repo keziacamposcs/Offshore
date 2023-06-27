@@ -206,6 +206,12 @@ namespace OffshoreTrack.Migrations
                     b.Property<string>("fornecedor")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("inscricaoEstadual")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("inscricaoMunicipal")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("razaoSocial")
                         .HasColumnType("TEXT");
 
@@ -463,6 +469,9 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("item5")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("moeda")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("observacao")

@@ -13,6 +13,19 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" action="Create" enctype="multipart/form-data">
+                    
+                    <!-- Definicao de Moeda -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label asp-for="moeda" for="inputText" class="col-sm col-form-label">Definição de Moeda da Ordem de Compra:</label>
+                            <select class="form-select" id="moedaSelect" asp-for="moeda">
+                                <option value="R$">R$ - BRL</option>
+                                <option value="$">US$ - USD</option>
+                                <option value="€">EUR$ - EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Fim - Definicao de Moeda -->
 
                     <div class="row">
                         <div class="col-sm-9">
@@ -60,7 +73,14 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda1" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor1" name="valor1" asp-for="valor1" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -74,7 +94,14 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda2" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor2" name="valor2" asp-for="valor2" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -89,7 +116,14 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda3" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor3" name="valor3" asp-for="valor3" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -104,7 +138,14 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda4" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor4" name="valor4" asp-for="valor4" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -119,16 +160,38 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="inputText" class="col-sm col-form-label">Valor:</label>
-                            <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <span id="moeda5" class="moeda"></span>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control valor" id="valor5" name="valor5" asp-for="valor5" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br><hr>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
-                            <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
+                            <div class="row">
+                                <h5>Rateio</h5>
+                                <div class="col-sm-3">
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="sem_rateio">
+                                    <label class="form-check-label">
+                                        Sem Rateio
+                                    </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
+                                    <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
+                                    <input type="hidden" asp-for="id_rateio" id="hiddenRateio" />
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <br>
 
                     <h5>Fornecedor</h5>
                     <div class="row">
@@ -136,18 +199,21 @@
                             <div class="form-group">
                                 <label asp-for="id_fornecedor" class="col-sm col-form-label">Fornecedor Principal:</label>
                                 <select asp-for="id_fornecedor" class="form-control" asp-items="@ViewBag.fornecedor"></select>
+                                <div class="form-text"></div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label asp-for="id_fornecedor2" class="col-sm col-form-label">Fornecedor 2:</label>
+                                <label asp-for="id_fornecedor2" class="col-sm col-form-label">Fornecedor 2: </label>
                                 <select asp-for="id_fornecedor2" class="form-control" asp-items="@ViewBag.fornecedor2"></select>
+                                <div class="form-text">O fornecedor escolhido será a 2º opção.</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label asp-for="id_fornecedor3" class="col-sm col-form-label">Fornecedor 3:</label>
                                 <select asp-for="id_fornecedor3" class="form-control" asp-items="@ViewBag.fornecedor3"></select>
+                                <div class="form-text">O fornecedor escolhido será a 3º opção.</div>
                             </div>
                         </div>
                     </div>
@@ -159,9 +225,7 @@
                             <select asp-for="id_setor" class="form-control" asp-items="@ViewBag.setor"></select>
                         </div>
                     </div>
-
-
-
+                    <br>
                     <div class="form-group">
                         <label for="anexo" class="form-label">Anexar arquivo:</label>
                         <input class="form-control" type="file" id="anexoFile" name="anexoFile">
@@ -179,21 +243,57 @@
 {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $(".valor").on('input', function() {
-        var value = $(this).val();
-        value = value.replace(/^R\$ /, '');
-        $(this).val('R$ ' + value);
-    });
+    $(document).ready(function() {
+        var moeda = $('#moedaSelect').val(); // pega o valor inicial da moeda
+        $('.moeda').text(moeda); // atualiza a moeda mostrada antes do input
 
-    $('form').on('submit', function(e) {
-        $(".valor").each(function() {
+        // Atualiza o valor da moeda quando a seleção é alterada
+        $('#moedaSelect').on('change', function() {
+            moeda = $(this).val();
+            $('.moeda').text(moeda); // atualiza a moeda mostrada antes do input
+        });
+
+        // Formata o input de valor cada vez que é alterado
+        $(".valor").on('input', function() {
             var value = $(this).val();
-            value = value.replace(/^R\$ /, '');
+            value = removeExtraDots(value); // remove pontos extras
+            value = value.replace(/[^0-9.]/g, ''); // remove caracteres não numéricos exceto o ponto
             $(this).val(value);
         });
     });
-});
+
+    // Função para remover pontos extras
+    function removeExtraDots(value) {
+        var count = value.split('.').length - 1;
+        if (count > 1) {
+            var lastDot = value.lastIndexOf('.');
+            value = value.slice(0, lastDot) + value.slice(lastDot + 1);
+        }
+        return value;
+    }
+
+
+    document.getElementById('sem_rateio').addEventListener('change', function() {
+    var select = document.getElementById('id_rateio');
+    var hidden = document.getElementById('hiddenRateio');
+
+    if (this.checked) {
+        // Checkbox está marcado, definir o valor do select e do campo oculto para nulo e desabilitá-lo
+        select.value = '';
+        hidden.value = '';
+        select.disabled = true;
+    } else {
+        // Checkbox não está marcado, habilitar o campo de seleção e copiar seu valor para o campo oculto
+        select.disabled = false;
+        hidden.value = select.value;
+    }
+    });
+
+    // Atualizar o valor do campo oculto sempre que o valor do campo de seleção muda
+    document.getElementById('id_rateio').addEventListener('change', function() {
+        document.getElementById('hiddenRateio').value = this.value;
+    });
+
 </script>
 
 }

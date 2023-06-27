@@ -17,15 +17,15 @@
                     <label for="inputText" class="col-sm col-form-label">Permissão:</label>
                     <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" />
                     <br />
-                    <label><input type="checkbox" asp-for="pode_criar"> Pode Criar</label><br />
+                    <label><input type="checkbox" id="pode_criar" asp-for="pode_criar"> Pode Criar</label><br />
                     <br>
-                    <label><input type="checkbox" asp-for="pode_ler"> Pode Ler</label><br />
+                    <label><input type="checkbox" id="pode_ler" asp-for="pode_ler"> Pode Ler</label><br />
                     <br>
-                    <label><input type="checkbox" asp-for="pode_atualizar"> Pode Atualizar</label><br />
+                    <label><input type="checkbox" id="pode_atualizar" asp-for="pode_atualizar"> Pode Atualizar</label><br />
                     <br>
-                    <label><input type="checkbox" asp-for="pode_deletar"> Pode Deletar</label><br />
+                    <label><input type="checkbox" id="pode_deletar" asp-for="pode_deletar"> Pode Deletar</label><br />
                     <br>
-                    <label><input type="checkbox" asp-for="permissao_admin"> Permissão de Administrador</label><br />
+                    <label><input type="checkbox" id="permissao_admin" asp-for="permissao_admin"> Permissão de Administrador</label><br />
                     <br>
                     <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
                 </form>
@@ -36,6 +36,21 @@
 
 @section Scripts
 {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#permissao_admin').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#pode_criar').prop('checked', true);
+                    $('#pode_ler').prop('checked', true);
+                    $('#pode_atualizar').prop('checked', true);
+                    $('#pode_deletar').prop('checked', true);
+                } else {
+                    $('#pode_criar').prop('checked', false);
+                    $('#pode_ler').prop('checked', false);
+                    $('#pode_atualizar').prop('checked', false);
+                    $('#pode_deletar').prop('checked', false);
+                }
+            });
+        });
+    </script>
 }

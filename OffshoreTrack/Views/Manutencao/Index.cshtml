@@ -39,7 +39,7 @@
                             <tr>
                                 <td>@item.manutencao</td>
                                 <td>@item.material?.material</td>
-                                <td>@item.data</td>
+                                <td>@(item.data?.ToString("dd/MM/yyyy") ?? "")</td>
                                 <td>@item.status?.status</td>
                                 <td>
                                     <a class="btn btn-primary" href="Manutencao/Read/@item.id_manutencao"><i class="bi bi-eye"></i></a>

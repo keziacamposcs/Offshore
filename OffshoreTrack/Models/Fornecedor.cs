@@ -24,6 +24,10 @@ namespace OffshoreTrack.Models
 
         public string? vendedor { get; set; }
 
+        public string? inscricaoEstadual { get; set; }
+
+        public string? inscricaoMunicipal { get; set; }
+
         //Relacionamentos
         public List<Manutencao>? manutencaos { get; set; }
         public List<Material>? materials { get; set; }
