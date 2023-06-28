@@ -34,6 +34,7 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Funcionalidades</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="manual.html">Manual do Usuário</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="configurar.html">Como implementar</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#perfil">Quem desenvolveu</a></li>
 
                     </ul>
@@ -49,26 +50,46 @@
         <!-- Mashead header-->
         <header class="masthead">
             <div class="container px-5">
-                <div class="alert alert-warning" role="alert">
-                    Lançamento 01/07/2023 
-                </div>
-                
+
                 <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <!-- Mashead text and app badges-->
+                    <div class="col-lg-7">
+
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
-                            <h1 lass="display-1 lh-1 mb-3">Sistema de Controle de Materiais Offshore</h1>
-                            <p class="lead fw-normal text-muted mb-5">Totalmente gratuito, fácil de utilizar, leve e rápido!</p>
-                              
-                            <div class="d-flex flex-column flex-lg-row align-items-center">
-                                <a class="btn btn-primary" href="https://github.com/keziacamposcs/Offshore">
-                                    <i class="bi-github"></i>
-                                    <span class="ms-1">Download</span>
-                                </a>
+                            <h1 lass="display-1 lh-1 mb-3">Sistema de Gerenciamento Offshore</h1>
+                            <h5 class="lead fw-normal text-muted ">Totalmente gratuito, fácil de utilizar, leve e rápido!</h5>
+                            <p class="fw-normal text-muted"><strong>Controle seus materiais, certificados, contratos, clientes, fornecedores...</strong></p>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a class="btn btn-primary" href="https://github.com/keziacamposcs/Offshore">
+                                        <i class="bi-github"></i>
+                                        <span class="ms-1">Confira o código</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-primary" href="OffshoreTrackBuild.zip">
+                                        <i class="bi-download"></i>
+                                        <span class="ms-1">Download o Sistema</span>
+                                    </a>
+                                </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <a class="btn btn-success" href="http://www.offshoretrack.com.br">
+                                        <i class="bi-eye"></i>
+                                        <span class="ms-1">Confira o Sistema em Live! (por tempo limitado)</span>
+                                    </a>
+                                    <p>Se não conseguir pelo link acima, tente: <a href="http://keziacamposcs-001-site1.ftempurl.com">Link</a></p>
+                                    <p><strong>Usuário:</strong> teste - <strong>Senha:</strong> 123</p>
+                                </div>
+                            </div>
+                        
                         </div>
+
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <!-- Masthead device mockup feature-->
                         <div class="masthead-device-mockup">
                                 <div class="device">
@@ -94,7 +115,8 @@
                                     <h3 class="font-alt text-center">Controle de Materiais</h3>
                                     <p class="text-muted">
                                         <li>Cadastro de Materiais.</pli>
-                                        <li>Identificação via Qr Code facilitando rastreabilidade e informaçoes do Ativo.</li>
+                                        <li>Gerador de Qr Code para materiais. Facilitando acesso a informações do Ativo.</li>
+                                        <li>Histórico de Manutenções</li>
                                     </p>
                                 </div>
 
@@ -103,7 +125,7 @@
                                     <h4 class="font-alt text-center">Controle de Partes Soltas de Materiais</h4>
                                     <p class="text-muted">
                                         <li>Cadastro de Partes Soltas (Spares).</li>
-                                        <li>Identificação via Qr Code facilitando rastreabilidade e informaçoes.</li>
+                                        <li>Gerador de Qr Code para partes soltas. Facilitando acesso a informações do Ativo.</li>
                                     </p>
                                 </div>
 
@@ -113,6 +135,8 @@
                                     <h3 class="font-alt text-center">Ordem de Compra</h3>
                                     <p class="text-muted">
                                         <li>Solicitação de Ordens de Compras.</li>
+                                        <li>Controle de Ordens de Compras.</li>
+                                        <li>Relatórios de Ordens de Compras</li>
                                     </p>
                                 </div>
 
@@ -120,7 +144,7 @@
                                     <i class="bi-person-fill icon-feature text-gradient d-block mb-3 text-center"></i>
                                     <h3 class="font-alt text-center">Controle de Usuários e Permissões</h3>
                                     <p class="text-muted mb-0">
-                                        <li>Cadastro de usuários com definição de permissões.</li>
+                                        <li>Cadastro de usuários com definição de permissões de acesso.</li>
                                     </p>
                                 </div>
 
@@ -138,6 +162,7 @@
                                     <h3 class="font-alt text-center">Controle de Clientes e Fornecedores</h3>
                                     <p class="text-muted mb-0">
                                         <li>Controle de Clientes da Empresa.</li>
+                                        <li>Controle de Fornecedores da Empresa.</li>
                                         <li>Controle de Contratos de Clientes e Fornecedores.</li>
                                     </p>
                                 </div>
@@ -200,11 +225,13 @@
             <div class="cta-content">
                 <div class="container">
                     <div class="col-md-6">
-                        <h5 class="text-white">
+                        <h3 class="text-white">
                             Sistema totalmente gratuito para empresas do setor de Óleo e Gás.<br><br>
+                        </h3>
+                        <h5 class="text-white">
                             Libere o potencial máximo de sua empresa com informações organizadas.<br><br>
                         </h5>
-                        <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="https://startbootstrap.com/theme/new-age" target="_blank">Download de graça!</a>
+                        <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="OffshoreTrackBuild.zip">Download de graça!</a>
                     </div>
                     <div class="col-md-6"></div>
                 </div>
