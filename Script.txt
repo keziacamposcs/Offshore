@@ -1,3 +1,4 @@
+-- we don't know how to generate root <with-no-name> (class Root) :(
 create table Certificacao
 (
     id_certificacao     INTEGER not null
