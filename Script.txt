@@ -1,0 +1,572 @@
+create table Certificacao
+(
+    id_certificacao     INTEGER not null
+        constraint PK_Certificacao
+            primary key autoincrement,
+    certificacao        TEXT,
+    orgaoEmissor        TEXT,
+    dataEmissao         TEXT    not null,
+    dataValidade        TEXT,
+    anexo               BLOB,
+    Materialid_material INTEGER,
+    Deletado            INTEGER
+);
+
+create index IX_Certificacao_Materialid_material
+    on Certificacao (Materialid_material);
+
+create table Empresa
+(
+    id_empresa                INTEGER not null
+        constraint PK_Empresa
+            primary key autoincrement,
+    cnpjEmpresa               TEXT,
+    emailEmpresa              TEXT,
+    empresa                   TEXT,
+    enderecoEmpresa           TEXT,
+    inscricaoEstadualEmpresa  TEXT,
+    inscricaoMunicipalEmpresa TEXT,
+    logoEmpresa               BLOB,
+    razaoSocialEmpresa        TEXT,
+    responsavelEmpresa        TEXT,
+    telefoneEmpresa           TEXT,
+    Deletado                  INTEGER
+);
+
+create table FormaPagamento
+(
+    id_formaPagamento INTEGER not null
+        constraint PK_FormaPagamento
+            primary key autoincrement,
+    formaPagamento    TEXT,
+    descricao         TEXT,
+    Deletado          INTEGER
+);
+
+create table Status
+(
+    id_status INTEGER not null
+        constraint PK_Status
+            primary key autoincrement,
+    status    TEXT,
+    Deletado  INTEGER
+);
+
+create table __EFMigrationsHistory
+(
+    MigrationId    TEXT not null
+        constraint PK___EFMigrationsHistory
+            primary key,
+    ProductVersion TEXT not null
+);
+
+create table cliente
+(
+    id_cliente  INTEGER not null
+        constraint PK_cliente
+            primary key autoincrement,
+    cliente     TEXT,
+    cnpj        TEXT,
+    endereco    TEXT,
+    razaoSocial TEXT,
+    telefone    TEXT,
+    Deletado    INTEGER
+);
+
+create table criticidade
+(
+    id_criticidade INTEGER not null
+        constraint PK_criticidade
+            primary key autoincrement,
+    criticidade    TEXT,
+    Deletado       INTEGER
+);
+
+create table fornecedor
+(
+    id_fornecedor      INTEGER not null
+        constraint PK_fornecedor
+            primary key autoincrement,
+    fornecedor         TEXT,
+    cnpj               TEXT,
+    endereco           TEXT,
+    telefone           TEXT,
+    email              TEXT,
+    vendedor           TEXT,
+    razaoSocial        TEXT,
+    inscricaoEstadual  TEXT,
+    inscricaoMunicipal TEXT,
+    Deletado           INTEGER
+);
+
+create table local
+(
+    id_local   INTEGER not null
+        constraint PK_local
+            primary key autoincrement,
+    local      TEXT,
+    id_cliente INTEGER
+        constraint FK_local_cliente_id_cliente
+            references cliente,
+    Deletado   INTEGER
+);
+
+create index IX_local_id_cliente
+    on local (id_cliente);
+
+create table permissao
+(
+    id_permissao         INTEGER not null
+        constraint PK_permissao
+            primary key autoincrement,
+    nome_permissao       TEXT,
+    permissaoCertificado INTEGER,
+    permissaoCliente     INTEGER,
+    permissaoContrato    INTEGER,
+    permissaoCriticidade INTEGER,
+    permissaoFornecedor  INTEGER,
+    permissaoLocal       INTEGER,
+    permissaoManutencao  INTEGER,
+    permissaoMaterial    INTEGER,
+    permissaoOrdemCompra INTEGER,
+    permissaoParteSolta  INTEGER,
+    permissaoRateio      INTEGER,
+    permissaoSetor       INTEGER,
+    permissaoTipo        INTEGER,
+    permissao_admin      INTEGER,
+    pode_atualizar       INTEGER,
+    pode_criar           INTEGER,
+    pode_deletar         INTEGER,
+    pode_ler             INTEGER,
+    Deletado             INTEGER
+);
+
+create table setor
+(
+    id_setor INTEGER not null
+        constraint PK_setor
+            primary key autoincrement,
+    setor    TEXT,
+    Deletado INTEGER
+);
+
+create table Contrato
+(
+    id_contrato   INTEGER not null
+        constraint PK_Contrato
+            primary key autoincrement,
+    anexo         BLOB,
+    contrato      TEXT,
+    dataFim       TEXT,
+    dataInicio    TEXT    not null,
+    id_cliente    INTEGER
+        constraint FK_Contrato_cliente_id_cliente
+            references cliente,
+    id_fornecedor INTEGER
+        constraint FK_Contrato_fornecedor_id_fornecedor
+            references fornecedor,
+    id_setor      INTEGER
+        constraint FK_Contrato_setor_id_setor
+            references setor,
+    id_status     INTEGER
+        constraint FK_Contrato_Status_id_status
+            references Status,
+    Deletado      INTEGER
+);
+
+create index IX_Contrato_id_cliente
+    on Contrato (id_cliente);
+
+create index IX_Contrato_id_fornecedor
+    on Contrato (id_fornecedor);
+
+create index IX_Contrato_id_setor
+    on Contrato (id_setor);
+
+create index IX_Contrato_id_status
+    on Contrato (id_status);
+
+create table rateio
+(
+    id_rateio    INTEGER not null
+        constraint PK_rateio
+            primary key autoincrement,
+    id_setor1    INTEGER
+        constraint FK_rateio_setor_id_setor1
+            references setor,
+    id_setor2    INTEGER
+        constraint FK_rateio_setor_id_setor2
+            references setor,
+    porcentagem1 REAL,
+    porcentagem2 REAL,
+    rateio       TEXT,
+    Deletado     INTEGER
+);
+
+create index IX_rateio_id_setor1
+    on rateio (id_setor1);
+
+create index IX_rateio_id_setor2
+    on rateio (id_setor2);
+
+create table tipo
+(
+    id_tipo  INTEGER not null
+        constraint PK_tipo
+            primary key autoincrement,
+    tipo     TEXT,
+    Deletado INTEGER
+);
+
+create table manutencao
+(
+    id_manutencao  INTEGER not null
+        constraint PK_manutencao
+            primary key autoincrement,
+    data           TEXT,
+    data_conclusao TEXT,
+    data_prevista  TEXT,
+    descricao      TEXT,
+    id_criticidade INTEGER
+        constraint FK_manutencao_criticidade_id_criticidade
+            references criticidade,
+    id_fornecedor  INTEGER
+        constraint FK_manutencao_fornecedor_id_fornecedor
+            references fornecedor,
+    id_material    INTEGER,
+    id_setor       INTEGER
+        constraint FK_manutencao_setor_id_setor
+            references setor,
+    id_status      INTEGER
+        constraint FK_manutencao_Status_id_status
+            references Status,
+    id_tipo        INTEGER
+        constraint FK_manutencao_tipo_id_tipo
+            references tipo,
+    manutencao     TEXT,
+    anexo          BLOB,
+    Deletado       INTEGER
+);
+
+create index IX_manutencao_id_criticidade
+    on manutencao (id_criticidade);
+
+create index IX_manutencao_id_fornecedor
+    on manutencao (id_fornecedor);
+
+create index IX_manutencao_id_material
+    on manutencao (id_material);
+
+create index IX_manutencao_id_setor
+    on manutencao (id_setor);
+
+create index IX_manutencao_id_status
+    on manutencao (id_status);
+
+create index IX_manutencao_id_tipo
+    on manutencao (id_tipo);
+
+create table usuario
+(
+    id_usuario   INTEGER not null
+        constraint PK_usuario
+            primary key autoincrement,
+    cpf          TEXT,
+    email        TEXT,
+    id_permissao INTEGER
+        constraint FK_usuario_permissao_id_permissao
+            references permissao,
+    nome         TEXT,
+    senha        TEXT,
+    usuario      TEXT,
+    Deletado     INTEGER
+);
+
+create table ordemCompra
+(
+    id_oc             INTEGER not null
+        constraint PK_ordemCompra
+            primary key autoincrement,
+    anexo             BLOB,
+    data_conclusao    TEXT,
+    data_oc           TEXT,
+    data_prevista     TEXT,
+    id_empresa        INTEGER
+        constraint FK_ordemCompra_Empresa_id_empresa
+            references Empresa,
+    id_formaPagamento INTEGER
+        constraint FK_ordemCompra_FormaPagamento_id_formaPagamento
+            references FormaPagamento,
+    id_fornecedor     INTEGER
+        constraint FK_ordemCompra_fornecedor_id_fornecedor
+            references fornecedor,
+    id_fornecedor2    INTEGER
+        constraint FK_ordemCompra_fornecedor_id_fornecedor2
+            references fornecedor,
+    id_fornecedor3    INTEGER
+        constraint FK_ordemCompra_fornecedor_id_fornecedor3
+            references fornecedor,
+    id_rateio         INTEGER
+        constraint FK_ordemCompra_rateio_id_rateio
+            references rateio,
+    id_setor          INTEGER
+        constraint FK_ordemCompra_setor_id_setor
+            references setor,
+    id_status         INTEGER
+        constraint FK_ordemCompra_Status_id_status
+            references Status,
+    id_usuario        INTEGER
+        constraint FK_ordemCompra_usuario_id_usuario
+            references usuario,
+    item1             TEXT,
+    item2             TEXT,
+    item3             TEXT,
+    item4             TEXT,
+    item5             TEXT,
+    moeda             TEXT,
+    observacao        TEXT,
+    oc                TEXT,
+    prioridade        TEXT,
+    quantidade1       INTEGER,
+    quantidade2       INTEGER,
+    quantidade3       INTEGER,
+    quantidade4       INTEGER,
+    quantidade5       INTEGER,
+    valor1            REAL,
+    valor2            REAL,
+    valor3            REAL,
+    valor4            REAL,
+    valor5            REAL,
+    Deletado          INTEGER
+);
+
+create table material
+(
+    id_material             INTEGER not null
+        constraint PK_material
+            primary key autoincrement,
+    anexo                   BLOB,
+    dataFabricacao          TEXT,
+    dataValidade            TEXT,
+    descricao               TEXT,
+    dimensoes               TEXT,
+    id_certificacao         INTEGER
+        constraint FK_material_Certificacao_id_certificacao
+            references Certificacao,
+    id_cliente              INTEGER
+        constraint FK_material_cliente_id_cliente
+            references cliente,
+    id_criticidade          INTEGER
+        constraint FK_material_criticidade_id_criticidade
+            references criticidade,
+    id_fornecedor           INTEGER
+        constraint FK_material_fornecedor_id_fornecedor
+            references fornecedor,
+    id_local                INTEGER
+        constraint FK_material_local_id_local
+            references local,
+    id_manutencao           INTEGER,
+    id_ordemcompra          INTEGER,
+    id_partesolta           INTEGER,
+    id_setor                INTEGER
+        constraint FK_material_setor_id_setor
+            references setor,
+    id_status               INTEGER,
+    id_tipo                 INTEGER
+        constraint FK_material_tipo_id_tipo
+            references tipo,
+    id_usuario              INTEGER
+        constraint FK_material_usuario_id_usuario
+            references usuario,
+    manutencaoid_manutencao INTEGER
+        constraint FK_material_manutencao_manutencaoid_manutencao
+            references manutencao,
+    material                TEXT,
+    numeroSerie             TEXT,
+    ordemCompraid_oc        INTEGER
+        constraint FK_material_ordemCompra_ordemCompraid_oc
+            references ordemCompra,
+    parteSoltaid_partesolta INTEGER,
+    peso                    TEXT,
+    qrcode                  TEXT,
+    statusid_status         INTEGER
+        constraint FK_material_Status_statusid_status
+            references Status,
+    Deletado                INTEGER
+);
+
+alter table Certificacao
+    add constraint FK_Certificacao_material_Materialid_material
+        foreign key (Materialid_material) references material;
+
+create table atividadeLog
+(
+    Id          INTEGER not null
+        constraint PK_atividadeLog
+            primary key autoincrement,
+    Acao        TEXT    not null,
+    Timestamp   TEXT    not null,
+    id_usuario  INTEGER
+        constraint FK_atividadeLog_usuario_id_usuario
+            references usuario,
+    id_material INTEGER
+        constraint FK_atividadeLog_material_id_material
+            references material
+);
+
+create index IX_atividadeLog_id_material
+    on atividadeLog (id_material);
+
+create index IX_atividadeLog_id_usuario
+    on atividadeLog (id_usuario);
+
+alter table manutencao
+    add constraint FK_manutencao_material_id_material
+        foreign key (id_material) references material;
+
+create index IX_material_id_certificacao
+    on material (id_certificacao);
+
+create index IX_material_id_cliente
+    on material (id_cliente);
+
+create index IX_material_id_criticidade
+    on material (id_criticidade);
+
+create index IX_material_id_fornecedor
+    on material (id_fornecedor);
+
+create index IX_material_id_local
+    on material (id_local);
+
+create index IX_material_id_setor
+    on material (id_setor);
+
+create index IX_material_id_tipo
+    on material (id_tipo);
+
+create index IX_material_id_usuario
+    on material (id_usuario);
+
+create index IX_material_manutencaoid_manutencao
+    on material (manutencaoid_manutencao);
+
+create index IX_material_ordemCompraid_oc
+    on material (ordemCompraid_oc);
+
+create index IX_material_parteSoltaid_partesolta
+    on material (parteSoltaid_partesolta);
+
+create index IX_material_statusid_status
+    on material (statusid_status);
+
+create index IX_ordemCompra_id_empresa
+    on ordemCompra (id_empresa);
+
+create index IX_ordemCompra_id_formaPagamento
+    on ordemCompra (id_formaPagamento);
+
+create index IX_ordemCompra_id_fornecedor
+    on ordemCompra (id_fornecedor);
+
+create index IX_ordemCompra_id_fornecedor2
+    on ordemCompra (id_fornecedor2);
+
+create index IX_ordemCompra_id_fornecedor3
+    on ordemCompra (id_fornecedor3);
+
+create index IX_ordemCompra_id_rateio
+    on ordemCompra (id_rateio);
+
+create index IX_ordemCompra_id_setor
+    on ordemCompra (id_setor);
+
+create index IX_ordemCompra_id_status
+    on ordemCompra (id_status);
+
+create index IX_ordemCompra_id_usuario
+    on ordemCompra (id_usuario);
+
+create table parteSolta
+(
+    id_partesolta           INTEGER not null
+        constraint PK_parteSolta
+            primary key autoincrement,
+    anexo                   BLOB,
+    descricao               TEXT,
+    dimensoes               TEXT,
+    fornecedorid_fornecedor INTEGER
+        constraint FK_parteSolta_fornecedor_fornecedorid_fornecedor
+            references fornecedor,
+    id_certificacao         INTEGER
+        constraint FK_parteSolta_Certificacao_id_certificacao
+            references Certificacao,
+    id_fornecedor           INTEGER,
+    id_local                INTEGER,
+    id_material             INTEGER
+        constraint FK_parteSolta_material_id_material
+            references material,
+    id_oc                   INTEGER,
+    id_status               INTEGER,
+    localid_local           INTEGER
+        constraint FK_parteSolta_local_localid_local
+            references local,
+    ocid_oc                 INTEGER
+        constraint FK_parteSolta_ordemCompra_ocid_oc
+            references ordemCompra,
+    partesolta              TEXT,
+    peso                    TEXT,
+    quantidade              INTEGER,
+    statusid_status         INTEGER
+        constraint FK_parteSolta_Status_statusid_status
+            references Status,
+    Deletado                INTEGER
+);
+
+create table atividadeLogPS
+(
+    id_atividadeLogPs INTEGER not null
+        constraint PK_atividadeLogPS
+            primary key autoincrement,
+    acao              TEXT    not null,
+    Timestamp         TEXT    not null,
+    id_usuario        INTEGER,
+    usuarioid_usuario INTEGER
+        constraint FK_atividadeLogPS_usuario_usuarioid_usuario
+            references usuario,
+    id_parteSolta     INTEGER
+        constraint FK_atividadeLogPS_parteSolta_id_parteSolta
+            references parteSolta
+);
+
+create index IX_atividadeLogPS_id_parteSolta
+    on atividadeLogPS (id_parteSolta);
+
+create index IX_atividadeLogPS_usuarioid_usuario
+    on atividadeLogPS (usuarioid_usuario);
+
+alter table material
+    add constraint FK_material_parteSolta_parteSoltaid_partesolta
+        foreign key (parteSoltaid_partesolta) references parteSolta;
+
+create index IX_parteSolta_fornecedorid_fornecedor
+    on parteSolta (fornecedorid_fornecedor);
+
+create index IX_parteSolta_id_certificacao
+    on parteSolta (id_certificacao);
+
+create index IX_parteSolta_id_material
+    on parteSolta (id_material);
+
+create index IX_parteSolta_localid_local
+    on parteSolta (localid_local);
+
+create index IX_parteSolta_ocid_oc
+    on parteSolta (ocid_oc);
+
+create index IX_parteSolta_statusid_status
+    on parteSolta (statusid_status);
+
+create index IX_usuario_id_permissao
+    on usuario (id_permissao);
+
