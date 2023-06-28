@@ -36,6 +36,7 @@ namespace OffshoreTrack.Controllers
 
         /* CRUD */
         // Create
+// Create
         [HttpGet]
         public IActionResult New()
         {
@@ -45,49 +46,46 @@ namespace OffshoreTrack.Controllers
                 TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-
-            // Inicializando um novo objeto Permissao
-            var permissao = new Permissao();
-
-            // Passando o objeto para a View
-            return View(permissao);
+            return View();
         }
 
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Permissao permissao)
+        public async Task<IActionResult> Create([Bind("nome_permissao, pode_criar, pode_ler, pode_atualizar, pode_deletar, permissao_admin, permissaoCertificado, permissaoCliente, permissaoContrato, permissaoCriticidade, permissaoFornecedor, permissaoLocal, permissaoManutencao, permissaoMaterial, permissaoOrdemCompra, permissaoParteSolta, permissaoRateio, permissaoSetor, permissaoTipo")] Permissao createRequest)
         {
-            if (ModelState.IsValid)
+            var permissoes = new Permissao
             {
-                // Definir os valores dos checkboxes
-                permissao.pode_criar = permissao.pode_criar ?? false;
-                permissao.pode_ler = permissao.pode_ler ?? false;
-                permissao.pode_atualizar = permissao.pode_atualizar ?? false;
-                permissao.pode_deletar = permissao.pode_deletar ?? false;
-                permissao.permissao_admin = permissao.permissao_admin ?? false;
-                permissao.permissaoCertificado = permissao.permissaoCertificado ?? false;
-                permissao.permissaoCliente = permissao.permissaoCliente ?? false;
-                permissao.permissaoContrato = permissao.permissaoContrato ?? false;
-                permissao.permissaoCriticidade = permissao.permissaoCriticidade ?? false;
-                permissao.permissaoFornecedor = permissao.permissaoFornecedor ?? false;
-                permissao.permissaoLocal = permissao.permissaoLocal ?? false;
-                permissao.permissaoManutencao = permissao.permissaoManutencao ?? false;
-                permissao.permissaoMaterial = permissao.permissaoMaterial ?? false;
-                permissao.permissaoOrdemCompra = permissao.permissaoOrdemCompra ?? false;
-                permissao.permissaoParteSolta = permissao.permissaoParteSolta ?? false;
-                permissao.permissaoRateio = permissao.permissaoRateio ?? false;
-                permissao.permissaoSetor = permissao.permissaoSetor ?? false;
-                permissao.permissaoTipo = permissao.permissaoTipo ?? false;
+                nome_permissao = createRequest.nome_permissao,
+                pode_criar = createRequest.pode_criar,
+                pode_ler = createRequest.pode_ler,
+                pode_atualizar = createRequest.pode_atualizar,
+                pode_deletar = createRequest.pode_deletar,
+                permissao_admin = createRequest.permissao_admin,
+                permissaoCertificado = createRequest.permissaoCertificado,
+                permissaoCliente = createRequest.permissaoCliente,
+                permissaoContrato = createRequest.permissaoContrato,
+                permissaoCriticidade = createRequest.permissaoCriticidade,
+                permissaoFornecedor = createRequest.permissaoFornecedor,
+                permissaoLocal = createRequest.permissaoLocal,
+                permissaoManutencao = createRequest.permissaoManutencao,
+                permissaoMaterial = createRequest.permissaoMaterial,
+                permissaoOrdemCompra = createRequest.permissaoOrdemCompra,
+                permissaoParteSolta = createRequest.permissaoParteSolta,
+                permissaoRateio = createRequest.permissaoRateio,
+                permissaoSetor = createRequest.permissaoSetor,
+                permissaoTipo = createRequest.permissaoTipo
+            };
 
-                // Adicionar o objeto ao contexto e salvar as alterações
-                contexto.Add(permissao);
+            contexto.Permissao.Add(permissoes);
+            
+            try
+            {
                 await contexto.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Read", new { id = permissoes.id_permissao });
             }
-
-            return View(permissao);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // Fim - Create

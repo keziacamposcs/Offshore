@@ -12,28 +12,117 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-            <form method="post" action="Create">
+<form method="post" action="Create">
 
-                <label for="inputText" class="col-sm col-form-label">Permissão:</label>
-                <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" />
-                <br />
-                <div class="row">
-<input type="hidden" asp-for="permissaoCertificado" />
-<div class="form-check">
-    <input class="form-check-input" type="checkbox" id="permissaoCertificadoCheckbox" 
-        name="permissaoCertificado" value="true" 
-        @(Model.permissaoCertificado.HasValue ? Model.permissaoCertificado.Value ? "checked" : "" : "")>
-    <label class="form-check-label" for="permissaoCertificadoCheckbox">Permissão Certificado</label>
-</div>
-                </div>
+    <label for="inputText" class="col-sm col-form-label">Permissão:</label>
+    <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" />
+    <br />
 
-                <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
-            </form>
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pode_criar" name="pode_criar" value="true">
+                <label class="form-check-label" for="pode_criar">Pode Criar</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pode_ler" name="pode_ler" value="true">
+                <label class="form-check-label" for="pode_ler">Pode Ler</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pode_atualizar" name="pode_atualizar" value="true">
+                <label class="form-check-label" for="pode_atualizar">Pode Atualizar</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pode_deletar" name="pode_deletar" value="true">
+                <label class="form-check-label" for="pode_deletar">Pode Deletar</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissao_admin" name="permissao_admin" value="true">
+                <label class="form-check-label" for="permissao_admin">Permissão de Admin</label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoCertificado" name="permissaoCertificado" value="true">
+                <label class="form-check-label" for="permissaoCertificado">Permissão página de Certificado</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoCliente" name="permissaoCliente" value="true">
+                <label class="form-check-label" for="permissaoCliente">Permissão página de Cliente</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoContrato" name="permissaoContrato" value="true">
+                <label class="form-check-label" for="permissaoContrato">Permissão página de Contrato</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoCriticidade" name="permissaoCriticidade" value="true">
+                <label class="form-check-label" for="permissaoCriticidade">Permissão página de Criticidade</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoFornecedor" name="permissaoFornecedor" value="true">
+                <label class="form-check-label" for="permissaoFornecedor">Permissão página de Fornecedor</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoLocal" name="permissaoLocal" value="true">
+                <label class="form-check-label" for="permissaoLocal">Permissão página de Local</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoManutencao" name="permissaoManutencao" value="true">
+                <label class="form-check-label" for="permissaoManutencao">Permissão página de Manutenção</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoMaterial" name="permissaoMaterial" value="true">
+                <label class="form-check-label" for="permissaoMaterial">Permissão página de Material</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoOrdemCompra" name="permissaoOrdemCompra" value="true">
+                <label class="form-check-label" for="permissaoOrdemCompra">Permissão página de Ordem de Compra</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoParteSolta" name="permissaoParteSolta" value="true">
+                <label class="form-check-label" for="permissaoParteSolta">Permissão página de Parte Soltas [Spare]</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoRateio" name="permissaoRateio" value="true">
+                <label class="form-check-label" for="permissaoRateio">Permissão página de Rateio</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoSetor" name="permissaoSetor" value="true">
+                <label class="form-check-label" for="permissaoSetor">Permissão página de Setor</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="permissaoTipo" name="permissaoTipo" value="true">
+                <label class="form-check-label" for="permissaoTipo">Permissão página de Tipo</label>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+</form>
             </div>
         </div>
     </div>
 </div>
-
 @section Scripts
 {
     <script>
