@@ -32,7 +32,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var certificacao = await contexto.Certificacao.ToListAsync();
+            var certificacao = await contexto.Certificacao.Where(c => c.Deletado != true).ToListAsync();
             return View(certificacao);
         }
 
@@ -202,9 +202,17 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Certificacao.Remove(certificacao);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            certificacao.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 

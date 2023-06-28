@@ -31,7 +31,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var contrato = await contexto.Contrato.Include(c => c.status).ToListAsync();
+            var contrato = await contexto.Contrato.Where(c => c.Deletado != true).Include(c => c.status).ToListAsync();
             return View(contrato);
         }
 
@@ -55,10 +55,10 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var fornecedors = contexto.Fornecedor.ToList();
-            var clientes = contexto.Cliente.ToList();
-            var status = contexto.Status.ToList();
-            var setors = contexto.Setor.ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
 
             ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
             ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
@@ -160,10 +160,10 @@ namespace OffshoreTrack.Controllers
             }
 
             var contrato = await contexto.Contrato.FirstOrDefaultAsync(x => x.id_contrato == id);
-            var fornecedors = contexto.Fornecedor.ToList();
-            var status = contexto.Status.ToList();
-            var setors = contexto.Setor.ToList();
-            var clientes = contexto.Cliente.ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
 
             ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
             ViewBag.status = new SelectList(status, "id_status", "status");
@@ -239,9 +239,17 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Contrato.Remove(contrato);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            contrato.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         // Fim - Delete
 

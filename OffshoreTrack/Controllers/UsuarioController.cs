@@ -32,7 +32,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var usuarios = await contexto.Usuario.Include(l => l.Permissao).ToListAsync();
+            var usuarios = await contexto.Usuario.Include(l => l.Permissao).Where(c => c.Deletado != true).ToListAsync();
             return View(usuarios);
         }
 
@@ -49,7 +49,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var permissoes = contexto.Permissao.ToList();
+            var permissoes = contexto.Permissao.Where(c => c.Deletado != true).ToList();
             if (!permissoes.Any())
             {
                 throw new Exception("Não existem permissões na base de dados!");
@@ -147,7 +147,7 @@ namespace OffshoreTrack.Controllers
                 return NotFound();
             }
 
-            var permissoes = await contexto.Permissao.ToListAsync();
+            var permissoes = await contexto.Permissao.Where(c => c.Deletado != true).ToListAsync();
             if (!permissoes.Any())
             {
                 throw new Exception("Não existem permissões na base de dados!");
@@ -223,9 +223,17 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Usuario.Remove(usuario);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            usuario.Deletado = true;
+            try
+            {
+                contexto.Usuario.Update(usuario);
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 

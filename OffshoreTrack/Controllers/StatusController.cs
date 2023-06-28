@@ -24,7 +24,7 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var status = await contexto.Status.ToListAsync();
+            var status = await contexto.Status.Where(c => c.Deletado != true).ToListAsync();
             return View(status);
         }
 
@@ -142,9 +142,17 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Status.Remove(status);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            status.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         // Fim - Delete
 

@@ -29,7 +29,7 @@ namespace OffshoreTrack.Controllers
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var fornecedores = await contexto.Fornecedor.ToListAsync();
+            var fornecedores = await contexto.Fornecedor.Where(c => c.Deletado != true).ToListAsync();
             return View(fornecedores);
         }
 
@@ -197,9 +197,18 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Fornecedor.Remove(fornecedor);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            fornecedor.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         // Fim - Delete
 

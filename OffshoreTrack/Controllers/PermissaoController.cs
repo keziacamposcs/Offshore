@@ -30,7 +30,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var permissao = await contexto.Permissao.ToListAsync();
+            var permissao = await contexto.Permissao.Where(c => c.Deletado != true).ToListAsync();
             return View(permissao);
         }
 
@@ -204,9 +204,21 @@ namespace OffshoreTrack.Controllers
             }
 
             var permissao = await contexto.Permissao.FindAsync(id);
-            contexto.Permissao.Remove(permissao);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+            if(permissao == null)
+            {
+                return NotFound();
+            }
+            permissao.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         private bool PermissaoExists(int id)

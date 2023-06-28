@@ -34,6 +34,7 @@ namespace OffshoreTrack.Controllers
             var ordemCompras = await contexto.OrdemCompra
                             .Include(x => x.setor)
                             .Include(x => x.status)
+                            .Where(c => c.Deletado != true)
                             .ToListAsync();
             return View(ordemCompras);
         }
@@ -61,12 +62,12 @@ namespace OffshoreTrack.Controllers
             var model = new OrdemCompra();
             model.data_oc = DateTime.Now;
 
-            var setors = contexto.Setor.ToList();
-            var fornecedors1 = contexto.Fornecedor.ToList();
-            var fornecedors2 = contexto.Fornecedor.ToList();
-            var fornecedors3 = contexto.Fornecedor.ToList();
-            var rateios = contexto.Rateio.ToList();
-            var formaPagamentos = contexto.FormaPagamento.ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var fornecedors1 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors2 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors3 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var rateios = contexto.Rateio.Where(c => c.Deletado != true).ToList();
+            var formaPagamentos = contexto.FormaPagamento.Where(c => c.Deletado != true).ToList();
 
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
             ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
@@ -186,12 +187,12 @@ namespace OffshoreTrack.Controllers
             }
 
             var ordemCompra = await contexto.OrdemCompra.FirstOrDefaultAsync(x => x.id_oc == id);
-            var setors = contexto.Setor.ToList();
-            var fornecedors1 = contexto.Fornecedor.ToList();
-            var fornecedors2 = contexto.Fornecedor.ToList();
-            var fornecedors3 = contexto.Fornecedor.ToList();
-            var rateios = contexto.Rateio.ToList();
-            var formaPagamentos = contexto.FormaPagamento.ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var fornecedors1 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors2 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors3 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var rateios = contexto.Rateio.Where(c => c.Deletado != true).ToList();
+            var formaPagamentos = contexto.FormaPagamento.Where(c => c.Deletado != true).ToList();
             
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
             ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
@@ -282,9 +283,16 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.OrdemCompra.Remove(ordemCompra);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ordemCompra.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 

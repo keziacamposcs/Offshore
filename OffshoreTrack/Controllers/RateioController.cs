@@ -30,7 +30,7 @@ namespace OffshoreTrack.Controllers
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var rateio = await contexto.Rateio.ToListAsync();
+            var rateio = await contexto.Rateio.Where(c => c.Deletado != true).ToListAsync();
             return View(rateio);
         }
 
@@ -53,8 +53,8 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var setores1 = contexto.Setor.ToList();
-            var setores2 = contexto.Setor.ToList();
+            var setores1 = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var setores2 = contexto.Setor.Where(c => c.Deletado != true).ToList();
 
             if (!setores1.Any())
             {
@@ -172,8 +172,8 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            var setores1 = await contexto.Setor.ToListAsync();
-            var setores2 = await contexto.Setor.ToListAsync();
+            var setores1 = await contexto.Setor.Where(c => c.Deletado != true).ToListAsync();
+            var setores2 = await contexto.Setor.Where(c => c.Deletado != true).ToListAsync();
             ViewBag.setores1 = new SelectList(setores1, "id_setor", "setor");
             ViewBag.setores2 = new SelectList(setores2, "id_setor", "setor");
 
@@ -223,16 +223,21 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
             var rateio = await contexto.Rateio.FindAsync(deleteRequest.id_rateio);
-
             if (rateio == null)
             {
                 return NotFound();
             }
-            contexto.Rateio.Remove(rateio);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            rateio.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 

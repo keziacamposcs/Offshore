@@ -37,6 +37,7 @@ namespace OffshoreTrack.Controllers
             var parteSolta = await contexto.ParteSolta
                 .Include(x => x.fornecedor)
                 .Include(x => x.material)
+                .Where(c => c.Deletado != true)
                 .ToListAsync();
 
             return View(parteSolta);
@@ -62,12 +63,12 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var ordemCompras = contexto.OrdemCompra.ToList();
-            var materiais = contexto.Material.ToList();
-            var fornecedors = contexto.Fornecedor.ToList();
-            var status = contexto.Status.ToList();
-            var locais = contexto.Local.ToList();
-            var certificacaos = contexto.Certificacao.ToList();
+            var ordemCompras = contexto.OrdemCompra.Where(c => c.Deletado != true).ToList();
+            var materiais = contexto.Material.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
+            var locais = contexto.Local.Where(c => c.Deletado != true).ToList();
+            var certificacaos = contexto.Certificacao.Where(c => c.Deletado != true).ToList();
 
             ViewBag.ordemCompras = new SelectList(ordemCompras, "id_oc", "oc");
             ViewBag.materiais = new SelectList(materiais, "id_material", "material");
@@ -190,12 +191,12 @@ namespace OffshoreTrack.Controllers
             }
 
             var parteSolta = await contexto.ParteSolta.FirstOrDefaultAsync(x => x.id_partesolta == id);
-            var locals = contexto.Local.ToList();
-            var status = contexto.Status.ToList();
-            var certificacaos = contexto.Certificacao.ToList();
-            var fornecedors = contexto.Fornecedor.ToList();
-            var materiais = contexto.Material.ToList();
-            var ordemCompras = contexto.OrdemCompra.ToList();
+            var locals = contexto.Local.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
+            var certificacaos = contexto.Certificacao.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var materiais = contexto.Material.Where(c => c.Deletado != true).ToList();
+            var ordemCompras = contexto.OrdemCompra.Where(c => c.Deletado != true).ToList();
 
 
             ViewBag.local = new SelectList(locals, "id_local", "local");
@@ -275,11 +276,16 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-
             parteSolta.Deletado = true;
-            await contexto.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 

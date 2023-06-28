@@ -29,7 +29,7 @@ namespace OffshoreTrack.Controllers
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var setor = await contexto.Setor.ToListAsync();
+            var setor = await contexto.Setor.Where(c => c.Deletado != true).ToListAsync();
             return View(setor);
         }
 
@@ -162,16 +162,23 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
             var setor = await contexto.Setor.FindAsync(deleteRequest.id_setor);
 
             if (setor == null)
             {
                 return NotFound();
             }
-            contexto.Setor.Remove(setor);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            setor.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         // Fim - Delete
 

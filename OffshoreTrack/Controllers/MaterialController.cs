@@ -39,6 +39,7 @@ namespace OffshoreTrack.Controllers
                 .Include(x => x.tipo)
                 .Include(x => x.setor)
                 .Include(x => x.local)
+                .Where(c => c.Deletado != true)
                 .ToListAsync();
 
             return View(materials);
@@ -63,14 +64,14 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var tipos = contexto.Tipo.ToList();
-            var criticidades = contexto.Criticidade.ToList();
-            var setors = contexto.Setor.ToList();
-            var clientes = contexto.Cliente.ToList();
-            var locals = contexto.Local.ToList();
-            var usuarios = contexto.Usuario.ToList();
-            var fornecedors = contexto.Fornecedor.ToList();
-            var status = contexto.Status.ToList();
+            var tipos = contexto.Tipo.Where(c => c.Deletado != true).ToList();
+            var criticidades = contexto.Criticidade.Where(c => c.Deletado != true).ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
+            var locals = contexto.Local.Where(c => c.Deletado != true).ToList();
+            var usuarios = contexto.Usuario.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
 
             ViewBag.tipo = new SelectList(tipos, "id_tipo", "tipo");
             ViewBag.criticidade = new SelectList(criticidades, "id_criticidade", "criticidade");
@@ -251,15 +252,15 @@ namespace OffshoreTrack.Controllers
             }
 
             var material = await contexto.Material.FirstOrDefaultAsync(x => x.id_material == id);
-            var tipos = contexto.Tipo.ToList();
-            var criticidades = contexto.Criticidade.ToList();
-            var setors = contexto.Setor.ToList();
-            var clientes = contexto.Cliente.ToList();
-            var locals = contexto.Local.ToList();
-            var usuarios = contexto.Usuario.ToList();
-            var fornecedors = contexto.Fornecedor.ToList();
-            var status = contexto.Status.ToList();
-            var certificacaos = contexto.Certificacao.ToList();
+            var tipos = contexto.Tipo.Where(c => c.Deletado != true).ToList();
+            var criticidades = contexto.Criticidade.Where(c => c.Deletado != true).ToList();
+            var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
+            var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
+            var locals = contexto.Local.Where(c => c.Deletado != true).ToList();
+            var usuarios = contexto.Usuario.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var status = contexto.Status.Where(c => c.Deletado != true).ToList();
+            var certificacaos = contexto.Certificacao.Where(c => c.Deletado != true).ToList();
 
             ViewBag.tipo = new SelectList(tipos, "id_tipo", "tipo");
             ViewBag.criticidade = new SelectList(criticidades, "id_criticidade", "criticidade");
@@ -354,9 +355,17 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Material.Remove(material);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            material.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /* Fim - CRUD */

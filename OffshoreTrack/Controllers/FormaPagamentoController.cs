@@ -25,7 +25,7 @@ namespace OffshoreTrack.Controllers
         public async Task<IActionResult> Index()
         {
             var formaPagamento = await contexto.FormaPagamento.ToListAsync();
-            var descricao = await contexto.FormaPagamento.ToListAsync();
+            var descricao = await contexto.FormaPagamento.Where(c => c.Deletado != true).ToListAsync();
             return View(formaPagamento);
         }
 
@@ -145,9 +145,19 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.FormaPagamento.Remove(formaPagamentos);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            formaPagamentos.Deletado = true;
+
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+
         }
         // Fim - Delete
 

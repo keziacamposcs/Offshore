@@ -31,7 +31,7 @@ namespace OffshoreTrack.Controllers
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var locais = await contexto.Local.Include(l => l.Cliente).ToListAsync();
+            var locais = await contexto.Local.Where(c => c.Deletado != true).Include(l => l.Cliente).ToListAsync();
             return View(locais);
         }
         /* CRUD */
@@ -55,7 +55,7 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var clientes = contexto.Cliente.ToList();
+            var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
 
             if (!clientes.Any())
             {
@@ -148,7 +148,7 @@ namespace OffshoreTrack.Controllers
                 return NotFound();
             }
             // Obtenha todos os clientes e crie uma lista de seleção.
-            var clientes = await contexto.Cliente.ToListAsync();
+            var clientes = await contexto.Cliente.Where(c => c.Deletado != true).ToListAsync();
             ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente", local.id_cliente);
             return View(local);
         }
@@ -201,9 +201,16 @@ namespace OffshoreTrack.Controllers
             {
                 return NotFound();
             }
-            contexto.Local.Remove(local);
-            await contexto.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            local.Deletado = true;
+            try
+            {
+                await contexto.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         // Fim - Delete
 
