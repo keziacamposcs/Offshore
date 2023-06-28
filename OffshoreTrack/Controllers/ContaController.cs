@@ -34,14 +34,34 @@ public class ContaController : Controller
 
         if (usuario != null)
         {
+                var role = "Usuário";
+                if (usuario.Permissao.permissao_admin.HasValue)
+                {
+                    role = usuario.Permissao.permissao_admin.Value ? "Admin" : "Usuário";
+                }
+
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, usuario.usuario),
-                    new Claim(ClaimTypes.Role, usuario.Permissao.permissao_admin ? "Admin" : "Usuário"),
+                    //new Claim(ClaimTypes.Role, usuario.Permissao.permissao_admin ? "Admin" : "Usuário"),
+                    new Claim(ClaimTypes.Role, role),
                     new Claim("PodeCriar", usuario.Permissao.pode_criar.ToString()),
                     new Claim("PodeLer", usuario.Permissao.pode_ler.ToString()),
                     new Claim("PodeAtualizar", usuario.Permissao.pode_atualizar.ToString()),
                     new Claim("PodeDeletar", usuario.Permissao.pode_deletar.ToString()),
+                    new Claim("PermissaoCertificado", usuario.Permissao.permissaoCertificado.ToString()),
+                    new Claim("PermissaoCliente", usuario.Permissao.permissaoCliente.ToString()),
+                    new Claim("PermissaoContrato", usuario.Permissao.permissaoContrato.ToString()),
+                    new Claim("PermissaoCriticidade", usuario.Permissao.permissaoCriticidade.ToString()),
+                    new Claim("PermissaoFornecedor", usuario.Permissao.permissaoFornecedor.ToString()),
+                    new Claim("PermissaoLocal", usuario.Permissao.permissaoLocal.ToString()),
+                    new Claim("PermissaoManutencao", usuario.Permissao.permissaoManutencao.ToString()),
+                    new Claim("PermissaoMaterial", usuario.Permissao.permissaoMaterial.ToString()),
+                    new Claim("PermissaoOrdemCompra", usuario.Permissao.permissaoOrdemCompra.ToString()),
+                    new Claim("PermissaoParteSolta", usuario.Permissao.permissaoParteSolta.ToString()),
+                    new Claim("PermissaoRateio", usuario.Permissao.permissaoRateio.ToString()),
+                    new Claim("PermissaoSetor", usuario.Permissao.permissaoSetor.ToString()),
+                    new Claim("PermissaoTipo", usuario.Permissao.permissaoTipo.ToString()),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(

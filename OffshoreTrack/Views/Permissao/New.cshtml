@@ -12,23 +12,23 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <form method="post" asp-action="Create">
+            <form method="post" action="Create">
 
-                    <label for="inputText" class="col-sm col-form-label">Permissão:</label>
-                    <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" />
-                    <br />
-                    <label><input type="checkbox" id="pode_criar" asp-for="pode_criar"> Pode Criar</label><br />
-                    <br>
-                    <label><input type="checkbox" id="pode_ler" asp-for="pode_ler"> Pode Ler</label><br />
-                    <br>
-                    <label><input type="checkbox" id="pode_atualizar" asp-for="pode_atualizar"> Pode Atualizar</label><br />
-                    <br>
-                    <label><input type="checkbox" id="pode_deletar" asp-for="pode_deletar"> Pode Deletar</label><br />
-                    <br>
-                    <label><input type="checkbox" id="permissao_admin" asp-for="permissao_admin"> Permissão de Administrador</label><br />
-                    <br>
-                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
-                </form>
+                <label for="inputText" class="col-sm col-form-label">Permissão:</label>
+                <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" />
+                <br />
+                <div class="row">
+<input type="hidden" asp-for="permissaoCertificado" />
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" id="permissaoCertificadoCheckbox" 
+        name="permissaoCertificado" value="true" 
+        @(Model.permissaoCertificado.HasValue ? Model.permissaoCertificado.Value ? "checked" : "" : "")>
+    <label class="form-check-label" for="permissaoCertificadoCheckbox">Permissão Certificado</label>
+</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+            </form>
             </div>
         </div>
     </div>
@@ -44,11 +44,41 @@
                     $('#pode_ler').prop('checked', true);
                     $('#pode_atualizar').prop('checked', true);
                     $('#pode_deletar').prop('checked', true);
+                    $('#permissaoCertificado').prop('checked', true);
+                    $('#permissaoCliente').prop('checked', true);
+                    $('#permissaoContrato').prop('checked', true);
+                    $('#permissaoCriticidade').prop('checked', true);
+                    $('#permissaoEmpresa').prop('checked', true);
+                    $('#permissaoFormaPagamento').prop('checked', true);
+                    $('#permissaoFornecedor').prop('checked', true);
+                    $('#permissaoLocal').prop('checked', true);
+                    $('#permissaoManutencao').prop('checked', true);
+                    $('#permissaoMaterial').prop('checked', true);
+                    $('#permissaoOrdemCompra').prop('checked', true);
+                    $('#permissaoParteSolta').prop('checked', true);
+                    $('#permissaoRateio').prop('checked', true);
+                    $('#permissaoSetor').prop('checked', true);
+                    $('#permissaoTipo').prop('checked', true);
                 } else {
                     $('#pode_criar').prop('checked', false);
                     $('#pode_ler').prop('checked', false);
                     $('#pode_atualizar').prop('checked', false);
                     $('#pode_deletar').prop('checked', false);
+                    $('#permissaoCertificado').prop('checked', false);
+                    $('#permissaoCliente').prop('checked', false);
+                    $('#permissaoContrato').prop('checked', false);
+                    $('#permissaoCriticidade').prop('checked', false);
+                    $('#permissaoEmpresa').prop('checked', false);
+                    $('#permissaoFormaPagamento').prop('checked', false);
+                    $('#permissaoFornecedor').prop('checked', false);
+                    $('#permissaoLocal').prop('checked', false);
+                    $('#permissaoManutencao').prop('checked', false);
+                    $('#permissaoMaterial').prop('checked', false);
+                    $('#permissaoOrdemCompra').prop('checked', false);
+                    $('#permissaoParteSolta').prop('checked', false);
+                    $('#permissaoRateio').prop('checked', false);
+                    $('#permissaoSetor').prop('checked', false);
+                    $('#permissaoTipo').prop('checked', false);
                 }
             });
         });

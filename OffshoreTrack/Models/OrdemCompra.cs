@@ -9,6 +9,7 @@ namespace OffshoreTrack.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_oc { get; set; }
+        public bool? Deletado { get; set; }
         public string? oc { get; set; }
         public string? observacao { get; set; }
         public string? moeda { get; set; }

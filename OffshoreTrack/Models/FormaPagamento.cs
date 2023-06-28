@@ -9,6 +9,7 @@ namespace OffshoreTrack.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_formaPagamento { get; set; }
+        public bool? Deletado { get; set; }
 
         public string? formaPagamento { get; set; }
 

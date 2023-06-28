@@ -24,6 +24,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var temPermissao = User.HasClaim("PermissaoCliente", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var clientes = await contexto.Cliente.ToListAsync();
             return View(clientes);
         }
@@ -33,7 +39,13 @@ namespace OffshoreTrack.Controllers
         // Create
         [HttpGet]
         public IActionResult New()
-        {   
+        {
+            var temPermissao = User.HasClaim("PermissaoCliente", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeCriar = User.HasClaim("PodeCriar", "True");
             if(!podeCriar)
             {    
@@ -83,7 +95,13 @@ namespace OffshoreTrack.Controllers
         // Read
         [HttpGet]
         public async Task<IActionResult> Read(int id)
-        {   
+        {
+            var temPermissao = User.HasClaim("PermissaoCliente", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeLer = User.HasClaim("PodeLer", "True");
             if(!podeLer)
             {    
@@ -101,6 +119,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var temPermissao = User.HasClaim("PermissaoCliente", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
             if(!podeAtualizar)
             {    
@@ -148,6 +172,12 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete (Cliente deleteRequest)
         {
+            var temPermissao = User.HasClaim("PermissaoCliente", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeDeletar = User.HasClaim("PodeDeletar", "True");
             if(!podeDeletar)
             {    

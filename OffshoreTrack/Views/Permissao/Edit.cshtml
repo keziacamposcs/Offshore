@@ -22,25 +22,108 @@
             <div class="card-body">
                 <form asp-action="Update" method="post">
                     <input type="hidden" asp-for="id_permissao" />
-
                     <div class="form-group">
                         <label asp-for="nome_permissao" class="control-label"></label>
                         <input asp-for="nome_permissao" class="form-control" />
                     </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" asp-for="pode_criar"> Pode Criar</label>
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" asp-for="pode_ler"> Pode Ler</label>
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" asp-for="pode_atualizar"> Pode Atualizar</label>
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" asp-for="pode_deletar"> Pode Deletar</label>
-                    </div>
-                    <div class="form-group">
-                        <label><input type="checkbox" asp-for="permissao_admin"> Permissão de Administrador</label>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pode_criar" name="pode_criar" value="true" @(Model.pode_criar.HasValue && Model.pode_criar.Value ? "checked" : "")>
+                                <label class="form-check-label" for="pode_criar">Pode Criar</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pode_ler" name="pode_ler" value="true" @(Model.pode_ler.HasValue && Model.pode_ler.Value ? "checked" : "")>
+                                <label class="form-check-label" for="pode_ler">Pode Ler</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pode_atualizar" name="pode_atualizar" value="true" @(Model.pode_atualizar.HasValue && Model.pode_atualizar.Value ? "checked" : "")>
+                                <label class="form-check-label" for="pode_atualizar">Pode Atualizar</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pode_deletar" name="pode_deletar" value="true" @(Model.pode_deletar.HasValue && Model.pode_deletar.Value ? "checked" : "")>
+                                <label class="form-check-label" for="pode_deletar">Pode Deletar</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissao_admin" name="permissao_admin" value="true" @(Model.permissao_admin.HasValue && Model.permissao_admin.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissao_admin">Permissão de Administrador</label>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoCertificado" name="permissaoCertificado" value="true" @(Model.permissaoCertificado.HasValue && Model.permissaoCertificado.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoCertificado">Permissão página de Certificado</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoCliente" name="permissaoCliente" value="true" @(Model.permissaoCliente.HasValue && Model.permissaoCliente.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoCliente">Permissão página de Cliente</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoContrato" name="permissaoContrato" value="true" @(Model.permissaoContrato.HasValue && Model.permissaoContrato.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoContrato">Permissão página de Contrato</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoCriticidade" name="permissaoCriticidade" value="true" @(Model.permissaoCriticidade.HasValue && Model.permissaoCriticidade.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoCriticidade">Permissão página de Criticidade</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoFornecedor" name="permissaoFornecedor" value="true" @(Model.permissaoFornecedor.HasValue && Model.permissaoFornecedor.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoFornecedor">Permissão página de Fornecedor</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoLocal" name="permissaoLocal" value="true" @(Model.permissaoLocal.HasValue && Model.permissaoLocal.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoLocal">Permissão página de Local</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoManutencao" name="permissaoManutencao" value="true" @(Model.permissaoManutencao.HasValue && Model.permissaoManutencao.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoManutencao">Permissão página de Manutenção</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoMaterial" name="permissaoMaterial" value="true" @(Model.permissaoMaterial.HasValue && Model.permissaoMaterial.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoMaterial">Permissão página de Material</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoOrdemCompra" name="permissaoOrdemCompra" value="true" @(Model.permissaoOrdemCompra.HasValue && Model.permissaoOrdemCompra.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoOrdemCompra">Permissão página de Ordem de Compra</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoParteSolta" name="permissaoParteSolta" value="true" @(Model.permissaoParteSolta.HasValue && Model.permissaoParteSolta.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoParteSolta">Permissão página de Partes Soltas [Spares]</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoRateio" name="permissaoRateio" value="true" @(Model.permissaoRateio.HasValue && Model.permissaoRateio.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoRateio">Permissão página de Rateio</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoSetor" name="permissaoSetor" value="true" @(Model.permissaoSetor.HasValue && Model.permissaoSetor.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoSetor">Permissão página de Setor [Depto]</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="permissaoTipo" name="permissaoTipo" value="true" @(Model.permissaoTipo.HasValue && Model.permissaoTipo.Value ? "checked" : "")>
+                                <label class="form-check-label" for="permissaoTipo">Permissão página de Tipo</label>
+                            </div>
+
+                        </div>
                     </div>
 
 
@@ -56,3 +139,53 @@
         </div>
     </div>
 </div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#permissao_admin').click(function () {
+                if ($(this).is(':checked')) {
+                    $('#pode_criar').prop('checked', true);
+                    $('#pode_ler').prop('checked', true);
+                    $('#pode_atualizar').prop('checked', true);
+                    $('#pode_deletar').prop('checked', true);
+                    $('#permissaoCertificado').prop('checked', true);
+                    $('#permissaoCliente').prop('checked', true);
+                    $('#permissaoContrato').prop('checked', true);
+                    $('#permissaoCriticidade').prop('checked', true);
+                    $('#permissaoEmpresa').prop('checked', true);
+                    $('#permissaoFormaPagamento').prop('checked', true);
+                    $('#permissaoFornecedor').prop('checked', true);
+                    $('#permissaoLocal').prop('checked', true);
+                    $('#permissaoManutencao').prop('checked', true);
+                    $('#permissaoMaterial').prop('checked', true);
+                    $('#permissaoOrdemCompra').prop('checked', true);
+                    $('#permissaoParteSolta').prop('checked', true);
+                    $('#permissaoRateio').prop('checked', true);
+                    $('#permissaoSetor').prop('checked', true);
+                    $('#permissaoTipo').prop('checked', true);
+                } else {
+                    $('#pode_criar').prop('checked', false);
+                    $('#pode_ler').prop('checked', false);
+                    $('#pode_atualizar').prop('checked', false);
+                    $('#pode_deletar').prop('checked', false);
+                    $('#permissaoCertificado').prop('checked', false);
+                    $('#permissaoCliente').prop('checked', false);
+                    $('#permissaoContrato').prop('checked', false);
+                    $('#permissaoCriticidade').prop('checked', false);
+                    $('#permissaoEmpresa').prop('checked', false);
+                    $('#permissaoFormaPagamento').prop('checked', false);
+                    $('#permissaoFornecedor').prop('checked', false);
+                    $('#permissaoLocal').prop('checked', false);
+                    $('#permissaoManutencao').prop('checked', false);
+                    $('#permissaoMaterial').prop('checked', false);
+                    $('#permissaoOrdemCompra').prop('checked', false);
+                    $('#permissaoParteSolta').prop('checked', false);
+                    $('#permissaoRateio').prop('checked', false);
+                    $('#permissaoSetor').prop('checked', false);
+                    $('#permissaoTipo').prop('checked', false);
+                }
+            });
+        });
+    </script>
+}

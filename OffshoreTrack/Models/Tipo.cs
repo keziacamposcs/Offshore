@@ -10,6 +10,7 @@ namespace OffshoreTrack.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_tipo { get; set; }
 
+        public bool? Deletado { get; set; }
         public string? tipo { get; set; }
 
         //Relacionamentos

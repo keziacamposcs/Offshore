@@ -28,6 +28,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var parteSolta = await contexto.ParteSolta
                 .Include(x => x.fornecedor)
                 .Include(x => x.material)
@@ -43,6 +49,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeCriar = User.HasClaim("PodeCriar", "True");
             if(!podeCriar)
             {    
@@ -71,6 +83,12 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("partesolta, descricao, dimensoes, peso, quantidade, anexo, id_oc, id_material, id_fornecedor, id_status, id_local, id_certificacao")] ParteSolta createRequest, IFormFile anexoFile)
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var parteSolta = new ParteSolta
             {
                 partesolta = createRequest.partesolta,
@@ -120,6 +138,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeLer = User.HasClaim("PodeLer", "True");
             if(!podeLer)
             {    
@@ -152,6 +176,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
             if(!podeAtualizar)
             {    
@@ -224,8 +254,14 @@ namespace OffshoreTrack.Controllers
 
         // Delete
         [HttpPost]
-        public async Task<IActionResult> Delete(ParteSolta deleteRequest)
+        public async Task<IActionResult> Delete(int id)
         {
+            var temPermissao = User.HasClaim("PermissaoParteSolta", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeDeletar = User.HasClaim("PodeDeletar", "True");
             if(!podeDeletar)
             {    
@@ -233,14 +269,16 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var parteSolta = await contexto.ParteSolta.FindAsync(deleteRequest.id_partesolta);
+            var parteSolta = await contexto.ParteSolta.FindAsync(id);
 
             if (parteSolta == null)
             {
                 return NotFound();
             }
-            contexto.ParteSolta.Remove(parteSolta);
+
+            parteSolta.Deletado = true;
             await contexto.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
         // Fim - Delete

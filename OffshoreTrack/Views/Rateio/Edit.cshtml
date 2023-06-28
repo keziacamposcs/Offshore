@@ -23,50 +23,39 @@ ViewData["Title"]="Edit";
             <div class="card-body">
                 <form method="post" action="/Rateio/Update">
                     <input type="hidden" asp-for="id_rateio" />
-                    <label asp-for="rateio" class="col-sm col-form-label">Rateio:</label>
+
+                    <label for="inputText" class="col-sm col-form-label">Rateio:</label>
                     <input type="text" class="form-control" id="rateio" asp-for="rateio" />
-                    <br />
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label asp-for="id_setor1" class="col-form-label">Setor 1:</label>
-                                <select asp-for="id_setor1" class="form-control" asp-items="@ViewBag.setores1"></select>
-                                <span asp-validation-for="id_setor1" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label asp-for="porcentagem1" class="col-form-label">Porcentagem 1:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="porcentagem1" asp-for="porcentagem1" />
-                                <span asp-validation-for="porcentagem1" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col-sm-6">
+                            <label asp-for="id_setor1" class="col-form-label">Setor 1:</label>
+                            <select asp-for="id_setor1" class="form-control" asp-items="@ViewBag.setores1"></select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Porcentagem 1:</label>
+                            <input type="text" class="form-control" id="porcentagem1" asp-for="porcentagem1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
                             <label asp-for="id_setor2" class="col-form-label">Setor 2:</label>
                             <select asp-for="id_setor2" class="form-control" asp-items="@ViewBag.setores2"></select>
-                            <span asp-validation-for="id_setor2" class="text-danger"></span>
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label asp-for="porcentagem2" class="col-form-label">Porcentagem 2:</label>
-                                <input type="text" min="1" max="100" class="form-control" id="porcentagem2" asp-for="porcentagem2" />
-                                <span asp-validation-for="porcentagem2" class="text-danger"></span>
-                            </div>
+                        <div class="col-sm-6">
+                            <label for="inputText" class="col-sm col-form-label">Porcentagem 2:</label>
+                            <input type="text" class="form-control" id="porcentagem2" asp-for="porcentagem2" />
                         </div>
                     </div>
-                    <br>
-
+                    <br/>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-success" name="submit" value="submit">Atualizar</button>
-                    </div>
                 </form>
                 <form method="post" action="/Rateio/Delete">
                     <input type="hidden" asp-for="id_rateio" />
                     <button type="submit" class="btn btn-danger">Deletar</button>
                 </form>
+                    </div>
             </div>
         </div>
     </div>
@@ -74,21 +63,16 @@ ViewData["Title"]="Edit";
 @section Scripts
 {
     <script>
-    $(document).ready(function() {
-        $('form').submit(function(e) {
-            var porcentagem1 = parseFloat($('#porcentagem1').val().replace(',', '.'));
-            var porcentagem2 = parseFloat($('#porcentagem2').val().replace(',', '.'));
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                var porcentagem1 = parseFloat($('#porcentagem1').val().replace(',', '.'));
+                var porcentagem2 = parseFloat($('#porcentagem2').val().replace(',', '.'));
 
-            if (isNaN(porcentagem1) || isNaN(porcentagem2) || porcentagem1 + porcentagem2 != 100) {
-                alert('A soma das porcentagens deve ser 100%');
-                e.preventDefault(); // impede a submissão do formulário
-            } else {
-                // Alterar os valores de porcentagem1 e porcentagem2 para usar o ponto como separador decimal
-                $('#porcentagem1').val(porcentagem1.toFixed(2));
-                $('#porcentagem2').val(porcentagem2.toFixed(2));
-            }
+                if (isNaN(porcentagem1) || isNaN(porcentagem2) || porcentagem1 + porcentagem2 !== 100) {
+                    e.preventDefault();
+                    alert('A soma das porcentagens deve ser 100%');
+                }
+            });
         });
-    });
     </script>
 }
-

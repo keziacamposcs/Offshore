@@ -24,23 +24,104 @@
                 <label for="inputText" class="col-sm col-form-label">Permissão:</label>
                 <input type="text" class="form-control" id="nome_permissao" name="nome_permissao" asp-for="nome_permissao" readonly />
                 <br>
-                <dl class="row">
-                    <dt class="col-sm-2">Pode Criar</dt>
-                    <dd class="col-sm-10">  @Html.DisplayFor(model => model.pode_criar)</dd>
-                    <br>
-                    <dt class="col-sm-2">Pode Ler</dt>
-                    <dd class="col-sm-10">  @Html.DisplayFor(model => model.pode_ler)</dd>
-                    <br>
-                    <dt class="col-sm-2">Pode Atualizar</dt>
-                    <dd class="col-sm-10">@Html.DisplayFor(model => model.pode_atualizar)</dd>
-                    <br>
-                    <dt class="col-sm-2">Pode Deletar</dt>
-                    <dd class="col-sm-10">@Html.DisplayFor(model => model.pode_deletar)</dd>
-                    <br>
-                    <dt class="col-sm-2">Permissão de Administrador</dt>
-                    <dd class="col-sm-10">@Html.DisplayFor(model => model.permissao_admin)</dd>
 
-                </dl>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-check">                            
+                            <input class="form-check-input" type="checkbox" id="pode_criar" @(Model.pode_criar.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="pode_criar">Pode Criar</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pode_ler" @(Model.pode_ler.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="pode_ler">Pode Ler</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pode_atualizar" @(Model.pode_atualizar.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="pode_atualizar">Pode Atualizar</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pode_deletar" @(Model.pode_deletar.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="pode_deletar">Pode Deletar</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissao_admin" @(Model.permissao_admin.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissao_admin">Permissão de Administrador</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoCertificado" @(Model.permissaoCertificado.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoCertificado">Permissão Certificado</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoCliente" @(Model.permissaoCliente.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoCliente">Permissão Cliente</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoContrato" @(Model.permissaoContrato.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoContrato">Permissão Contrato</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoCriticidade" @(Model.permissaoCriticidade.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoCriticidade">Permissão Criticidade</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoFornecedor" @(Model.permissaoFornecedor.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoFornecedor">Permissão Fornecedor</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoLocal" @(Model.permissaoLocal.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoLocal">Permissão Local</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoManutencao" @(Model.permissaoManutencao.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoManutencao">Permissão Manutenção</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoMaterial" @(Model.permissaoMaterial.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoMaterial">Permissão Material</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoOrdemCompra" @(Model.permissaoOrdemCompra.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoOrdemCompra">Permissão Ordem Compra</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoParteSolta" @(Model.permissaoParteSolta.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoParteSolta">Permissão Parte Solta</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoRateio" @(Model.permissaoRateio.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoRateio">Permissão Rateio</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoSetor" @(Model.permissaoSetor.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoSetor">Permissão Setor</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissaoTipo" @(Model.permissaoTipo.GetValueOrDefault() ? "checked" : "") disabled>
+                            <label class="form-check-label" for="permissaoTipo">Permissão Tipo</label>
+                        </div>
+
+                    </div>
+                </div>
+
                 <br />
             </div>
         </div>

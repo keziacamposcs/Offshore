@@ -82,6 +82,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("Materialid_material")
                         .HasColumnType("INTEGER");
 
@@ -113,6 +116,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("cliente")
                         .HasColumnType("TEXT");
 
@@ -137,6 +143,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_contrato")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("anexo")
@@ -182,6 +191,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("criticidade")
                         .HasColumnType("TEXT");
 
@@ -194,6 +206,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_empresa")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("cnpjEmpresa")
@@ -237,6 +252,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("descricao")
                         .HasColumnType("TEXT");
 
@@ -252,6 +270,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_fornecedor")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("cnpj")
@@ -292,6 +313,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("id_cliente")
                         .HasColumnType("INTEGER");
 
@@ -309,6 +333,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_manutencao")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("anexo")
@@ -368,6 +395,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_material")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("anexo")
@@ -478,6 +508,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_oc")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("anexo")
@@ -605,6 +638,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<byte[]>("anexo")
                         .HasColumnType("BLOB");
 
@@ -676,22 +712,64 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("nome_permissao")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("permissao_admin")
+                    b.Property<bool?>("permissaoCertificado")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("pode_atualizar")
+                    b.Property<bool?>("permissaoCliente")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("pode_criar")
+                    b.Property<bool?>("permissaoContrato")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("pode_deletar")
+                    b.Property<bool?>("permissaoCriticidade")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("pode_ler")
+                    b.Property<bool?>("permissaoFornecedor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoLocal")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoManutencao")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoMaterial")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoOrdemCompra")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoParteSolta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoRateio")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoSetor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissaoTipo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("permissao_admin")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("pode_atualizar")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("pode_criar")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("pode_deletar")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("pode_ler")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id_permissao");
@@ -703,6 +781,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_rateio")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("id_setor1")
@@ -735,6 +816,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("setor")
                         .HasColumnType("TEXT");
 
@@ -747,6 +831,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_status")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("status")
@@ -763,6 +850,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("tipo")
                         .HasColumnType("TEXT");
 
@@ -775,6 +865,9 @@ namespace OffshoreTrack.Migrations
                 {
                     b.Property<int>("id_usuario")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("cpf")

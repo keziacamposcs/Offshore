@@ -24,6 +24,13 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var ordemCompras = await contexto.OrdemCompra
                             .Include(x => x.setor)
                             .Include(x => x.status)
@@ -38,6 +45,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public IActionResult New()
         {
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeCriar = User.HasClaim("PodeCriar", "True");
             if(!podeCriar)
             {    
@@ -67,7 +80,13 @@ namespace OffshoreTrack.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, item1, quantidade1, valor1, item2, quantidade2, valor2, item3,  item4, quantidade4, valor4, item5, quantidade5, valor5, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
-        {
+        {      
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var ordemCompra = new OrdemCompra
             {   id_empresa = 1,
                 oc = createRequest.oc,
@@ -122,6 +141,12 @@ namespace OffshoreTrack.Controllers
         [HttpGet]
         public async Task<IActionResult> Read(int id)
         {
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeLer = User.HasClaim("PodeLer", "True");
             if(!podeLer)
             {    
@@ -146,7 +171,13 @@ namespace OffshoreTrack.Controllers
         // Update
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
-        {
+        {   
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
             if(!podeAtualizar)
             {    
@@ -232,6 +263,12 @@ namespace OffshoreTrack.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(OrdemCompra deleteRequest)
         {
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if(!temPermissao)
+            {    
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
             var podeDeletar = User.HasClaim("PodeDeletar", "True");
             if(!podeDeletar)
             {    

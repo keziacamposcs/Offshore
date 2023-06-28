@@ -35,7 +35,6 @@ namespace OffshoreTrack.Controllers
         }
 
         /* CRUD */
-
         // Create
         [HttpGet]
         public IActionResult New()
@@ -47,20 +46,50 @@ namespace OffshoreTrack.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            // Inicializando um novo objeto Permissao
+            var permissao = new Permissao();
+
+            // Passando o objeto para a View
+            return View(permissao);
         }
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Permissao permissao)
         {
             if (ModelState.IsValid)
             {
+                // Definir os valores dos checkboxes
+                permissao.pode_criar = permissao.pode_criar ?? false;
+                permissao.pode_ler = permissao.pode_ler ?? false;
+                permissao.pode_atualizar = permissao.pode_atualizar ?? false;
+                permissao.pode_deletar = permissao.pode_deletar ?? false;
+                permissao.permissao_admin = permissao.permissao_admin ?? false;
+                permissao.permissaoCertificado = permissao.permissaoCertificado ?? false;
+                permissao.permissaoCliente = permissao.permissaoCliente ?? false;
+                permissao.permissaoContrato = permissao.permissaoContrato ?? false;
+                permissao.permissaoCriticidade = permissao.permissaoCriticidade ?? false;
+                permissao.permissaoFornecedor = permissao.permissaoFornecedor ?? false;
+                permissao.permissaoLocal = permissao.permissaoLocal ?? false;
+                permissao.permissaoManutencao = permissao.permissaoManutencao ?? false;
+                permissao.permissaoMaterial = permissao.permissaoMaterial ?? false;
+                permissao.permissaoOrdemCompra = permissao.permissaoOrdemCompra ?? false;
+                permissao.permissaoParteSolta = permissao.permissaoParteSolta ?? false;
+                permissao.permissaoRateio = permissao.permissaoRateio ?? false;
+                permissao.permissaoSetor = permissao.permissaoSetor ?? false;
+                permissao.permissaoTipo = permissao.permissaoTipo ?? false;
+
+                // Adicionar o objeto ao contexto e salvar as alterações
                 contexto.Add(permissao);
                 await contexto.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(permissao);
         }
+
         // Fim - Create
 
         // Read
@@ -120,7 +149,28 @@ namespace OffshoreTrack.Controllers
         public async Task<IActionResult> Update(Permissao permissao)
         {
             if (ModelState.IsValid)
-            {
+            {     
+                permissao.pode_criar = Request.Form["pode_criar"].Contains("true");
+                permissao.pode_ler = Request.Form["pode_ler"].Contains("true");
+                permissao.pode_atualizar = Request.Form["pode_atualizar"].Contains("true");
+                permissao.pode_deletar = Request.Form["pode_deletar"].Contains("true");
+                permissao.permissao_admin = Request.Form["permissao_admin"].Contains("true");
+
+                permissao.permissaoCertificado = Request.Form["permissaoCertificado"].Contains("true");
+                permissao.permissaoCliente = Request.Form["permissaoCliente"].Contains("true");
+                permissao.permissaoContrato = Request.Form["permissaoContrato"].Contains("true");
+                permissao.permissaoCriticidade = Request.Form["permissaoCriticidade"].Contains("true");
+                permissao.permissaoFornecedor = Request.Form["permissaoFornecedor"].Contains("true");
+                permissao.permissaoLocal = Request.Form["permissaoLocal"].Contains("true");
+                permissao.permissaoManutencao = Request.Form["permissaoManutencao"].Contains("true");
+                permissao.permissaoMaterial = Request.Form["permissaoMaterial"].Contains("true");
+                permissao.permissaoOrdemCompra = Request.Form["permissaoOrdemCompra"].Contains("true");
+                permissao.permissaoParteSolta = Request.Form["permissaoParteSolta"].Contains("true");
+                permissao.permissaoRateio = Request.Form["permissaoRateio"].Contains("true");
+                permissao.permissaoSetor = Request.Form["permissaoSetor"].Contains("true");
+                permissao.permissaoTipo = Request.Form["permissaoTipo"].Contains("true");
+
+
                 try
                 {
                     contexto.Update(permissao);
@@ -146,7 +196,7 @@ namespace OffshoreTrack.Controllers
         // Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id) // Alterado de DeleteConfirmed para Delete
+        public async Task<IActionResult> Delete(int id)
         {    
             var isAdmin = User.IsInRole("Admin");
             if (!isAdmin)
@@ -168,40 +218,5 @@ namespace OffshoreTrack.Controllers
         // Fim - Delete
 
         /* Fim - CRUD */
-
-        // Verificacao de Permissão
-        private bool UserHasPermission(string permissionName)
-        {
-            // Obtenha o usuário atualmente autenticado
-            var currentUser = contexto.Usuario
-                .Include(u => u.Permissao)
-                .FirstOrDefault(u => u.usuario == User.Identity.Name);
-
-            // Verifique se o usuário e suas permissões existem
-            if (currentUser != null && currentUser.Permissao != null)
-            {
-                var permissao = currentUser.Permissao;
-
-                // Verifique a permissão específica com base no nome fornecido
-                switch (permissionName)
-                {
-                    case "pode_criar":
-                        return permissao.pode_criar;
-                    case "pode_ler":
-                        return permissao.pode_ler;
-                    case "pode_atualizar":
-                        return permissao.pode_atualizar;
-                    case "pode_deletar":
-                        return permissao.pode_deletar;
-                    case "permissao_admin":
-                        return permissao.permissao_admin;
-                }
-            }
-
-            return false;
-        }
-
-        // Fim - Verificacao de Permissão
-
     }
 }

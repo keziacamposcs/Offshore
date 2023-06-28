@@ -9,6 +9,8 @@ namespace OffshoreTrack.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_contrato { get; set; }
+        public bool? Deletado { get; set; }
+
         public string? contrato { get; set; }
         public DateTime dataInicio { get; set; }
         public DateTime? dataFim { get; set; }
