@@ -80,7 +80,7 @@ namespace OffshoreTrack.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, item1, quantidade1, valor1, item2, quantidade2, valor2, item3,  item4, quantidade4, valor4, item5, quantidade5, valor5, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
+        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
         {      
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
             if(!temPermissao)
@@ -96,21 +96,6 @@ namespace OffshoreTrack.Controllers
                 observacao = createRequest.observacao,
                 data_oc = createRequest.data_oc,
                 data_prevista = createRequest.data_prevista,
-                item1 = createRequest.item1,
-                quantidade1 = createRequest.quantidade1,
-                valor1 = createRequest.valor1,
-                item2 = createRequest.item2,
-                quantidade2 = createRequest.quantidade2,
-                valor2 = createRequest.valor2,
-                item3 = createRequest.item3,
-                quantidade3 = createRequest.quantidade3,
-                valor3 = createRequest.valor3,
-                item4 = createRequest.item4,
-                quantidade4 = createRequest.quantidade4,
-                valor4 = createRequest.valor4,
-                item5 = createRequest.item5,
-                quantidade5 = createRequest.quantidade5,
-                valor5 = createRequest.valor5,
                 id_fornecedor = createRequest.id_fornecedor,
                 id_fornecedor2 = createRequest.id_fornecedor2,
                 id_fornecedor3 = createRequest.id_fornecedor3,
@@ -222,21 +207,6 @@ namespace OffshoreTrack.Controllers
             ordemCompra.observacao = updateRequest.observacao;
             ordemCompra.data_oc = updateRequest.data_oc;
             ordemCompra.data_prevista = updateRequest.data_prevista;
-            ordemCompra.item1 = updateRequest.item1;
-            ordemCompra.quantidade1 = updateRequest.quantidade1;
-            ordemCompra.valor1 = updateRequest.valor1;
-            ordemCompra.item2 = updateRequest.item2;
-            ordemCompra.quantidade2 = updateRequest.quantidade2;
-            ordemCompra.valor2 = updateRequest.valor2;
-            ordemCompra.item3 = updateRequest.item3;
-            ordemCompra.quantidade3 = updateRequest.quantidade3;
-            ordemCompra.valor3 = updateRequest.valor3;
-            ordemCompra.item4 = updateRequest.item4;
-            ordemCompra.quantidade4 = updateRequest.quantidade4;
-            ordemCompra.valor4 = updateRequest.valor4;
-            ordemCompra.item5 = updateRequest.item5;
-            ordemCompra.quantidade5 = updateRequest.quantidade5;
-            ordemCompra.valor5 = updateRequest.valor5;
             ordemCompra.id_fornecedor = updateRequest.id_fornecedor;
             ordemCompra.id_fornecedor2 = updateRequest.id_fornecedor2;
             ordemCompra.id_fornecedor3 = updateRequest.id_fornecedor3;

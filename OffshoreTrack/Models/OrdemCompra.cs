@@ -13,6 +13,7 @@ namespace OffshoreTrack.Models
         public string? oc { get; set; }
         public string? observacao { get; set; }
         public string? moeda { get; set; }
+        /*
         public string? item1 { get; set; }
         public string? item2 { get; set; }
         public string? item3 { get; set; }
@@ -30,6 +31,7 @@ namespace OffshoreTrack.Models
         public int? quantidade3 { get; set; }
         public int? quantidade4 { get; set; }
         public int? quantidade5 { get; set; }
+        */
 
         public string? prioridade { get; set; }
         public byte[]? anexo { get; set; }
@@ -68,10 +70,10 @@ namespace OffshoreTrack.Models
 
         //Relacionamentos
         public List<ParteSolta>? parteSoltas { get; set; }
-
         public List<Material>? materials { get; set; }
+        public ICollection<Item>? Itens { get; set; }
 
-        // Calculos
+        /* Calculos
         public double TotalValor 
         {
             get
@@ -109,9 +111,6 @@ namespace OffshoreTrack.Models
                 }
             }
         }
-
-
-
-
+        */
     }
 }

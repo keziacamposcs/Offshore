@@ -47,6 +47,8 @@ namespace OffshoreTrack.Data
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
 
         public DbSet<Contrato> Contrato { get; set; }
+
+        public DbSet<Item> Item { get; set; }
  
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -216,6 +218,10 @@ namespace OffshoreTrack.Data
                 .WithMany(e => e.ordemCompras)
                 .HasForeignKey(o => o.id_formaPagamento);
 
+            modelBuilder.Entity<OrdemCompra>()
+                .HasMany(o => o.Itens)
+                .WithOne(i => i.ordemCompra)
+                .HasForeignKey(i => i.id_oc);
 
             // Parte Solta
             modelBuilder.Entity<ParteSolta>()
@@ -290,6 +296,7 @@ namespace OffshoreTrack.Data
                 .HasOne(al => al.parteSolta)
                 .WithMany(m => m.atividadeLogsPS)
                 .HasForeignKey(al => al.id_parteSolta);
+
 
 
             /* Tabelas */

@@ -307,6 +307,31 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("fornecedor", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Item", b =>
+                {
+                    b.Property<int>("id_item")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("id_oc")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("item")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("quantidade")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("valor")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("id_item");
+
+                    b.HasIndex("id_oc");
+
+                    b.ToTable("Item");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
                 {
                     b.Property<int>("id_local")
@@ -552,21 +577,6 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_usuario")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("item1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("item2")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("item3")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("item4")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("item5")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("moeda")
                         .HasColumnType("TEXT");
 
@@ -578,36 +588,6 @@ namespace OffshoreTrack.Migrations
 
                     b.Property<string>("prioridade")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("quantidade1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("quantidade2")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("quantidade3")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("quantidade4")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("quantidade5")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double?>("valor1")
-                        .HasColumnType("REAL");
-
-                    b.Property<double?>("valor2")
-                        .HasColumnType("REAL");
-
-                    b.Property<double?>("valor3")
-                        .HasColumnType("REAL");
-
-                    b.Property<double?>("valor4")
-                        .HasColumnType("REAL");
-
-                    b.Property<double?>("valor5")
-                        .HasColumnType("REAL");
 
                     b.HasKey("id_oc");
 
@@ -959,6 +939,15 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("status");
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Item", b =>
+                {
+                    b.HasOne("OffshoreTrack.Models.OrdemCompra", "ordemCompra")
+                        .WithMany("Itens")
+                        .HasForeignKey("id_oc");
+
+                    b.Navigation("ordemCompra");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.Local", b =>
                 {
                     b.HasOne("OffshoreTrack.Models.Cliente", "Cliente")
@@ -1277,6 +1266,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>
                 {
+                    b.Navigation("Itens");
+
                     b.Navigation("materials");
 
                     b.Navigation("parteSoltas");

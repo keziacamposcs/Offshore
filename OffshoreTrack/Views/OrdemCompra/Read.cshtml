@@ -163,102 +163,12 @@
                     <hr>
 
                     <h5 class="print_oc print_rel col-sm-12">Itens</h5>
-                        <table class="table table-bordered border-dark print_oc print_rel">
 
-                        @if (!string.IsNullOrEmpty(Model.item1)){
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Item 1:</strong> @Model.item1
-                                </td>
-                                <td colspan="1">
-                                    <strong>Quant.:</strong> @Model.quantidade1
-                                </td>
-                                <td colspan="1">
-                                    <strong>Valor:</strong> @Model.moeda @Model.valor1
-                                </td>
-                            </tr>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.item2)){
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Item 2:</strong> @Model.item2
-                                </td>
-                                <td colspan="1">
-                                    <strong>Quant.:</strong> @Model.quantidade2
-                                </td>
-                                <td colspan="1">
-                                    <strong>Valor:</strong> @Model.moeda @Model.valor2
-                                </td>
-                            </tr>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.item3)){
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Item 3:</strong> @Model.item3
-                                </td>
-                                <td colspan="1">
-                                    <strong>Quant.:</strong> @Model.quantidade3
-                                </td>
-                                <td colspan="1">
-                                    <strong>Valor:</strong> @Model.moeda @Model.valor3
-                                </td>
-                            </tr>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.item4)){
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Item 4:</strong> @Model.item4
-                                </td>
-                                <td colspan="1">
-                                    <strong>Quant.:</strong> @Model.quantidade4
-                                </td>
-                                <td colspan="1">
-                                    <strong>Valor:</strong> @Model.moeda @Model.valor4
-                                </td>
-                            </tr>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.item5)){
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Item 5:</strong> @Model.item5
-                                </td>
-                                <td colspan="1">
-                                    <strong>Quant.:</strong> @Model.quantidade5
-                                </td>
-                                <td colspan="1">
-                                    <strong>Valor:</strong> @Model.moeda @Model.valor5
-                                </td>
-                            </tr>
-                        }
-                        </table>
                     <br class="">
 
                     <div class="row print_oc print_rel">
-                        <div class="col-sm-12"><strong>Total:</strong> @Model.moeda @Model.TotalValor</div>
                     </div>
                     <hr>
-                    @if (Model.rateio != null)
-                    {
-                        <div class="print_rel col-sm-12">
-                            <div class="row">
-                                <p><strong>Rateio: </strong>@Model.rateio.rateio</p>
-                            </div>
-                            <div class="col-sm-12">
-                                <table class="table table-bordered border-dark">
-                                    <tr>
-                                        <td>Rateio 1</td>
-                                        <td colspan="1"><strong>Porcentagem (%):</strong> @Model.rateio.porcentagem1</td>
-                                        <td colspan="1"><strong>Valor:</strong> @Model.moeda @Model.TotalComRateio1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rateio 2</td>
-                                        <td colspan="1"><strong>Porcentagem (%):</strong> @Model.rateio.porcentagem2</td>
-                                        <td colspan="1"><strong>Valor:</strong> @Model.moeda @Model.TotalComRateio2</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    }
                     <div class="print_rel">
                     <h5 class="col-sm-12">Fornecedores</h5>
                     <div class="row ">
