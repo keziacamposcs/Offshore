@@ -79,48 +79,45 @@ namespace OffshoreTrack.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo ")] OrdemCompra createRequest ,IFormFile anexoFile)
-        {      
-            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-            if(!temPermissao)
-            {    
-                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
-                return RedirectToAction("Index", "Home");
-            }
-            var ordemCompra = new OrdemCompra
-            {   id_empresa = 1,
-                oc = createRequest.oc,
-                moeda = createRequest.moeda,
-                prioridade = createRequest.prioridade,
-                observacao = createRequest.observacao,
-                data_oc = createRequest.data_oc,
-                data_prevista = createRequest.data_prevista,
-                id_fornecedor = createRequest.id_fornecedor,
-                id_fornecedor2 = createRequest.id_fornecedor2,
-                id_fornecedor3 = createRequest.id_fornecedor3,
-                id_setor = createRequest.id_setor,
-                id_rateio = createRequest.id_rateio,
-                id_formaPagamento = createRequest.id_formaPagamento,
-                anexo = createRequest.anexo
-            };
-            if (anexoFile != null && anexoFile.Length > 0)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await anexoFile.CopyToAsync(memoryStream);
-                    ordemCompra.anexo = memoryStream.ToArray();
-                }
-            }
-            else
-            {
-                ordemCompra.anexo = null; 
-            }
-            contexto.OrdemCompra.Add(ordemCompra);
-            await contexto.SaveChangesAsync();
+[HttpPost]
+public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
+{      
+    var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+    if(!temPermissao)
+    {    
+        TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+        return RedirectToAction("Index", "Home");
+    }
 
-            return RedirectToAction("Read", new { id = ordemCompra.id_oc });
+    if (anexoFile != null && anexoFile.Length > 0)
+    {
+        using (var memoryStream = new MemoryStream())
+        {
+            await anexoFile.CopyToAsync(memoryStream);
+            createRequest.anexo = memoryStream.ToArray();
         }
+    }
+    else
+    {
+        createRequest.anexo = null; 
+    }
+
+    contexto.Add(createRequest);
+    await contexto.SaveChangesAsync();
+
+    if (createRequest.Itens != null)
+    {
+        foreach (var item in createRequest.Itens)
+        {
+            item.id_oc = createRequest.id_oc;
+            contexto.Add(item);
+        }
+        await contexto.SaveChangesAsync();
+    }
+
+    return RedirectToAction("Read", new { id = createRequest.id_oc });
+}
+
         // Fim - Create
 
         // Read

@@ -9,7 +9,6 @@ namespace OffshoreTrack.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_item { get; set; }
-
         public string? item { get; set; }
         public double? valor { get; set; }
         public int? quantidade { get; set; }

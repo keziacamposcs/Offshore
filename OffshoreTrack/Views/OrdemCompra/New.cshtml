@@ -61,32 +61,24 @@
                         </div>
                     </div>
                     <hr>
+
+
                     <h5>Itens</h5>
+                    <button class="btn btn-primary" type="button" id="btnAdicionarItem"><i class="bi bi-plus"></i> Adicionar Item</button>
 
-
-                    <br><hr>
-                    <div class="col">
-                        <div class="form-group">
-                            <div class="row">
-                                <h5>Rateio</h5>
-                                <div class="col-sm-3">
-                                    <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="sem_rateio">
-                                    <label class="form-check-label">
-                                        Sem Rateio
-                                    </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <label asp-for="id_rateio" class="col-sm col-form-label">Rateio:</label>
-                                    <select asp-for="id_rateio" class="form-control" asp-items="@ViewBag.rateio"></select>
-                                    <input type="hidden" asp-for="id_rateio" id="hiddenRateio" />
-                                </div>
-                            </div>
-                        </div>
+                    <div id="itensContainer">
+                        <!-- Campos de item existentes aqui -->
                     </div>
                     <br>
 
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <h5>Total: </h5>
+                        <p><span id="moeda" class="moeda"></span><span id="displayTotal">0</span></p>
+                    </div>
+
+
+                    <br>
+                    <hr>
                     <h5>Fornecedor</h5>
                     <div class="row">
                         <div class="col">
@@ -135,69 +127,108 @@
                         <input class="form-control" type="file" id="anexoFile" name="anexoFile">
                     </div>
                     <br />
-
-                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary" name="submit" value="submit">Cadastrar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+
 @section Scripts
 {
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        var moeda = $('#moedaSelect').val(); // pega o valor inicial da moeda
-        $('.moeda').text(moeda); // atualiza a moeda mostrada antes do input
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        // Atualiza o valor da moeda quando a seleção é alterada
-        $('#moedaSelect').on('change', function() {
-            moeda = $(this).val();
-            $('.moeda').text(moeda); // atualiza a moeda mostrada antes do input
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var moeda = $('#moedaSelect').val();
+            $('.moeda').text(moeda);
+
+            $('#moedaSelect').on('change', function () {
+                moeda = $(this).val();
+                $('.moeda').text(moeda);
+                $('.item-moeda').text(moeda);
+            });
+
+            $(document).on('input', '.valor', function () {
+                var value = $(this).val();
+                value = removeExtraDots(value);
+                value = value.replace(/[^0-9.]/g, '');
+                $(this).val(value);
+                calcularTotal();
+            });
+
+            function removeExtraDots(value) {
+                var count = value.split('.').length - 1;
+                if (count > 1) {
+                    var lastDot = value.lastIndexOf('.');
+                    value = value.slice(0, lastDot) + value.slice(lastDot + 1);
+                }
+                return value;
+            }
+
+            // Evento de mudança na quantidade
+            $(document).on('input', '.quantidade', function () {
+                var quantidade = parseInt($(this).val()) || 0;
+                var index = $(this).data('index');
+                var valorUnitario = parseFloat($('#valor_' + index).val()) || 0;
+                var subtotal = quantidade * valorUnitario;
+                $('#subtotal_' + index).text(subtotal.toFixed(2));
+                calcularTotal();
+            });
+
+
+
+        document.getElementById('btnAdicionarItem').addEventListener('click', function () 
+        {
+            var ordemCompraItems = document.getElementById('itensContainer');
+            var index = ordemCompraItems.children.length;
+
+            var itemInput = document.createElement('input');
+            itemInput.name = 'Itens[' + index + '].item';
+            ordemCompraItems.appendChild(itemInput);
+
+            var valorInput = document.createElement('input');
+            valorInput.name = 'Itens[' + index + '].valor';
+            ordemCompraItems.appendChild(valorInput);
+
+            var quantidadeInput = document.createElement('input');
+            quantidadeInput.name = 'Itens[' + index + '].quantidade';
+            ordemCompraItems.appendChild(quantidadeInput);
         });
 
-        // Formata o input de valor cada vez que é alterado
-        $(".valor").on('input', function() {
-            var value = $(this).val();
-            value = removeExtraDots(value); // remove pontos extras
-            value = value.replace(/[^0-9.]/g, ''); // remove caracteres não numéricos exceto o ponto
-            $(this).val(value);
+
+
+
+
+
+
+
+
+
+            // Função para calcular o total
+            function calcularTotal() {
+                var total = 0;
+                // Percorrer cada item e calcular o subtotal
+                $('.row[id^="itemRow"]').each(function () {
+                    var index = $(this).attr('id').replace('itemRow', '');
+                    var quantidade = parseInt($('#items\\[' + index + '\\]\\.quantidade').val()) || 0;
+                    var valorUnitario = parseFloat($('#items\\[' + index + '\\]\\.valor').val()) || 0;
+                    var subtotal = quantidade * valorUnitario;
+                    $('#subtotal_' + index).text(subtotal.toFixed(2));
+                    total += subtotal;
+                });
+                // Atualizar o valor total no formulário
+                $('#total').val(total.toFixed(2));
+                // Exibir o total
+                $('#displayTotal').text(total.toFixed(2));
+            }
+
         });
-    });
-
-    // Função para remover pontos extras
-    function removeExtraDots(value) {
-        var count = value.split('.').length - 1;
-        if (count > 1) {
-            var lastDot = value.lastIndexOf('.');
-            value = value.slice(0, lastDot) + value.slice(lastDot + 1);
-        }
-        return value;
-    }
 
 
-    document.getElementById('sem_rateio').addEventListener('change', function() {
-    var select = document.getElementById('id_rateio');
-    var hidden = document.getElementById('hiddenRateio');
 
-    if (this.checked) {
-        // Checkbox está marcado, definir o valor do select e do campo oculto para nulo e desabilitá-lo
-        select.value = '';
-        hidden.value = '';
-        select.disabled = true;
-    } else {
-        // Checkbox não está marcado, habilitar o campo de seleção e copiar seu valor para o campo oculto
-        select.disabled = false;
-        hidden.value = select.value;
-    }
-    });
-
-    // Atualizar o valor do campo oculto sempre que o valor do campo de seleção muda
-    document.getElementById('id_rateio').addEventListener('change', function() {
-        document.getElementById('hiddenRateio').value = this.value;
-    });
-
-</script>
-
+    </script>
 }

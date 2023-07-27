@@ -13,26 +13,6 @@ namespace OffshoreTrack.Models
         public string? oc { get; set; }
         public string? observacao { get; set; }
         public string? moeda { get; set; }
-        /*
-        public string? item1 { get; set; }
-        public string? item2 { get; set; }
-        public string? item3 { get; set; }
-        public string? item4 { get; set; }
-        public string? item5 { get; set; }
-
-        public double? valor1 { get; set; }
-        public double? valor2 { get; set; }
-        public double? valor3 { get; set; }
-        public double? valor4 { get; set; }
-        public double? valor5 { get; set; }
-
-        public int? quantidade1 { get; set; }
-        public int? quantidade2 { get; set; }
-        public int? quantidade3 { get; set; }
-        public int? quantidade4 { get; set; }
-        public int? quantidade5 { get; set; }
-        */
-
         public string? prioridade { get; set; }
         public byte[]? anexo { get; set; }
 
@@ -73,44 +53,6 @@ namespace OffshoreTrack.Models
         public List<Material>? materials { get; set; }
         public ICollection<Item>? Itens { get; set; }
 
-        /* Calculos
-        public double TotalValor 
-        {
-            get
-            {
-                return (double)(valor1 ?? 0) + (double)(valor2 ?? 0) + (double)(valor3 ?? 0) + (double)(valor4 ?? 0) + (double)(valor5 ?? 0);
-            }
-        }
-        public double TotalComRateio1
-        {
-            get
-            {
-                if (this.rateio != null)
-                {
-                    var ratio1 = (double)(rateio.porcentagem1 ?? 0) / 100;
-                    return this.TotalValor * ratio1;
-                }
-                else
-                {
-                    return this.TotalValor;
-                }
-            }
-        }
-        public double TotalComRateio2
-        {
-            get
-            {
-                if (this.rateio != null)
-                {
-                    var ratio2 = (double)(rateio.porcentagem2 ?? 0) / 100;
-                    return this.TotalValor * ratio2;
-                }
-                else
-                {
-                    return this.TotalValor;
-                }
-            }
-        }
-        */
+
     }
 }
