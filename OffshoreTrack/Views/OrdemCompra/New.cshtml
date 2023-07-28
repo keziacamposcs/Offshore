@@ -178,9 +178,7 @@
                 $('#subtotal_' + index).text(subtotal.toFixed(2));
                 calcularTotal();
             });
-
-
-
+/*
         document.getElementById('btnAdicionarItem').addEventListener('click', function () 
         {
             var ordemCompraItems = document.getElementById('itensContainer');
@@ -198,13 +196,39 @@
             quantidadeInput.name = 'Itens[' + index + '].quantidade';
             ordemCompraItems.appendChild(quantidadeInput);
         });
+*/
+    var itemIndex = 0;
 
+    document.getElementById('btnAdicionarItem').addEventListener('click', function () {
+        var ordemCompraItems = document.getElementById('itensContainer');
 
+        var itemRow = document.createElement('div');
+        itemRow.id = "itemRow" + itemIndex;
+        itemRow.classList.add("row"); // Para estilização
 
+        var itemInput = document.createElement('input');
+        itemInput.id = 'items[' + itemIndex + '].item';
+        itemInput.name = 'Itens[' + itemIndex + '].item';
+        itemRow.appendChild(itemInput);
 
+        var valorInput = document.createElement('input');
+        valorInput.id = 'items[' + itemIndex + '].valor';
+        valorInput.name = 'Itens[' + itemIndex + '].valor';
+        itemRow.appendChild(valorInput);
 
+        var quantidadeInput = document.createElement('input');
+        quantidadeInput.id = 'items[' + itemIndex + '].quantidade';
+        quantidadeInput.name = 'Itens[' + itemIndex + '].quantidade';
+        itemRow.appendChild(quantidadeInput);
 
+        var subtotalDisplay = document.createElement('span');
+        subtotalDisplay.id = 'subtotal_' + itemIndex;
+        itemRow.appendChild(subtotalDisplay);
 
+        ordemCompraItems.appendChild(itemRow);
+
+        itemIndex++; // Incrementa o índice para o próximo item
+    });
 
 
 
@@ -227,8 +251,5 @@
             }
 
         });
-
-
-
     </script>
 }

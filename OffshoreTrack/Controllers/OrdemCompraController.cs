@@ -101,7 +101,23 @@ public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao
     {
         createRequest.anexo = null; 
     }
-
+    
+    var ordemCompra = new OrdemCompra
+    {   id_empresa = createRequest.id_empresa,
+        oc = createRequest.oc,
+        moeda = createRequest.moeda,
+        prioridade = createRequest.prioridade,
+        observacao = createRequest.observacao,
+        data_oc = createRequest.data_oc,
+        data_prevista = createRequest.data_prevista,
+        id_fornecedor = createRequest.id_fornecedor,
+        id_fornecedor2 = createRequest.id_fornecedor2,
+        id_fornecedor3 = createRequest.id_fornecedor3,
+        id_setor = createRequest.id_setor,
+        id_rateio = createRequest.id_rateio,
+        id_formaPagamento = createRequest.id_formaPagamento,
+        anexo = createRequest.anexo
+    };
     contexto.Add(createRequest);
     await contexto.SaveChangesAsync();
 
@@ -109,12 +125,16 @@ public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao
     {
         foreach (var item in createRequest.Itens)
         {
-            item.id_oc = createRequest.id_oc;
             contexto.Add(item);
         }
+        try{
         await contexto.SaveChangesAsync();
+        }
+        catch(Exception e)
+        {
+            e.ToString();
+        }
     }
-
     return RedirectToAction("Read", new { id = createRequest.id_oc });
 }
 
