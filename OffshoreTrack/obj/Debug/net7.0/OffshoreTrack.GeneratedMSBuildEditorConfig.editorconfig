@@ -184,16 +184,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWF0ZXJpYWwvUmVhZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Moeda/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9lZGEvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Moeda/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9lZGEvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/Moeda/New.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW9lZGEvTmV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/New copy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT3JkZW1Db21wcmEvTmV3IGNvcHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/keziacampos/GitHub/Offshore/OffshoreTrack/Views/OrdemCompra/New.cshtml]

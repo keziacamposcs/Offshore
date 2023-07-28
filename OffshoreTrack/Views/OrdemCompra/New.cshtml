@@ -74,6 +74,8 @@
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <h5>Total: </h5>
                         <p><span id="moeda" class="moeda"></span><span id="displayTotal">0</span></p>
+                        <input type="hidden" id="total" name="total">
+
                     </div>
 
 
@@ -142,7 +144,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+
+        $(document).ready(function () 
+        {
+            // Select das moedas
             var moeda = $('#moedaSelect').val();
             $('.moeda').text(moeda);
 
@@ -151,34 +156,9 @@
                 $('.moeda').text(moeda);
                 $('.item-moeda').text(moeda);
             });
+            // Fim - Select das moedas
 
-            $(document).on('input', '.valor', function () {
-                var value = $(this).val();
-                value = removeExtraDots(value);
-                value = value.replace(/[^0-9.]/g, '');
-                $(this).val(value);
-                calcularTotal();
-            });
-
-            function removeExtraDots(value) {
-                var count = value.split('.').length - 1;
-                if (count > 1) {
-                    var lastDot = value.lastIndexOf('.');
-                    value = value.slice(0, lastDot) + value.slice(lastDot + 1);
-                }
-                return value;
-            }
-
-            // Evento de mudança na quantidade
-            $(document).on('input', '.quantidade', function () {
-                var quantidade = parseInt($(this).val()) || 0;
-                var index = $(this).data('index');
-                var valorUnitario = parseFloat($('#valor_' + index).val()) || 0;
-                var subtotal = quantidade * valorUnitario;
-                $('#subtotal_' + index).text(subtotal.toFixed(2));
-                calcularTotal();
-            });
-
+            // Criação de itens
             var itemIndex = 0;
             document.getElementById('btnAdicionarItem').addEventListener('click', function () {
                 var ordemCompraItems = document.getElementById('itensContainer');
@@ -187,7 +167,6 @@
                 itemRow.id = "itemRow" + itemIndex;
                 itemRow.classList.add("row"); 
 
-                // Cria uma div com classe col-sm-4 para cada input
                 var colItemInput = document.createElement('div');
                 colItemInput.classList.add("col-sm-4");
                 var labelItem = document.createElement('label');
@@ -229,27 +208,37 @@
                 itemRow.appendChild(colValorInput);
                 
                 ordemCompraItems.appendChild(itemRow);
-
                 itemIndex++; 
+
+                calcularTotal();
+            });
+            // Fim - Criação de itens
+
+            $('#itensContainer').on('input', 'input[id$=".quantidade"], input[id$=".valor"]', function () {
+                calcularTotal();
             });
 
             // Função para calcular o total
-            function calcularTotal() {
+            function calcularTotal() 
+            {
                 var total = 0;
                 // Percorrer cada item e calcular o subtotal
                 $('.row[id^="itemRow"]').each(function () {
                     var index = $(this).attr('id').replace('itemRow', '');
                     var quantidade = parseInt($('#items\\[' + index + '\\]\\.quantidade').val()) || 0;
-                    var valorUnitario = parseFloat($('#items\\[' + index + '\\]\\.valor').val()) || 0;
+                    var valorUnitario = parseFloat($('#items\\[' + index + '\\]\\.valor').val().replace(',', '.')) || 0;
                     var subtotal = quantidade * valorUnitario;
-                    $('#subtotal_' + index).text(subtotal.toFixed(2));
+                    $('#subtotal_' + index).text(subtotal.toFixed(2).replace('.', ','));
                     total += subtotal;
                 });
-                // Atualizar o valor total no formulário
-                $('#total').val(total.toFixed(2));
+
                 // Exibir o total
-                $('#displayTotal').text(total.toFixed(2));
+                $('#displayTotal').text(total.toFixed(2).replace('.', ','));
+
+                // Setar o total ao campo hidden
+                $('#total').val(total.toFixed(2).replace('.', ','));
             }
+            // Fim - Função para calcular o total
 
         });
     </script>

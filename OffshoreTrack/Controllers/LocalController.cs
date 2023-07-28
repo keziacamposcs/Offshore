@@ -56,12 +56,6 @@ namespace OffshoreTrack.Controllers
             }
 
             var clientes = contexto.Cliente.Where(c => c.Deletado != true).ToList();
-
-            if (!clientes.Any())
-            {
-                throw new Exception("Não existem clientes na base de dados!");
-            }
-
             ViewBag.cliente = new SelectList(clientes, "id_cliente", "cliente");
 
             return View();

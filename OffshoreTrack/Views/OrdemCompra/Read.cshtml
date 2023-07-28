@@ -21,96 +21,6 @@
     <div class="col">
         <div class="card">
             <div class="card-body">
-                    <!-- Cabeçalho para imprimir o OC e Relatorio-->
-                    <div class="print-only-oc print_oc print_rel">
-                        <h4>Ordem de compra</h4>
-                        <table class="table table-bordered border-dark">
-                            <tr>
-                                <td colspan="1">
-                                    @if(Model.empresa.logoEmpresa != null) 
-                                    {
-                                        var base64 = Convert.ToBase64String(Model.empresa.logoEmpresa);
-                                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-
-                                        <img src="@imgSrc" alt="Logo da Empresa" width="100px;" />
-                                    }
-
-                                </td>
-                                <td colspan="2">
-                                    <strong>@Model.empresa.empresa</strong>
-                                </td>
-                                <td colspan="1">
-                                    <strong>ID:</strong>@Model.empresa.id_empresa
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Razão Social:</strong> @Model.empresa.razaoSocialEmpresa
-                                </td>
-                                <td colspan="2">
-                                    <strong>CNPJ:</strong> @Model.empresa.cnpjEmpresa
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Inscrição Estadual:</strong> @Model.empresa.inscricaoEstadualEmpresa
-                                </td>
-                                <td colspan="2">
-                                    <strong>Inscrição Municipal:</strong> @Model.empresa.inscricaoMunicipalEmpresa
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <strong>Endereço:</strong> @Model.empresa.enderecoEmpresa
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Telefone:</strong> @Model.empresa.telefoneEmpresa
-                                </td>
-                                <td colspan="2">
-                                    <strong>E-mail:</strong> @Model.empresa.emailEmpresa
-                                </td>
-                            </tr>
-                            <!-- Dados do Fornecedor -->
-                            <tr>
-                                <td colspan="4">
-                                    <strong>Fornecedor</strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Razão Social:</strong> @Model.fornecedor.razaoSocial
-                                </td>
-                                <td colspan="2">
-                                    <strong>CNPJ:</strong> @Model.fornecedor.cnpj
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Inscrição Estadual:</strong> @Model.fornecedor.inscricaoEstadual
-                                </td>
-                                <td colspan="2">
-                                    <strong>Inscrição Municipal:</strong> @Model.fornecedor.inscricaoMunicipal
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <strong>Endereço:</strong> @Model.fornecedor.endereco
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <strong>Telefone:</strong> @Model.fornecedor.telefone
-                                </td>
-                                <td colspan="2">
-                                    <strong>E-mail:</strong> @Model.fornecedor.email
-                                </td>
-                            </tr>
-                            <!-- Fim - Dados do Fornecedor -->
-                        </table>
-                    </div>
-                    <!-- Fim - Cabeçalho para imprimir o OC -->
 
                     <div class="row">
                         <div class="col-sm-2">
@@ -163,10 +73,30 @@
                     <hr>
 
                     <h5 class="print_oc print_rel col-sm-12">Itens</h5>
-
                     <br class="">
-
                     <div class="row print_oc print_rel">
+                        <div class="container">
+                        <table class="table table-bordered border-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Quantidade</th>
+                                    <th scope="col">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Itens)
+                                {
+                                    <tr>
+                                        <td>@item.item</td>
+                                        <td>@item.quantidade</td>
+                                        <td> @item.valor</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        </div>
                     </div>
                     <hr>
                     <div class="print_rel">
@@ -210,7 +140,7 @@
                     </div>
                 </div>
 
-                    <div class="col ">
+                    <div class="col">
                         <label asp-for="anexo" class="col-form-label">Anexos:</label>
                         @if(Model.anexo != null && Model.anexo.Length > 0)
                         {

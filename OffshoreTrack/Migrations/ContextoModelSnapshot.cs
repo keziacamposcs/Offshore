@@ -529,6 +529,26 @@ namespace OffshoreTrack.Migrations
                     b.ToTable("material", (string)null);
                 });
 
+            modelBuilder.Entity("OffshoreTrack.Models.Moeda", b =>
+                {
+                    b.Property<int>("id_moeda")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Deletado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("moeda_descricao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("simbolo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id_moeda");
+
+                    b.ToTable("Moeda");
+                });
+
             modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>
                 {
                     b.Property<int>("id_oc")
@@ -588,6 +608,9 @@ namespace OffshoreTrack.Migrations
 
                     b.Property<string>("prioridade")
                         .HasColumnType("TEXT");
+
+                    b.Property<double?>("total")
+                        .HasColumnType("REAL");
 
                     b.HasKey("id_oc");
 

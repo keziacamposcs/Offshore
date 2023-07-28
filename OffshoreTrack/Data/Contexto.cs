@@ -9,46 +9,28 @@ namespace OffshoreTrack.Data
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
         }
-        
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Certificacao> Certificacao { get; set; }
-
         public DbSet<Criticidade> Criticidade { get; set; }
-
         public DbSet<Fornecedor> Fornecedor { get; set; }
-
         public DbSet<Local> Local { get; set; }
-
         public DbSet<Manutencao> Manutencao { get; set; }
-
         public DbSet<Material> Material { get; set; }
-
         public DbSet<OrdemCompra> OrdemCompra { get; set; }
-
         public DbSet<ParteSolta> ParteSolta { get; set; }
-
         public DbSet<Rateio> Rateio { get; set; }
-
         public DbSet<Setor> Setor { get; set; }
-
         public DbSet<Tipo> Tipo { get; set; }
-
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Permissao> Permissao { get; set; }
-
         public DbSet<Status> Status { get; set; }
-
         public DbSet<AtividadeLog> AtividadeLog { get; set; }
-
         public DbSet<AtividadeLogPS> AtividadeLogPS { get; set; }
-
         public DbSet<Empresa> Empresa { get; set; }
-
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
-
         public DbSet<Contrato> Contrato { get; set; }
-
         public DbSet<Item> Item { get; set; }
+        public DbSet<Moeda> Moeda { get; set; }
  
         //Relacionamentos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -223,7 +205,8 @@ namespace OffshoreTrack.Data
                 .HasMany(o => o.Itens)
                 .WithOne(i => i.ordemCompra)
                 .HasForeignKey(i => i.id_oc);
-*/
+*/                
+
 
             modelBuilder.Entity<Item>()
                 .HasOne(i => i.ordemCompra)

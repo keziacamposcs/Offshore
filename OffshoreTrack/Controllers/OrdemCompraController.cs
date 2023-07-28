@@ -63,112 +63,120 @@ namespace OffshoreTrack.Controllers
             model.data_oc = DateTime.Now;
 
             var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
-            var fornecedors1 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
-            var fornecedors2 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
-            var fornecedors3 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
             var rateios = contexto.Rateio.Where(c => c.Deletado != true).ToList();
             var formaPagamentos = contexto.FormaPagamento.Where(c => c.Deletado != true).ToList();
 
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
-            ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
-            ViewBag.fornecedor2 = new SelectList(fornecedors2, "id_fornecedor", "fornecedor");
-            ViewBag.fornecedor3 = new SelectList(fornecedors3, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor2 = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor3 = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
             ViewBag.rateio = new SelectList(rateios, "id_rateio", "rateio");
             ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
             return View(model); 
         }
 
 
-[HttpPost]
-public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
-{      
-    var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-    if(!temPermissao)
-    {    
-        TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
-        return RedirectToAction("Index", "Home");
-    }
-
-    if (anexoFile != null && anexoFile.Length > 0)
-    {
-        using (var memoryStream = new MemoryStream())
-        {
-            await anexoFile.CopyToAsync(memoryStream);
-            createRequest.anexo = memoryStream.ToArray();
-        }
-    }
-    else
-    {
-        createRequest.anexo = null; 
-    }
-    
-    var ordemCompra = new OrdemCompra
-    {   id_empresa = 1,
-        oc = createRequest.oc,
-        moeda = createRequest.moeda,
-        prioridade = createRequest.prioridade,
-        observacao = createRequest.observacao,
-        data_oc = createRequest.data_oc,
-        data_prevista = createRequest.data_prevista,
-        id_fornecedor = createRequest.id_fornecedor,
-        id_fornecedor2 = createRequest.id_fornecedor2,
-        id_fornecedor3 = createRequest.id_fornecedor3,
-        id_setor = createRequest.id_setor,
-        id_rateio = createRequest.id_rateio,
-        id_formaPagamento = createRequest.id_formaPagamento,
-        anexo = createRequest.anexo
-    };
-    contexto.Add(createRequest);
-    await contexto.SaveChangesAsync();
-
-    if (createRequest.Itens != null)
-    {
-        foreach (var item in createRequest.Itens)
-        {
-            contexto.Add(item);
-        }
-        try{
-        await contexto.SaveChangesAsync();
-        }
-        catch(Exception e)
-        {
-            e.ToString();
-        }
-    }
-    return RedirectToAction("Read", new { id = createRequest.id_oc });
-}
-
-        // Fim - Create
-
-        // Read
-        [HttpGet]
-        public async Task<IActionResult> Read(int id)
-        {
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, total, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
+        {      
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
             if(!temPermissao)
             {    
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var podeLer = User.HasClaim("PodeLer", "True");
-            if(!podeLer)
-            {    
-                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
-                return RedirectToAction("Index", "Home");
-            }
 
-            var ordemCompra = await contexto.OrdemCompra
-                            .Include(x => x.setor)
-                            .Include(x => x.status)
-                            .Include(x => x.fornecedor)
-                            .Include(x => x.fornecedor2)
-                            .Include(x => x.fornecedor3)
-                            .Include(x => x.rateio)
-                            .Include(x => x.empresa)  
-                            .Include(x => x.formaPagamento)                          
-            .FirstOrDefaultAsync(x => x.id_oc == id);
-            return View(ordemCompra);
+            if (anexoFile != null && anexoFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await anexoFile.CopyToAsync(memoryStream);
+                    createRequest.anexo = memoryStream.ToArray();
+                }
+            }
+            else
+            {
+                createRequest.anexo = null; 
+            }
+            
+            var ordemCompra = new OrdemCompra
+            {   id_empresa = 1,
+                oc = createRequest.oc,
+                moeda = createRequest.moeda,
+                prioridade = createRequest.prioridade,
+                observacao = createRequest.observacao,
+                data_oc = createRequest.data_oc,
+                data_prevista = createRequest.data_prevista,
+                id_fornecedor = createRequest.id_fornecedor,
+                id_fornecedor2 = createRequest.id_fornecedor2,
+                id_fornecedor3 = createRequest.id_fornecedor3,
+                id_setor = createRequest.id_setor,
+                id_rateio = createRequest.id_rateio,
+                id_formaPagamento = createRequest.id_formaPagamento,
+                total = createRequest.total,
+                anexo = createRequest.anexo
+            };
+            contexto.Add(createRequest);
+            await contexto.SaveChangesAsync();
+
+            if (createRequest.Itens != null)
+            {
+                foreach (var item in createRequest.Itens)
+                {
+                    contexto.Add(item);
+                }
+                try{
+                await contexto.SaveChangesAsync();
+                }
+                catch(Exception e)
+                {
+                    e.ToString();
+                }
+            }
+            return RedirectToAction("Read", new { id = createRequest.id_oc });
         }
+
+        // Fim - Create
+
+        // Read
+[HttpGet]
+public async Task<IActionResult> Read(int id)
+{
+    var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+    if(!temPermissao)
+    {    
+        TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+        return RedirectToAction("Index", "Home");
+    }
+    var podeLer = User.HasClaim("PodeLer", "True");
+    if(!podeLer)
+    {    
+        TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+        return RedirectToAction("Index", "Home");
+    }
+
+    var ordemCompra = await contexto.OrdemCompra
+                    .Include(x => x.setor)
+                    .Include(x => x.status)
+                    .Include(x => x.fornecedor)
+                    .Include(x => x.fornecedor2)
+                    .Include(x => x.fornecedor3)
+                    .Include(x => x.rateio)
+                    .Include(x => x.empresa)  
+                    .Include(x => x.formaPagamento)        
+                    .Include(x => x.Itens)     
+    .FirstOrDefaultAsync(x => x.id_oc == id);
+    if(ordemCompra == null)
+    {
+        TempData["Aviso"] = "Não foi possível encontrar a Ordem de Compra.";
+        return RedirectToAction("Index", "Home");
+    }
+
+    // Retorna a vista e passa o objeto ordemCompra como um modelo
+    return View(ordemCompra);
+}
+
         // Fim - Read
 
         // Update

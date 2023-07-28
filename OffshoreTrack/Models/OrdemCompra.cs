@@ -14,6 +14,8 @@ namespace OffshoreTrack.Models
         public string? observacao { get; set; }
         public string? moeda { get; set; }
         public string? prioridade { get; set; }
+        public double? total { get; set; }
+
         public byte[]? anexo { get; set; }
 
         public DateTime? data_oc { get; set; }
@@ -52,7 +54,5 @@ namespace OffshoreTrack.Models
         public List<ParteSolta>? parteSoltas { get; set; }
         public List<Material>? materials { get; set; }
         public ICollection<Item>? Itens { get; set; }
-
-
     }
 }
