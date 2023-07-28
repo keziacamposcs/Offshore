@@ -178,59 +178,60 @@
                 $('#subtotal_' + index).text(subtotal.toFixed(2));
                 calcularTotal();
             });
-/*
-        document.getElementById('btnAdicionarItem').addEventListener('click', function () 
-        {
-            var ordemCompraItems = document.getElementById('itensContainer');
-            var index = ordemCompraItems.children.length;
 
-            var itemInput = document.createElement('input');
-            itemInput.name = 'Itens[' + index + '].item';
-            ordemCompraItems.appendChild(itemInput);
+            var itemIndex = 0;
+            document.getElementById('btnAdicionarItem').addEventListener('click', function () {
+                var ordemCompraItems = document.getElementById('itensContainer');
 
-            var valorInput = document.createElement('input');
-            valorInput.name = 'Itens[' + index + '].valor';
-            ordemCompraItems.appendChild(valorInput);
+                var itemRow = document.createElement('div');
+                itemRow.id = "itemRow" + itemIndex;
+                itemRow.classList.add("row"); 
 
-            var quantidadeInput = document.createElement('input');
-            quantidadeInput.name = 'Itens[' + index + '].quantidade';
-            ordemCompraItems.appendChild(quantidadeInput);
-        });
-*/
-    var itemIndex = 0;
+                // Cria uma div com classe col-sm-4 para cada input
+                var colItemInput = document.createElement('div');
+                colItemInput.classList.add("col-sm-4");
+                var labelItem = document.createElement('label');
+                labelItem.htmlFor = 'items[' + itemIndex + '].item';
+                labelItem.textContent = 'Item:';
+                var itemInput = document.createElement('input');
+                itemInput.id = 'items[' + itemIndex + '].item';
+                itemInput.name = 'Itens[' + itemIndex + '].item';
+                itemInput.classList.add("form-control"); 
+                colItemInput.appendChild(labelItem);
+                colItemInput.appendChild(itemInput);
+                itemRow.appendChild(colItemInput);
 
-    document.getElementById('btnAdicionarItem').addEventListener('click', function () {
-        var ordemCompraItems = document.getElementById('itensContainer');
+                var colQuantidadeInput = document.createElement('div');
+                colQuantidadeInput.classList.add("col-sm-4");
+                var labelQuantidade = document.createElement('label');
+                labelQuantidade.htmlFor = 'items[' + itemIndex + '].quantidade';
+                labelQuantidade.textContent = 'Quantidade:';
+                var quantidadeInput = document.createElement('input');
+                quantidadeInput.id = 'items[' + itemIndex + '].quantidade';
+                quantidadeInput.name = 'Itens[' + itemIndex + '].quantidade';
+                quantidadeInput.type = 'number';
+                quantidadeInput.classList.add("form-control"); 
+                colQuantidadeInput.appendChild(labelQuantidade);
+                colQuantidadeInput.appendChild(quantidadeInput);
+                itemRow.appendChild(colQuantidadeInput);
 
-        var itemRow = document.createElement('div');
-        itemRow.id = "itemRow" + itemIndex;
-        itemRow.classList.add("row"); // Para estilização
+                var colValorInput = document.createElement('div');
+                colValorInput.classList.add("col-sm-4");
+                var labelValor = document.createElement('label');
+                labelValor.htmlFor = 'items[' + itemIndex + '].valor';
+                labelValor.textContent = 'Valor:';
+                var valorInput = document.createElement('input');
+                valorInput.id = 'items[' + itemIndex + '].valor';
+                valorInput.name = 'Itens[' + itemIndex + '].valor';
+                valorInput.classList.add("form-control"); 
+                colValorInput.appendChild(labelValor);
+                colValorInput.appendChild(valorInput);
+                itemRow.appendChild(colValorInput);
+                
+                ordemCompraItems.appendChild(itemRow);
 
-        var itemInput = document.createElement('input');
-        itemInput.id = 'items[' + itemIndex + '].item';
-        itemInput.name = 'Itens[' + itemIndex + '].item';
-        itemRow.appendChild(itemInput);
-
-        var valorInput = document.createElement('input');
-        valorInput.id = 'items[' + itemIndex + '].valor';
-        valorInput.name = 'Itens[' + itemIndex + '].valor';
-        itemRow.appendChild(valorInput);
-
-        var quantidadeInput = document.createElement('input');
-        quantidadeInput.id = 'items[' + itemIndex + '].quantidade';
-        quantidadeInput.name = 'Itens[' + itemIndex + '].quantidade';
-        itemRow.appendChild(quantidadeInput);
-
-        var subtotalDisplay = document.createElement('span');
-        subtotalDisplay.id = 'subtotal_' + itemIndex;
-        itemRow.appendChild(subtotalDisplay);
-
-        ordemCompraItems.appendChild(itemRow);
-
-        itemIndex++; // Incrementa o índice para o próximo item
-    });
-
-
+                itemIndex++; 
+            });
 
             // Função para calcular o total
             function calcularTotal() {

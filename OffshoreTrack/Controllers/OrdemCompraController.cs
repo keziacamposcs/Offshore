@@ -103,7 +103,7 @@ public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao
     }
     
     var ordemCompra = new OrdemCompra
-    {   id_empresa = createRequest.id_empresa,
+    {   id_empresa = 1,
         oc = createRequest.oc,
         moeda = createRequest.moeda,
         prioridade = createRequest.prioridade,
