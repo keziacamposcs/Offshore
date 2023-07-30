@@ -205,11 +205,16 @@ namespace OffshoreTrack.Data
                 .WithMany(e => e.ordemCompras)
                 .HasForeignKey(o => o.id_moeda);       
 
-
+            // Item
             modelBuilder.Entity<Item>()
                 .HasOne(i => i.ordemCompra)
                 .WithMany(o => o.Itens)
                 .HasForeignKey(i => i.id_oc);
+
+            modelBuilder.Entity<Item>()
+                .HasOne(o => o.moeda)
+                .WithMany(e => e.items)
+                .HasForeignKey(o => o.id_moeda);       
 
             // Parte Solta
             modelBuilder.Entity<ParteSolta>()

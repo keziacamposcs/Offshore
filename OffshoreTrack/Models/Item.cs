@@ -15,7 +15,7 @@ namespace OffshoreTrack.Models
 
         public int? id_oc { get; set; }
         public OrdemCompra? ordemCompra { get; set; }
-
-        
+        public int? id_moeda { get; set; }
+        public Moeda? moeda { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace OffshoreTrack.Models
         public string? moeda_descricao { get; set; }
         public string? simbolo { get; set; }
         public List<OrdemCompra>? ordemCompras { get; set; }
+        public List<Item>? items { get; set; }
+
     }
 }

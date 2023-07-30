@@ -313,6 +313,9 @@ namespace OffshoreTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("id_moeda")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("id_oc")
                         .HasColumnType("INTEGER");
 
@@ -326,6 +329,8 @@ namespace OffshoreTrack.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("id_item");
+
+                    b.HasIndex("id_moeda");
 
                     b.HasIndex("id_oc");
 
@@ -966,9 +971,15 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Item", b =>
                 {
+                    b.HasOne("OffshoreTrack.Models.Moeda", "moeda")
+                        .WithMany("items")
+                        .HasForeignKey("id_moeda");
+
                     b.HasOne("OffshoreTrack.Models.OrdemCompra", "ordemCompra")
                         .WithMany("Itens")
                         .HasForeignKey("id_oc");
+
+                    b.Navigation("moeda");
 
                     b.Navigation("ordemCompra");
                 });
@@ -1297,6 +1308,8 @@ namespace OffshoreTrack.Migrations
 
             modelBuilder.Entity("OffshoreTrack.Models.Moeda", b =>
                 {
+                    b.Navigation("items");
+
                     b.Navigation("ordemCompras");
                 });
 

@@ -121,13 +121,15 @@ namespace OffshoreTrack.Controllers
                 total = createRequest.total,
                 anexo = createRequest.anexo
             };
-            contexto.Add(createRequest);
+            contexto.Add(ordemCompra);
             await contexto.SaveChangesAsync();
 
             if (createRequest.Itens != null)
             {
                 foreach (var item in createRequest.Itens)
                 {
+                    item.id_moeda = createRequest.id_moeda;
+                    item.id_oc = ordemCompra.id_oc;
                     contexto.Add(item);
                 }
                 try{
@@ -138,7 +140,7 @@ namespace OffshoreTrack.Controllers
                     e.ToString();
                 }
             }
-            return RedirectToAction("Read", new { id = createRequest.id_oc });
+            return RedirectToAction("Read", new { id = ordemCompra.id_oc });
         }
 
         // Fim - Create
