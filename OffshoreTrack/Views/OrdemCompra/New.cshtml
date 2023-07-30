@@ -17,11 +17,12 @@
                     <!-- Definicao de Moeda -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <label asp-for="moeda" for="inputText" class="col-sm col-form-label">Definição de Moeda da Ordem de Compra:</label>
-                            <select class="form-select" id="moedaSelect" asp-for="moeda">
-                                <option value="R$">R$ - BRL</option>
-                                <option value="$">US$ - USD</option>
-                                <option value="€">EUR$ - EUR</option>
+                            <label asp-for="id_moeda" class="col-sm col-form-label">Moeda: </label>
+                            <select id="moedaSelect" asp-for="id_moeda" class="form-control">
+                                @foreach (var moeda in ViewBag.moedas)
+                                {
+                                    <option value="@moeda.id_moeda" data-simbolo="@moeda.simbolo">@moeda.moeda_descricao</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -44,12 +45,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <label for="inputText" class="col-sm col-form-label">Observação:</label>
-                            <textarea type="text" rows="3" class="form-control" id="observacao" name="observacao" asp-for="observacao" ></textarea>
+                            <textarea type="text" rows="3" class="form-control" id="observacao" name="observacao" asp-for="observacao"></textarea>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <label for="inputText" class="col-sm col-form-label">Data:</label>
@@ -73,9 +76,11 @@
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <h5>Total: </h5>
-                        <p><span id="moeda" class="moeda"></span><span id="displayTotal">0</span></p>
+                        <p>
+                            <p id="moedaSimbolo"></p>
+                            <span id="displayTotal">0</span>
+                        </p>
                         <input type="hidden" id="total" name="total">
-
                     </div>
 
 
@@ -148,13 +153,9 @@
         $(document).ready(function () 
         {
             // Select das moedas
-            var moeda = $('#moedaSelect').val();
-            $('.moeda').text(moeda);
-
-            $('#moedaSelect').on('change', function () {
-                moeda = $(this).val();
-                $('.moeda').text(moeda);
-                $('.item-moeda').text(moeda);
+            $('#moedaSelect').change(function () {
+                var simbolo = $(this).find('option:selected').data('simbolo');
+                $('#moedaSimbolo').text(simbolo);
             });
             // Fim - Select das moedas
 

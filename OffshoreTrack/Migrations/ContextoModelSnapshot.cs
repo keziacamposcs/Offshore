@@ -585,6 +585,9 @@ namespace OffshoreTrack.Migrations
                     b.Property<int?>("id_fornecedor3")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("id_moeda")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("id_rateio")
                         .HasColumnType("INTEGER");
 
@@ -596,9 +599,6 @@ namespace OffshoreTrack.Migrations
 
                     b.Property<int?>("id_usuario")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("moeda")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("observacao")
                         .HasColumnType("TEXT");
@@ -623,6 +623,8 @@ namespace OffshoreTrack.Migrations
                     b.HasIndex("id_fornecedor2");
 
                     b.HasIndex("id_fornecedor3");
+
+                    b.HasIndex("id_moeda");
 
                     b.HasIndex("id_rateio");
 
@@ -1116,6 +1118,10 @@ namespace OffshoreTrack.Migrations
                         .WithMany("OrdensCompra3")
                         .HasForeignKey("id_fornecedor3");
 
+                    b.HasOne("OffshoreTrack.Models.Moeda", "moeda")
+                        .WithMany("ordemCompras")
+                        .HasForeignKey("id_moeda");
+
                     b.HasOne("OffshoreTrack.Models.Rateio", "rateio")
                         .WithMany("ordemCompras")
                         .HasForeignKey("id_rateio");
@@ -1141,6 +1147,8 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("fornecedor2");
 
                     b.Navigation("fornecedor3");
+
+                    b.Navigation("moeda");
 
                     b.Navigation("rateio");
 
@@ -1285,6 +1293,11 @@ namespace OffshoreTrack.Migrations
                     b.Navigation("manutencaos");
 
                     b.Navigation("parteSoltas");
+                });
+
+            modelBuilder.Entity("OffshoreTrack.Models.Moeda", b =>
+                {
+                    b.Navigation("ordemCompras");
                 });
 
             modelBuilder.Entity("OffshoreTrack.Models.OrdemCompra", b =>

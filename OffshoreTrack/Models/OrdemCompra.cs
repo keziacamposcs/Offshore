@@ -12,7 +12,6 @@ namespace OffshoreTrack.Models
         public bool? Deletado { get; set; }
         public string? oc { get; set; }
         public string? observacao { get; set; }
-        public string? moeda { get; set; }
         public string? prioridade { get; set; }
         public double? total { get; set; }
 
@@ -49,6 +48,11 @@ namespace OffshoreTrack.Models
 
         public int? id_formaPagamento { get; set; }
         public FormaPagamento? formaPagamento { get; set; }
+
+        public int? id_moeda { get; set; }
+        public Moeda? moeda { get; set; }
+
+
 
         //Relacionamentos
         public List<ParteSolta>? parteSoltas { get; set; }

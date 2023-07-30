@@ -76,26 +76,29 @@
                     <br class="">
                     <div class="row print_oc print_rel">
                         <div class="container">
-                        <table class="table table-bordered border-dark">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Item</th>
-                                    <th scope="col">Quantidade</th>
-                                    <th scope="col">Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Itens)
-                                {
+                            <table class="table table-bordered border-dark">
+                                <thead>
                                     <tr>
-                                        <td>@item.item</td>
-                                        <td>@item.quantidade</td>
-                                        <td> @item.valor</td>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Valor</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
-
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Itens)
+                                    {
+                                        <tr>
+                                            <td>@item.item</td>
+                                            <td>@item.quantidade</td>
+                                            <td>@item.Moeda.simbolo @item.valor</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <h5>Total: </h5>
+                                <p id="moedaSimbolo" >@Model.moeda.simbolo</p><p>@Model.total</p>
+                            </div>
                         </div>
                     </div>
                     <hr>

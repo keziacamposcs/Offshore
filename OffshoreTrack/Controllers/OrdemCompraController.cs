@@ -66,6 +66,7 @@ namespace OffshoreTrack.Controllers
             var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
             var rateios = contexto.Rateio.Where(c => c.Deletado != true).ToList();
             var formaPagamentos = contexto.FormaPagamento.Where(c => c.Deletado != true).ToList();
+            var moedas = contexto.Moeda.Where(c => c.Deletado != true).ToList();
 
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
             ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
@@ -73,12 +74,14 @@ namespace OffshoreTrack.Controllers
             ViewBag.fornecedor3 = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
             ViewBag.rateio = new SelectList(rateios, "id_rateio", "rateio");
             ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
+            ViewBag.moedas = contexto.Moeda.Where(c => c.Deletado != true).Select(m => new { m.id_moeda, m.moeda_descricao, m.simbolo }).ToList();
+
             return View(model); 
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("oc, moeda, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, total, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
+        public async Task<IActionResult> Create([Bind("oc, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, id_moeda, total, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
         {      
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
             if(!temPermissao)
@@ -114,6 +117,7 @@ namespace OffshoreTrack.Controllers
                 id_setor = createRequest.id_setor,
                 id_rateio = createRequest.id_rateio,
                 id_formaPagamento = createRequest.id_formaPagamento,
+                id_moeda = createRequest.id_moeda,
                 total = createRequest.total,
                 anexo = createRequest.anexo
             };
@@ -164,7 +168,8 @@ public async Task<IActionResult> Read(int id)
                     .Include(x => x.fornecedor3)
                     .Include(x => x.rateio)
                     .Include(x => x.empresa)  
-                    .Include(x => x.formaPagamento)        
+                    .Include(x => x.formaPagamento)  
+                    .Include(x => x.moeda)      
                     .Include(x => x.Itens)     
     .FirstOrDefaultAsync(x => x.id_oc == id);
     if(ordemCompra == null)
