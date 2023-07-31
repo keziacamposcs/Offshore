@@ -169,7 +169,7 @@
                 itemRow.classList.add("row"); 
 
                 var colItemInput = document.createElement('div');
-                colItemInput.classList.add("col-sm-4");
+                colItemInput.classList.add("col-sm-5");
                 var labelItem = document.createElement('label');
                 labelItem.htmlFor = 'items[' + itemIndex + '].item';
                 labelItem.textContent = 'Item:';
@@ -182,7 +182,7 @@
                 itemRow.appendChild(colItemInput);
 
                 var colQuantidadeInput = document.createElement('div');
-                colQuantidadeInput.classList.add("col-sm-4");
+                colQuantidadeInput.classList.add("col-sm-3");
                 var labelQuantidade = document.createElement('label');
                 labelQuantidade.htmlFor = 'items[' + itemIndex + '].quantidade';
                 labelQuantidade.textContent = 'Quantidade:';
@@ -196,7 +196,7 @@
                 itemRow.appendChild(colQuantidadeInput);
 
                 var colValorInput = document.createElement('div');
-                colValorInput.classList.add("col-sm-4");
+                colValorInput.classList.add("col-sm-3");
                 var labelValor = document.createElement('label');
                 labelValor.htmlFor = 'items[' + itemIndex + '].valor';
                 labelValor.textContent = 'Valor:';
@@ -207,6 +207,19 @@
                 colValorInput.appendChild(labelValor);
                 colValorInput.appendChild(valorInput);
                 itemRow.appendChild(colValorInput);
+
+                var btnRemover = document.createElement('button');
+
+                btnRemover.innerHTML = '<i class="bi bi-trash"></i>';
+                btnRemover.type = 'button';
+                btnRemover.id = 'btnRemoverItem' + itemIndex;
+                btnRemover.classList.add("btn", "btn-danger", "btnRemoverItem", "btn-sm", "col-sm-1");
+                btnRemover.style.width ='50px';
+                btnRemover.style.height ='50px';
+                btnRemover.style.marginTop ='15px';
+
+                itemRow.appendChild(btnRemover);
+
                 
                 ordemCompraItems.appendChild(itemRow);
                 itemIndex++; 
@@ -218,6 +231,16 @@
             $('#itensContainer').on('input', 'input[id$=".quantidade"], input[id$=".valor"]', function () {
                 calcularTotal();
             });
+
+            // Evento de clique do botão de remoção
+            $('#itensContainer').on('click', '.btnRemoverItem', function () {
+                // Remover a linha correspondente
+                $(this).closest('.row').remove();
+                calcularTotal();
+            });
+
+
+
 
             // Função para calcular o total
             function calcularTotal() 

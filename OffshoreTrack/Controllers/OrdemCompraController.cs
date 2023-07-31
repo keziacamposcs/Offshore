@@ -25,8 +25,8 @@ namespace OffshoreTrack.Controllers
         public async Task<IActionResult> Index()
         {
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-            if(!temPermissao)
-            {    
+            if (!temPermissao)
+            {
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
@@ -42,19 +42,18 @@ namespace OffshoreTrack.Controllers
         /* CRUD */
 
         // Create
-
         [HttpGet]
         public IActionResult New()
         {
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-            if(!temPermissao)
-            {    
+            if (!temPermissao)
+            {
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
             var podeCriar = User.HasClaim("PodeCriar", "True");
-            if(!podeCriar)
-            {    
+            if (!podeCriar)
+            {
                 TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
@@ -76,16 +75,15 @@ namespace OffshoreTrack.Controllers
             ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
             ViewBag.moedas = contexto.Moeda.Where(c => c.Deletado != true).Select(m => new { m.id_moeda, m.moeda_descricao, m.simbolo }).ToList();
 
-            return View(model); 
+            return View(model);
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("oc, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, id_moeda, total, anexo, Itens")] OrdemCompra createRequest ,IFormFile anexoFile)
-        {      
+        public async Task<IActionResult> Create([Bind("oc, prioridade, observacao, data_oc, data_prevista, id_fornecedor, id_fornecedor2, id_fornecedor3, id_setor, id_rateio, id_formaPagamento, id_moeda, total, anexo, Itens")] OrdemCompra createRequest, IFormFile anexoFile)
+        {
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-            if(!temPermissao)
-            {    
+            if (!temPermissao)
+            {
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
@@ -100,11 +98,12 @@ namespace OffshoreTrack.Controllers
             }
             else
             {
-                createRequest.anexo = null; 
+                createRequest.anexo = null;
             }
-            
+
             var ordemCompra = new OrdemCompra
-            {   id_empresa = 1,
+            {
+                id_empresa = 1,
                 oc = createRequest.oc,
                 moeda = createRequest.moeda,
                 prioridade = createRequest.prioridade,
@@ -132,92 +131,95 @@ namespace OffshoreTrack.Controllers
                     item.id_oc = ordemCompra.id_oc;
                     contexto.Add(item);
                 }
-                try{
-                await contexto.SaveChangesAsync();
+                try
+                {
+                    await contexto.SaveChangesAsync();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     e.ToString();
                 }
             }
             return RedirectToAction("Read", new { id = ordemCompra.id_oc });
         }
-
         // Fim - Create
 
         // Read
-[HttpGet]
-public async Task<IActionResult> Read(int id)
-{
-    var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-    if(!temPermissao)
-    {    
-        TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
-        return RedirectToAction("Index", "Home");
-    }
-    var podeLer = User.HasClaim("PodeLer", "True");
-    if(!podeLer)
-    {    
-        TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
-        return RedirectToAction("Index", "Home");
-    }
-
-    var ordemCompra = await contexto.OrdemCompra
-                    .Include(x => x.setor)
-                    .Include(x => x.status)
-                    .Include(x => x.fornecedor)
-                    .Include(x => x.fornecedor2)
-                    .Include(x => x.fornecedor3)
-                    .Include(x => x.rateio)
-                    .Include(x => x.empresa)  
-                    .Include(x => x.formaPagamento)  
-                    .Include(x => x.moeda)      
-                    .Include(x => x.Itens)     
-    .FirstOrDefaultAsync(x => x.id_oc == id);
-    if(ordemCompra == null)
-    {
-        TempData["Aviso"] = "Não foi possível encontrar a Ordem de Compra.";
-        return RedirectToAction("Index", "Home");
-    }
-
-    // Retorna a vista e passa o objeto ordemCompra como um modelo
-    return View(ordemCompra);
-}
-
-        // Fim - Read
-
-        // Update
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {   
+        public async Task<IActionResult> Read(int id)
+        {
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
             if(!temPermissao)
             {    
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
-            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
-            if(!podeAtualizar)
+            var podeLer = User.HasClaim("PodeLer", "True");
+            if(!podeLer)
             {    
                 TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
 
-            var ordemCompra = await contexto.OrdemCompra.FirstOrDefaultAsync(x => x.id_oc == id);
+            var ordemCompra = await contexto.OrdemCompra
+                            .Include(x => x.setor)
+                            .Include(x => x.status)
+                            .Include(x => x.fornecedor)
+                            .Include(x => x.fornecedor2)
+                            .Include(x => x.fornecedor3)
+                            .Include(x => x.rateio)
+                            .Include(x => x.empresa)  
+                            .Include(x => x.formaPagamento)  
+                            .Include(x => x.moeda)      
+                            .Include(x => x.Itens)     
+            .FirstOrDefaultAsync(x => x.id_oc == id);
+            if(ordemCompra == null)
+            {
+                TempData["Aviso"] = "Não foi possível encontrar a Ordem de Compra.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Retorna a vista e passa o objeto ordemCompra como um modelo
+            return View(ordemCompra);
+        }
+        // Fim - Read
+
+        // Update
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
+            if (!temPermissao)
+            {
+                TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+            var podeAtualizar = User.HasClaim("PodeAtualizar", "True");
+            if (!podeAtualizar)
+            {
+                TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            //var ordemCompra = await contexto.OrdemCompra.FirstOrDefaultAsync(x => x.id_oc == id);
+            var ordemCompra = await contexto.OrdemCompra.Include(o => o.Itens).FirstOrDefaultAsync(m => m.id_oc == id);
+
             var setors = contexto.Setor.Where(c => c.Deletado != true).ToList();
-            var fornecedors1 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
-            var fornecedors2 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
-            var fornecedors3 = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
+            var fornecedors = contexto.Fornecedor.Where(c => c.Deletado != true).ToList();
             var rateios = contexto.Rateio.Where(c => c.Deletado != true).ToList();
             var formaPagamentos = contexto.FormaPagamento.Where(c => c.Deletado != true).ToList();
-            
+            var moedas = contexto.Moeda.Where(c => c.Deletado != true).ToList();
+
+            var itens = await contexto.Item.Where(c => c.id_oc == id).ToListAsync();  // Busca os itens
+
             ViewBag.setor = new SelectList(setors, "id_setor", "setor");
-            ViewBag.fornecedor = new SelectList(fornecedors1, "id_fornecedor", "fornecedor");
-            ViewBag.fornecedor2 = new SelectList(fornecedors2, "id_fornecedor", "fornecedor");
-            ViewBag.fornecedor3 = new SelectList(fornecedors3, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor2 = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
+            ViewBag.fornecedor3 = new SelectList(fornecedors, "id_fornecedor", "fornecedor");
             ViewBag.rateio = new SelectList(rateios, "id_rateio", "rateio");
             ViewBag.formaPagamento = new SelectList(formaPagamentos, "id_formaPagamento", "formaPagamento");
-            
+            ViewBag.moeda = new SelectList(moedas, "id_moeda", "moeda_descricao");
+                  
             if (ordemCompra == null)
             {
                 return NotFound();
@@ -226,9 +228,9 @@ public async Task<IActionResult> Read(int id)
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(OrdemCompra updateRequest, IFormFile anexoFile)
+        public async Task<IActionResult> Update(int id, OrdemCompra updateRequest, IFormFile anexoFile)
         {
-            var ordemCompra = await contexto.OrdemCompra.FindAsync(updateRequest.id_oc);
+            var ordemCompra = await contexto.OrdemCompra.Include(o => o.Itens).FirstOrDefaultAsync(o => o.id_oc == id);
             if (ordemCompra == null)
             {
                 return NotFound();
@@ -245,21 +247,63 @@ public async Task<IActionResult> Read(int id)
             ordemCompra.id_setor = updateRequest.id_setor;
             ordemCompra.id_rateio = updateRequest.id_rateio;
             ordemCompra.id_formaPagamento = updateRequest.id_formaPagamento;
+            ordemCompra.id_moeda = updateRequest.id_moeda;
+            ordemCompra.total = updateRequest.total;
 
             if (anexoFile != null && anexoFile.Length > 0)
             {
-                ordemCompra.anexo = null;
                 using (var memoryStream = new MemoryStream())
                 {
                     await anexoFile.CopyToAsync(memoryStream);
                     ordemCompra.anexo = memoryStream.ToArray();
                 }
             }
-            contexto.OrdemCompra.Update(ordemCompra);
+            
+            // Itens
+            if (updateRequest.Itens != null)
+            {
+                foreach (var item in updateRequest.Itens)
+                {
+                    if (item.id_item != 0) 
+                    {
+                        var existingItem = ordemCompra.Itens.FirstOrDefault(i => i.id_item == item.id_item);
+                        if (existingItem != null)
+                        {
+                            existingItem.item = item.item;
+                            existingItem.valor = item.valor;
+                            existingItem.quantidade = item.quantidade;
+                            existingItem.id_moeda = item.id_moeda;
+                        }
+                    }
+                    else 
+                    {
+                        item.id_oc = ordemCompra.id_oc;
+                        ordemCompra.Itens.Add(item);
+                    }
+                }
+            }
+
             await contexto.SaveChangesAsync();
             return RedirectToAction("Read", new { id = ordemCompra.id_oc });
         }
         // Fim - Update
+
+        // Delete Item
+        [HttpPost]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var item = await contexto.Item.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            contexto.Item.Remove(item);
+            await contexto.SaveChangesAsync();
+
+            return Ok();
+        }
+        // Fim - Delete Item
 
 
         // Delete
@@ -267,14 +311,14 @@ public async Task<IActionResult> Read(int id)
         public async Task<IActionResult> Delete(OrdemCompra deleteRequest)
         {
             var temPermissao = User.HasClaim("PermissaoOrdemCompra", "True");
-            if(!temPermissao)
-            {    
+            if (!temPermissao)
+            {
                 TempData["Aviso"] = "Você não tem permissão para acessar esta página. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
             var podeDeletar = User.HasClaim("PodeDeletar", "True");
-            if(!podeDeletar)
-            {    
+            if (!podeDeletar)
+            {
                 TempData["Aviso"] = "Você não tem permissão para realizar essa operação. Entre em contato com o administrador do sistema.";
                 return RedirectToAction("Index", "Home");
             }
@@ -298,6 +342,10 @@ public async Task<IActionResult> Read(int id)
         }
         // Fim - Delete
 
+
+
+
+
         /* Fim - CRUD */
 
         // Download de Anexo
@@ -305,7 +353,7 @@ public async Task<IActionResult> Read(int id)
         public async Task<IActionResult> DownloadAnexo(int id)
         {
             var ordemCompra = await contexto.OrdemCompra.FindAsync(id);
-            
+
             if (ordemCompra == null)
             {
                 return NotFound();
